@@ -14,7 +14,7 @@ end
 
 users.each do |user|
   5.times do |i|
-    user.posts << Post.create(title: "Post#{i} of #{user.name}", body: "post body #{i} of #{user.name}")
+    user.posts.create(title: "Post#{i} of #{user.name}", body: "post body #{i} of #{user.name}")
   end
 end
 

@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   has_many :user_posting
   has_many :users, through: :user_posting
