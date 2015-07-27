@@ -6,6 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.destroy_all
+Post.destroy_all
+Comment.destroy_all
+Tag.destroy_all
+UserPosting.destroy_all
+PostTagging.destroy_all
 
 users = []
 5.times do |i|
@@ -30,6 +36,11 @@ end
 Post.all.each do |post|
   tag = Tag.create(name: "Tag for #{post.title}")
   post.tags << tag
+  post.users << User.all.sample
   # tag.posts << post
+end
+
+Tag.all.each do |tag|
+  tag.posts << Post.all.sample
 end
 
