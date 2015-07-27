@@ -26,3 +26,10 @@ users.each do |user|
     comment.save
   end
 end
+
+Post.all.each do |post|
+  tag = Tag.create(name: "Tag for #{post.title}")
+  post.tags << tag
+  # tag.posts << post
+end
+
