@@ -6,19 +6,21 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-5.times do 
-  User.create({name: Faker::Name.name })
-end
+#Comment.destroy_all
+# 5.times do 
+#   User.create({name: Faker::Name.name })
+# end
 
-User.all.each do |user|
- user.posts.create( title: Faker::Name.title, body: Faker::Lorem.sentence)
-end
+# User.all.each do |user|
+#  user.posts.create( {title: Faker::Name.title, body: Faker::Lorem.sentence})
+# end
 
 
 Post.all.each do |post|
   rand(1..3).times do
-    post.comments.create( body:  Faker::Lorem.sentence)
-    post.tags.create( name: Faker::Lorem.word)
+    post.comments.create( {body:  Faker::Lorem.sentence, user_id: User.all.sample.id})
+
+    post.tags.create( {name: Faker::Lorem.word})
   end
   
 end
