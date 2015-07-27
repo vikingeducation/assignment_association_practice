@@ -14,7 +14,7 @@ end
 
 User.all.each do |user|
   MULTIPLIER.times do |index|
-    user.posts.create(title: "#{user.name}'s post #)#{index}",
+    user.authored_posts.create(title: "#{user.name}'s post #)#{index}",
                      body: "This is a test post number #{index * user.id}")
   end
 end
