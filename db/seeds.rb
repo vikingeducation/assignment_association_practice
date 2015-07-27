@@ -10,6 +10,17 @@
   User.create({name: Faker::Name.name })
 end
 
-10.times do
-  Post.create({ title: Faker::Name.title ,  body: Faker::Name.title, user_id: rand(1..5) })
+User.all.each do |user|
+ user.posts.create( title: Faker::Name.title, body: Faker::Lorem.sentence)
 end
+
+
+Post.all.each do |post|
+  rand(1..3).times do
+    post.comments.create( body:  Faker::Lorem.sentence)
+    post.tags.create( name: Faker::Lorem.word)
+  end
+  
+end
+
+
