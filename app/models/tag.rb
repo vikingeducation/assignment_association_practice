@@ -1,4 +1,9 @@
 class Tag < ActiveRecord::Base
-  has_many :taggings
-  has_many :posts, through: :taggings
+  has_many :post_taggings, class_name: "Tagging"
+  has_many :tagged_posts, through: :post_taggings, source: :post
+
+  has_many :post_authorings, through: :tagged_posts
+  has_many :authors_of_tagged_posts, through: :post_taggings,
+                                     through: :post_authorings, source: :user
+
 end
