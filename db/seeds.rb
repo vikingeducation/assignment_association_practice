@@ -6,14 +6,19 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-#Comment.destroy_all
-# 5.times do 
-#   User.create({name: Faker::Name.name })
-# end
+Comment.destroy_all
+Post.destroy_all
+User.destroy_all
+Tag.destroy_all
+Authorship.destroy_all
+Tagging.destroy_all
+5.times do 
+  User.create({name: Faker::Name.name })
+end
 
-# User.all.each do |user|
-#  user.posts.create( {title: Faker::Name.title, body: Faker::Lorem.sentence})
-# end
+User.all.each do |user|
+ user.posts.create( {title: Faker::Name.title, body: Faker::Lorem.sentence})
+end
 
 
 Post.all.each do |post|
