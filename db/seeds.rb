@@ -22,7 +22,7 @@ UserPosting.destroy_all
   	# u.posts << new_post
   		2.times do |f|
   			new_post.comments.create(:body => "Hi! I'm comment #{f} on post #{i}", :user_id => u.id)   #creating 2 comments per post
-  			if f%2 == 0     #creating 1 tag per post
+  			if f%2 == 0     # creating 1 tag per post
   				new_post.tags.create(:name => "Lorem")
   			else
   				new_post.tags.create(:name => "Ipsum")
