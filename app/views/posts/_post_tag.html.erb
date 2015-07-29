@@ -1,0 +1,4 @@
+<!-- # <%= f.collection_check_boxes( :tag_ids, Tag.all, :id, :name ) %> -->
+
+<%= f.label :tag_ids %>
+<%= f.select(:tag_ids, @tag_options, {include_blank: true} , {multiple: true, class: "post_tag", id: "edit_post_tag"} ) %>

@@ -1,0 +1,7 @@
+<%= link_to "Create new post", new_post_path %><br><br>
+<%= @posts.each do |post| %>
+	<%= "ID: #{post.id} Title: #{post.title}" %>
+	<%= link_to "Details", post_path(post.id) %>
+	<%= link_to "Edit", edit_post_path(post.id) %>
+	<br><br>
+<% end %> 
