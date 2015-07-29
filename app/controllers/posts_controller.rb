@@ -2,6 +2,8 @@ class PostsController < ApplicationController
 
   def new
     @post=Post.new
+    @author_options = User.all.map{|u| [ u.name, u.id ] }
+    @authors=User.all
   end
 
   def edit
@@ -27,6 +29,6 @@ class PostsController < ApplicationController
   private
 
   def whiteparams
-    params.require(:post).permit(:title, :body, :author_ids, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :authors, :tag_ids => [])
   end
 end

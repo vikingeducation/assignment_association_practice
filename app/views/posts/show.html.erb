@@ -1,9 +1,15 @@
 <%= @post.title %>
 <br>
 <%= @post.body %>
-<p> Author: <%= @post.authors %>
+<br>
 
 TAGS:
 <% @post.tags.each do |tag| %>
   <p><%= tag.name%></p>
 <% end %>
+
+
+ Author: 
+  <%= @post.authors.each do |a|%>
+  <p><%= a.name %></p>
+  <% end %>
