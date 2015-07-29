@@ -1,0 +1,17 @@
+<p><%= "Post ID: #{@post.id}" %></p>
+<p><%= "Title: #{@post.title}" %></p>
+<p><%= @post.body %></p> 
+<p><% @post.tags.each do |tag| %>
+	<%= "Tag #{tag.id} : #{tag.name}" %><br>
+	<% end %>
+</p>
+
+<p><% @post.authors.each do |author| %>
+	<%= "Author ID: #{author.id} : #{author.name}" %><br>
+	<% end %>
+</p>
+
+<p>
+<%= link_to "Index", posts_path %>
+</p>
+

@@ -18,7 +18,7 @@ UserPosting.destroy_all
 20.times do |n|
   u = User.create(:name => "fooUser#{n}")      #creating 20 users
   5.times do |i|
-  	new_post = u.posts.create(:title => "Post#{i}", :body => "Lorem Ipsum...")     #creating 5 posts per user
+  	new_post = u.authored_posts.create(:title => "Post#{i}", :body => "Lorem Ipsum...")     #creating 5 posts per user
   	# u.posts << new_post
   		2.times do |f|
   			new_post.comments.create(:body => "Hi! I'm comment #{f} on post #{i}", :user_id => u.id)   #creating 2 comments per post

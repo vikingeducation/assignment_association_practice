@@ -1,0 +1,27 @@
+<h1>Edit Post</h1>
+
+<%= form_for @post do |f| %>
+	<p>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	</p>
+	<p>
+	<%= f.label :body %>
+	<%= f.text_area :body %>
+	</p>
+	<p>
+		<%= render :partial => 'post_tag', :locals => {:f => f} %> 
+	</p>
+	<p>
+		<%= render :partial => 'post_author', :locals => {:f => f, :post => @post} %>
+	</p>
+	<p>
+		<%= f.submit "Update User" %> 
+	</p>
+<% end %>
+<br>
+<p> 
+<% if @post.persisted? %> 
+<%= link_to "Index", posts_path %>
+<%end%>
+</p>

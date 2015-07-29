@@ -1,0 +1,3 @@
+<!-- # <%= f.collection_radio_buttons(:author_ids, User.all, :id, :name) %> -->
+<%= f.label :author_ids, "Author Name" %>
+<%= f.select(:author_ids, @author_options, {include_blank: true} , {multiple: true} ) %>
