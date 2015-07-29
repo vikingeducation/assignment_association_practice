@@ -8,6 +8,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    @author_options = User.limit(5).map { |u| [u.name, u.id] }
     @post = Post.new(whitelist_post_params)
     if @post.save
       flash[:notice] = "Post #{@post.title} successfully created!"
@@ -37,9 +38,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
+  end
+
   private
 
     def whitelist_post_params
-      params.require(:post).permit(:title, :body, tag_ids: [])
+      params.require(:post).permit(:title, :body, :author_ids, tag_ids: [])
     end
 end
