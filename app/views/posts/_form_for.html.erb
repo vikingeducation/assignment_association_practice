@@ -6,7 +6,8 @@
 	<%= f.text_area :body %>
 	<br>
   <%= f.label :author_ids %>
-  <%= f.collection_radio_buttons(:author_ids, User.all, :id, :name) %>
+  Anonymous: <%= radio_button_tag("post[author_ids]", value="", checked=true) %>
+  <%= f.collection_radio_buttons(:author_ids, User.all, :id, :name, {}, {}) %>
 	<h4> <%= f.label :tag_ids %></h4>
   <br>
 	<%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>

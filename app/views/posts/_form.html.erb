@@ -1,24 +1,6 @@
 <%= render partial: "styled_form", locals: {post: post} %>
 <hr>
 <%= render partial: "form_for", locals: {post: post} %>
-
-<%= form_for post do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <br>
-  <%= f.label :body %>
-  <%= f.text_area :body %>
-  <br>
-
-  <%= f.label :author_ids %>
-  <%= f.collection_select(:author_ids, User.all, :id, :name, {include_blank: true}, {multiple: true}) %>
-
-  <%= f.label :tag_ids %>
-  <br>
-  <%= check_box_tag("post[tag_ids][]", value="", checked=false) %>
-  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
-  <%= f.submit %>
-<% end %>
 <hr>
 
 <%= form_tag post, method: "PATCH" do %>
