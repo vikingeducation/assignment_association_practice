@@ -11,10 +11,9 @@ class PostsController < ApplicationController
 
   def update
     @post=Post.find(params[:id])
-    @post.update(whiteparams)
-    if @post.save
+    if @post.update(whiteparams)
       flash[:success]="Updated"
-      redirect_to posts_path
+      redirect_to post_path(@post.id)
     else
       flash[:failure]="Not updated"
       render :edit
@@ -22,12 +21,12 @@ class PostsController < ApplicationController
   end
 
   def show
-
+    @post=Post.find(params[:id])
   end
 
   private
 
   def whiteparams
-    params.require(:post).permit(:title, :body, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :author_ids, :tag_ids => [])
   end
 end

@@ -12,12 +12,12 @@ User.destroy_all
 Tag.destroy_all
 Authorship.destroy_all
 Tagging.destroy_all
-5.times do 
+5.times do
   User.create({name: Faker::Name.name })
 end
 
 User.all.each do |user|
- user.posts.create( {title: Faker::Name.title, body: Faker::Lorem.sentence})
+ user.authored_posts.create( {title: Faker::Name.title, body: Faker::Lorem.sentence})
 end
 
 
@@ -27,7 +27,7 @@ Post.all.each do |post|
 
     post.tags.create( {name: Faker::Lorem.word})
   end
-  
+
 end
 
 

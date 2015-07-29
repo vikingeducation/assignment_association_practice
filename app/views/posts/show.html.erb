@@ -1,0 +1,9 @@
+<%= @post.title %>
+<br>
+<%= @post.body %>
+<p> Author: <%= @post.authors %>
+
+TAGS:
+<% @post.tags.each do |tag| %>
+  <p><%= tag.name%></p>
+<% end %>
