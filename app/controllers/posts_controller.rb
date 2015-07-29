@@ -29,6 +29,7 @@ class PostsController < ApplicationController
   private
 
   def whiteparams
-    params.require(:post).permit(:title, :body, :authors, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :authors,
+                    :author_ids => [], :tag_ids => [])
   end
 end

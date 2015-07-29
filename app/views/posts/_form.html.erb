@@ -1,7 +1,7 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, html: {class: "test-class", id: "some-id"} do |f| %>
 
 <%= f.label :title %>
-<%= f.text_field :title %>
+<%= f.text_field :title , class: "txt-field-test"%>
 
 <%= f.label :body %>
 <%= f.text_area :body %>
@@ -9,21 +9,12 @@
 <p>Tags:</p>
 <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
 
-<p>Authors:</p>
-<%= f.collection_radio_buttons(:authors, User.all, :id, :name ) %>
 
 
-<p>Authors via form_for:</p>
+<p>Authors via combo_box:</p>
 
-<%= form_for @post do |f| %>
-<%=f.select(:author_id, @author_options)%>
-<% end %>
-
-<p>Authors via form_tag:</p>
-
-<%= form_tag post_path(@post) do %>
-  <%= select_tag(:author_id, options_for_select(@author_options, @post.author_id )) %>
-<% end %>
+<%= f.collection_select :author_ids, User.all, :id, :name, { include_blank: true }, {:multiple => true,
+          class: "some_class", id: "try-id"} %>
 
 <%= f.submit %>
 
