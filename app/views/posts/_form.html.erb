@@ -22,28 +22,31 @@
   <br>
 
   <%= f.label :author_ids %>
-  <%= f.collection_select(:author_ids, User.all, :id, :name) %>
+  <%= f.collection_select(:author_ids, User.all, :id, :name, {multiple: true, include_blank: true}) %>
 
   <%= f.label :tag_ids %>
   <br>
-  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+  <%= check_box_tag("post[tag_ids][]", value="", checked=false) %>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, include_blank: true) %>
   <%= f.submit %>
 <% end %>
-
 <hr>
 
-<%= form_tag '/post' do %>
+<%= form_tag post, method: "PATCH" do %>
 
   <%= label_tag :title %>
-  <%= text_field_tag :title %>
+  <%= text_field_tag 'post[title]', post.title %>
 
   <%= label_tag :body %>
-  <%= text_field_tag :body %>
+  <%= text_field_tag 'post[body]', post.body %>
 
   <%= label_tag "Author" %>
-  <%= select_tag :author_id, options_for_select(@author_options, @post.author_id) %>
+  <%= select_tag 'post[author_ids][]', options_from_collection_for_select(User.all, :id, :name) %>
 
-  
+  <%= label_tag "Tags" %>
+  <%= select_tag 'post[tag_ids][]', options_from_collection_for_select(Tag.all, :id, :name), include_blank: true %>
+
+  <%= submit_tag %>
 
 <% end -%>
 
