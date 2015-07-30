@@ -4,7 +4,7 @@ class PostsController < ApplicationController
     @post=Post.new
     @author_options = User.all.map{|u| [ u.name, u.id ] }
     @authors=User.all
-    @comment=@post.comments.build
+    @post.comments.build
     
   end
 
@@ -25,7 +25,6 @@ class PostsController < ApplicationController
 
   def update
     @post=Post.find(params[:id])
-    @post.comments.build
     if @post.update(whiteparams)
       flash[:success]="Updated"
       redirect_to post_path(@post.id)
@@ -48,6 +47,6 @@ class PostsController < ApplicationController
                     :authors,
                     {:author_ids => [], 
                     :tag_ids => [],
-                    :comments_attributes => [:body, :post_id, :user_id]})
+                    :comments_attributes => [:body, :id]})
   end
 end
