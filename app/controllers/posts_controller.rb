@@ -10,18 +10,17 @@ class PostsController < ApplicationController
 
   def create
     @post=Post.new(whiteparams)
-    
+     
     if @post.save
-      
       redirect_to post_path(@post.id)
     else
       render :new
     end
-
   end
+
   def edit
     @post=Post.find(params[:id])
-
+    @post.comments.build
   end
 
   def update
@@ -49,6 +48,6 @@ class PostsController < ApplicationController
                     :authors,
                     {:author_ids => [], 
                     :tag_ids => [],
-                    :comment_attributes => [:body, :post_id, :user_id]})
+                    :comments_attributes => [:body, :post_id, :user_id]})
   end
 end

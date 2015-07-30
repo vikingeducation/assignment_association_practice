@@ -18,7 +18,7 @@
           class: "some_class", id: "try-id"} %>
 
 
-<%= f.fields_for :comment, Comment.new do |comment_form| %>
+<%= f.fields_for :comments, @post.comments do |comment_form| %>
 <h2>New comment</h2>
 <%= comment_form.label :body%>
 <%= comment_form.text_field :body%>
