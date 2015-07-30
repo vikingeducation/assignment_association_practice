@@ -1,0 +1,11 @@
+<h2> Comments </h2>
+  <div class="form-group">
+    <%= comment_fields.fields_for :comments do|comment_field| %>
+      <%= comment_field.label :body %>
+      <%= comment_field.text_area :body %>
+      <% if comment_fields.object.persisted? %>
+        <%= comment_field.label :_destroy, "Delete this comment?" %>
+        <%= comment_field.check_box :_destroy %>
+      <% end %>
+    <% end %>
+  </div>

@@ -1,0 +1,28 @@
+<%= form_for post do |f| %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :body %>
+  <%= f.text_area :body, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :author_ids %>
+  <%= f.collection_select(:author_ids, User.all, :id, :name, {include_blank: true}, {multiple: true, class: "form-control", id: "author-combo-box"}) %>
+  </div>
+
+  <%= render partial: "comment_fields", locals: {comment_fields: f} %>
+
+  <div class="form-group">
+    <%= f.label :tag_ids %>
+    <div class = "form-control">
+      <%= check_box_tag("post[tag_ids][]", value="", checked=false) %>
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {}, {}) %>
+    </div>
+    <%= f.submit "Create new post", class: "btn btn-primary" %>
+  </div>
+
+<% end %>
