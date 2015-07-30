@@ -1,25 +1,25 @@
 <%= render partial: "styled_form", locals: {post: post} %>
 <hr>
-<%= render partial: "form_for", locals: {post: post} %>
+<%# render partial: "form_for", locals: {post: post} %>
 <hr>
 
-<%= form_tag post, method: "PATCH" do %>
+<%# form_tag post, method: "PATCH" do %>
 
-  <%= label_tag :title %>
-  <%= text_field_tag 'post[title]', post.title %>
+  <%# label_tag :title %>
+  <%# text_field_tag 'post[title]', post.title %>
 
-  <%= label_tag :body %>
-  <%= text_field_tag 'post[body]', post.body %>
+  <%# label_tag :body %>
+  <%# text_field_tag 'post[body]', post.body %>
 
-  <%= label_tag "Author" %>
-  <%= select_tag 'post[author_ids][]', options_from_collection_for_select(User.all, :id, :name) %>
+  <%# label_tag "Author" %>
+  <%# select_tag 'post[author_ids][]', options_from_collection_for_select(User.all, :id, :name) %>
 
-  <%= label_tag "Tags" %>
-  <%= select_tag 'post[tag_ids][]', options_from_collection_for_select(Tag.all, :id, :name), include_blank: true, multiple: true %>
+  <%# label_tag "Tags" %>
+  <%# select_tag 'post[tag_ids][]', options_from_collection_for_select(Tag.all, :id, :name), include_blank: true, multiple: true %>
 
-  <%= submit_tag %>
+  <%# submit_tag %>
 
-<% end -%>
+<%# end -%>
 
 
 

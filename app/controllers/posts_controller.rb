@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.comments.build
   end
 
   def create
@@ -25,6 +26,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @post.comments.build
   end
 
   def update
@@ -48,6 +50,6 @@ class PostsController < ApplicationController
   private
 
     def whitelist_post_params
-      params.require(:post).permit(:title, :body, author_ids: [], tag_ids: [])
+      params.require(:post).permit(:title, :body, {author_ids: [], tag_ids: [], :comments_attributes => [:id, :body, :_destroy]})
     end
 end

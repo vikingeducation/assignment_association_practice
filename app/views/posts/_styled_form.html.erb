@@ -14,6 +14,8 @@
   <%= f.collection_select(:author_ids, User.all, :id, :name, {include_blank: true}, {multiple: true, class: "form-control", id: "author-combo-box"}) %>
   </div>
 
+  <%= render partial: "comment_fields", locals: {comment_fields: f} %>
+
   <div class="form-group">
     <%= f.label :tag_ids %>
     <div class = "form-control">
@@ -22,4 +24,5 @@
     </div>
     <%= f.submit "Create new post", class: "btn btn-primary" %>
   </div>
+
 <% end %>
