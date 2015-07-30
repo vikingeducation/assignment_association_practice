@@ -1,8 +1,9 @@
+<h2>New post</h2>
 <%= form_for @post, html: {class: "test-class", id: "some-id"} do |f| %>
-
+<br>
 <%= f.label :title %>
 <%= f.text_field :title , class: "txt-field-test"%>
-
+<br>
 <%= f.label :body %>
 <%= f.text_area :body %>
 
@@ -16,6 +17,14 @@
 <%= f.collection_select :author_ids, User.all, :id, :name, { include_blank: true }, {:multiple => true,
           class: "some_class", id: "try-id"} %>
 
+
+<%= f.fields_for :comment, Comment.new do |comment_form| %>
+<h2>New comment</h2>
+<%= comment_form.label :body%>
+<%= comment_form.text_field :body%>
+
+<% end %>
+<br>
 <%= f.submit %>
 
 
