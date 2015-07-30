@@ -19,12 +19,18 @@
 
 
 
-<h3>Existing Comments</h3>
+<h3>All Comments</h3>
 
 <%= f.fields_for :comments, @post.comments do |comment_form| %>
 <%= comment_form.label :body%>
 <%= comment_form.text_field :body%>
-<br>
+
+
+  <% if comment_form.object.persisted? %>
+  <%= comment_form.label :_destroy, "Delete this comment?" %>
+  <%= comment_form.check_box :_destroy%>
+  <% end %>
+  <br>
 <% end %>
 
 <br>

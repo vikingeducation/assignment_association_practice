@@ -47,6 +47,6 @@ class PostsController < ApplicationController
                     :authors,
                     {:author_ids => [], 
                     :tag_ids => [],
-                    :comments_attributes => [:body, :id]})
+                    :comments_attributes => [:body, :id, :_destroy]})
   end
 end
