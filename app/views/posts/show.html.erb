@@ -1,0 +1,21 @@
+<h2>Post number <%=@post.id%></h2>
+<%= @post.title %>
+<br>
+<%= @post.body %>
+<br>
+
+TAGS:
+<% @post.tags.each do |tag| %>
+  <p><%= tag.name%></p>
+<% end %>
+
+<br>
+ Author:
+  <% @post.authors.each do |a|%>
+  <p><%= a.name %></p>
+  <% end %>
+<br>
+  Comments:
+  <% @post.comments.each do |c|%>
+  <p><%= c.body %></p>
+  <% end %>

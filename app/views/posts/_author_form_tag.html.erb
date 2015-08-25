@@ -1,0 +1,11 @@
+<p>Authors via form_for:</p>
+
+
+<%=f.select(:author_ids, @author_options)%>
+
+
+<p>Authors via form_tag:</p>
+
+<%= form_tag post_path(@post) do %>
+  <%= select_tag(:author_ids, options_for_select(@author_options, @post.author_id )) %>
+<% end %>
