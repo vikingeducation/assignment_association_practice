@@ -100,9 +100,7 @@ end
 # Create posts
 puts 'Creating posts, user_postings and post_taggings'
 COUNT.times do
-  user = User.all.sample
   category = Category.all.sample
-  tag = Tag.all.sample
 
   post = Post.create(
     :title => "#{POST_TITLES.sample} #{POST_TITLES.sample}",
@@ -110,30 +108,39 @@ COUNT.times do
     :category_id => category.id
   )
 
-  # Create user_postings
-  UserPosting.create(
-    :post_id => post.id,
-    :user_id => user.id
-  )
+  (rand(1..5)).times do
+    # Create user_postings
+    user = User.all.sample
 
-  # Create post_taggings
-  PostTagging.create(
-    :post_id => post.id,
-    :tag_id => tag.id
-  )
+    UserPosting.create(
+      :post_id => post.id,
+      :user_id => user.id
+    )
+
+    # Create post_taggings
+    tag = Tag.all.sample
+
+    PostTagging.create(
+      :post_id => post.id,
+      :tag_id => tag.id
+    )
+  end
 end
 
 # Create comments
 puts 'Creating comments'
 COUNT.times do
   user = User.all.sample
-  post = Post.all.sample
+  
+  (rand(1..5)).times do
+    post = Post.all.sample
 
-  Comment.create(
-    :body => TEXTS.sample,
-    :post_id => post.id,
-    :user_id => user.id
-  )
+    Comment.create(
+      :body => TEXTS.sample,
+      :post_id => post.id,
+      :user_id => user.id
+    )
+  end
 end
 
 
