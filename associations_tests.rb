@@ -1,5 +1,3 @@
-# Run this file in `rails c` via `load 'tests.rb'`
-
 # List all Users, Comments, Posts, Categories or Tags.
 User.all
 Comment.all
