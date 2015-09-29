@@ -8,7 +8,7 @@ Category.all
 Tag.all
 
 # List a given user's comments
-User.first.comments
+User.first.authored_comments
 
 # Set a comment to belong to a different user
 comment = Comment.first
@@ -29,8 +29,8 @@ post.category = old_category
 comments = Comment.all.where('user_id = 1')
 old_user = comments.first.author
 new_user = User.where('id != 1').first
-comments = new_user.comments
-comments = old_user.comments
+comments = new_user.authored_comments
+comments = old_user.authored_comments
 
 # Set a comment's author to be a different user
 comment = Comment.all.sample
@@ -46,7 +46,7 @@ Comment.all.sample.author
 Post.find(Comment.group('post_id').count('post_id').max[0]).comments
 
 # Return a given comment's parent post
-Comment.first.post
+Comment.first.parent_post
 
 # Remove one post from a category's collection of posts
 category = Category.first
@@ -57,20 +57,20 @@ category.posts << post
 category.posts
 
 # List the posts authored by a given user
-User.first.posts
+User.first.authored_posts
 
 # List the IDs of all posts authored by a given user (hint: there's an association method for this)
-User.first.post_ids
+User.first.authored_post_ids
 
 # Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]
 user_one = User.first
 user_two = User.last
-post_ids_one = user_one.post_ids
-post_ids_two = user_two.post_ids
-user_one.post_ids = post_ids_two
-user_two.post_ids = post_ids_one
-user_one.posts
-user_two.posts
+post_ids_one = user_one.authored_post_ids
+post_ids_two = user_two.authored_post_ids
+user_one.authored_post_ids = post_ids_two
+user_two.authored_post_ids = post_ids_one
+user_one.authored_posts
+user_two.authored_posts
 
 # List the authors of a given post
 Post.first.authors
@@ -88,12 +88,12 @@ post_one.author_ids = author_ids_two
 post_two.author_ids = author_ids_one
 
 # List the posts under a given tag
-Tag.first.posts
+Tag.first.tagged_posts
 
 # Add a new post to a given tag by only using its ID
 tag = Tag.first
 post = Post.first
-tag.post_ids << post.id
+tag.tagged_post_ids << post.id
 
 # Add a new tag to a given post by only using its ID
 post = Post.last
