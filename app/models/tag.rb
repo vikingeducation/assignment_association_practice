@@ -11,6 +11,7 @@ class Tag < ActiveRecord::Base
 
   has_many :authors_of_tagged_posts,
   :through => :tagged_posts,
-  :source => :authors
+  :source => :authors,
+  :dependent => :destroy
 
 end

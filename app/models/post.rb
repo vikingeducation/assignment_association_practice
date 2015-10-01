@@ -4,16 +4,18 @@ class Post < ActiveRecord::Base
 
   has_many :post_taggings,
   :foreign_key => "post_id",
-  :class_name => "Pt"
+  :class_name => "Pt",
+  :dependent => :destroy
 
   has_many :post_authorings,
    :foreign_key => "post_id",
-   :class_name => "Pu"
+   :class_name => "Pu",
+   :dependent => :destroy
 
   has_many :authors,
   :through => :post_authorings,
   :source => :user,
-  :dependent => :delete_all
+  :dependent => :destroy
 
   has_many :tags,
    :through => :post_taggings,

@@ -1,0 +1,30 @@
+
+<%=form_for @post, :html => {:class => 'some_class', :id => 'some_id'} do |post|%>
+      Title: <%=post.text_field :title %>
+    <br>
+    <br>
+      Body: <%=post.text_area :body, cols: 30, rows: 5%>
+    <br>
+    <br>
+    Tags:
+      <%= post.collection_check_boxes( :tag_ids, Tag.all, :id, :name)%>
+    <br>
+    <br>
+    Category test #1<%#category id test # 1%>
+      <%#=post.collection_radio_buttons( :category_id,
+                                        Category.all,
+                                        :id,
+                                        :name
+                                      )%>
+    <br>
+    <br>
+    Category test #2<%#category id test # 2%>
+      <%=post.collection_select(  :category_id,
+                                  Category.all, 
+                                  :id, 
+                                  :name
+                                )%>
+    <br>
+    <br>
+    <%=post.submit%>
+<%end%>
