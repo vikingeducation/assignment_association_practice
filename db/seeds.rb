@@ -90,6 +90,7 @@ puts "generated user and tags"
 
 (MULTIPLIER/2).times {
   category_generate
+  puts "generate a category"
 }
 puts "generated categorys"
 

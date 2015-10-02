@@ -25,6 +25,19 @@
                                   :name
                                 )%>
     <br>
+    <%=post.fields_for :comments do |comment_field|%>
+          <%= comment_field.label :user_id %>
+          <br>
+          <%= comment_field.text_field :user_id %>
+          <br>
+          <%= comment_field.label :body %>
+          <br>
+          <%= comment_field.text_area :body, cols: 30, rows: 5 %>
+          <br>
+          <%#= comment_field.label :_destroy, "Delete Address?" %>
+          <%#= comment_field.check_box :_destroy %>
+          <br>
+    <%end%>
     <br>
     <%=post.submit%>
 <%end%>

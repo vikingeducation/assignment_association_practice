@@ -7,11 +7,20 @@ class PostsController < ApplicationController
   
   def edit
     @post = Post.find(params[:id])
+    @comment = @post.comments
+    @post.comments.build
     @category_selection = Category.all.map{|c| [c.name, c.id]}
+  end
+  
+  def show
+    @post = Post.find(params[:id])
   end
   
   def new
     @post = Post.new
+    3.times do 
+      @post.comments.build
+    end
     @category_selection = Category.all.map{|c| [c.name, c.id]}
   end
   
@@ -26,6 +35,7 @@ class PostsController < ApplicationController
   
   def update
     @post = Post.find(params[:id])
+    puts "update OK"
     if @post.update_attributes(post_params)
       redirect_to posts_path
     else
@@ -35,11 +45,11 @@ class PostsController < ApplicationController
   
 private
   def post_params
-    params.require(:post).permit(
-      :title,
-      :body,
-      :category_id,
-      :tag_ids => [],
-      :category_id => [])
+    params.require(:post).permit(:title,:body,
+                                 :category_id,
+                               :tag_ids => [],
+                           :category_id => [], 
+                           :comments_attributes => [:id, :user_id, :body, :_destroy]
+                           )
   end
 end
