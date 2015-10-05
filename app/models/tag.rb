@@ -5,9 +5,9 @@ class Tag < ActiveRecord::Base
   has_many :user_postings, :through => :tagged_posts, :source => :post_authorings
   has_many :authors_of_tagged_posts, :through => :user_postings, :class_name => 'User', :source => :user
 
-  before_destroy :destroy_post_taggings
+  before_destroy :dissociate
 
-  def destroy_post_taggings
+  def dissociate
     post_taggings.destroy_all
   end
 end

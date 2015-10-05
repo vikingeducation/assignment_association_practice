@@ -6,17 +6,11 @@ class Post < ActiveRecord::Base
   has_many :post_taggings
   has_many :tags, :through => :post_taggings
 
-  before_destroy :destroy_comments, :destroy_post_authorings, :destroy_post_taggings
+  before_destroy :dissociate
 
-  def destroy_comments
+  def dissociate
     comments.destroy_all
-  end
-
-  def destroy_post_authorings
     post_authorings.destroy_all
-  end
-
-  def destroy_post_taggings
     post_taggings.destroy_all
   end
 end
