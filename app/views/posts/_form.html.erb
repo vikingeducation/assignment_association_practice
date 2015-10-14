@@ -11,6 +11,97 @@
   </h1>
 </header>
 
+<!-- 10.19 Practice with Nested Forms -->
+<hr>
+<div class="alert alert-info">
+  10.19 Practice with Nested Forms
+</div>
+<%= form_for(post, :html => {
+  :id => 'my-form-id',
+  :class => 'my-form-class'
+}) do |post_fields| %>
+  <p>
+    ID: <%= post.id || '-'  %>
+  </p>
+  <div class="form-group">
+    <%= post_fields.label(:title) %>
+    <%= post_fields.text_field(:title, :class => 'form-control') %>
+  </div>
+  <div class="form-group">
+    <%= post_fields.label(:body) %>
+    <%= post_fields.text_area(:body, :class => 'form-control') %>
+  </div>
+
+  <div class="form-group">
+    <%= post_fields.label(:category_id, 'Category') %>
+    <%= post_fields.collection_select(
+      :category_id,
+      Category.all,
+      :id,
+      :name,
+      {:include_blank => true},
+      {:class => 'form-control'}
+    ) %>
+  </div>
+
+  <div class="form-group">
+    <%= post_fields.label(:tag_ids, 'Tags') %>
+    <%= post_fields.collection_check_boxes(
+      :tag_ids,
+      Tag.all,
+      :id,
+      :name
+    ) do |b|
+      checkbox = b.label {b.check_box + b.text}
+      %Q[<div class="checkbox">
+        #{checkbox}
+      </div>].html_safe
+    end %>
+  </div>
+
+  <h3>Comments</h3>
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      <%= post_fields.fields_for(:comments) do |comment_fields| %>
+        <p>
+          ID: <%= comment_fields.object.persisted? ? comment_fields.object.id : '-' %>
+        </p>
+
+        <div class="form-group">
+          <%= comment_fields.label(:body) %>
+          <%= comment_fields.text_area(:body, :class => 'form-control') %>
+        </div>
+
+        <div class="form-group">
+          <%= comment_fields.label(:author) %>
+          <%= comment_fields.collection_select(
+            :user_id,
+            User.all,
+            :id,
+            :name,
+            {:include_blank => true},
+            {:class => 'form-control'}
+          ) %>
+        </div>
+
+        <% if comment_fields.object.persisted? %>
+          <%= comment_fields.label(:_destroy, "Delete?", :class => 'text-danger') %>
+          <%= comment_fields.check_box(:_destroy) %>
+        <% end %>
+      <% end %>
+    </li>
+  </ul>
+
+  <%= post_fields.submit(:class => 'btn btn-primary') %>
+<% end %>
+
+
+<!-- 10.12 Practice with Collection Forms -->
+<hr>
+<div class="alert alert-info">
+  10.12 Practice with Collection Forms
+</div>
 <!-- 1. form_for collection_check_boxes -->
 <h2>
   1. <code>form_for</code> with <code>f.collection_check_boxes</code>
@@ -43,18 +134,20 @@
     ) %>
   </div>
 
-  <%= f.label(:tag_ids, 'Tags') %>
-  <%= f.collection_check_boxes(
-    :tag_ids,
-    Tag.all,
-    :id,
-    :name
-  ) do |b|
-    checkbox = b.label {b.check_box + b.text}
-    %Q[ <div class="checkbox">
-      #{checkbox}
-    </div>].html_safe
-  end %>
+  <div class="form-group">
+    <%= f.label(:tag_ids, 'Tags') %>
+    <%= f.collection_check_boxes(
+      :tag_ids,
+      Tag.all,
+      :id,
+      :name
+    ) do |b|
+      checkbox = b.label {b.check_box + b.text}
+      %Q[<div class="checkbox">
+        #{checkbox}
+      </div>].html_safe
+    end %>
+  </div>
 
   <%= f.submit(:class => 'btn btn-primary') %>
 <% end %>
@@ -76,31 +169,33 @@
     <%= f.text_area(:body, :class => 'form-control') %>
   </div>
 
-  <%= f.label(:category_id, 'Category') %>
-  <%= f.collection_radio_buttons(
-    :category_id,
-    Category.all,
-    :id,
-    :name
-  ) do |r|
-    radio = r.label {r.radio_button + r.text}
-    %Q[<div class="radio">
-      #{radio}
-    </div>].html_safe
-  end %>
+  <div class="form-group">
+    <%= f.label(:category_id, 'Category') %>
+    <%= f.collection_radio_buttons(
+      :category_id,
+      Category.all,
+      :id,
+      :name
+    ) do |r|
+      radio = r.label {r.radio_button + r.text}
+      %Q[<div class="radio">
+        #{radio}
+      </div>].html_safe
+    end %>
 
-  <%= f.label(:tag_ids, 'Tags') %>
-  <%= f.collection_select(
-    :tag_ids,
-    Tag.all,
-    :id,
-    :name,
-    {:include_blank => true},
-    {
-      :class => 'form-control',
-      :multiple => true
-    }
-  ) %>
+    <%= f.label(:tag_ids, 'Tags') %>
+    <%= f.collection_select(
+      :tag_ids,
+      Tag.all,
+      :id,
+      :name,
+      {:include_blank => true},
+      {
+        :class => 'form-control',
+        :multiple => true
+      }
+    ) %>
+  </div>
 
   <%= f.submit(:class => 'btn btn-primary') %>
 <% end %>
@@ -135,19 +230,21 @@
     ) %>
   </div>
 
-  <%= label_tag(:tag_ids, 'Tags') %>
-  <%= collection_check_boxes(
-    :post,
-    :tag_ids,
-    Tag.all,
-    :id,
-    :name
-  ) do |b|
-    checkbox = b.label {b.check_box + b.text}
-    %Q[<div class="checkbox">
-      #{checkbox}
-    </div>].html_safe
-  end %>
+  <div class="form-group">
+    <%= label_tag(:tag_ids, 'Tags') %>
+    <%= collection_check_boxes(
+      :post,
+      :tag_ids,
+      Tag.all,
+      :id,
+      :name
+    ) do |b|
+      checkbox = b.label {b.check_box + b.text}
+      %Q[<div class="checkbox">
+        #{checkbox}
+      </div>].html_safe
+    end %>
+  </div>
 
   <%= submit_tag(
     post.persisted? ? 'Update Post' : 'Create Post',

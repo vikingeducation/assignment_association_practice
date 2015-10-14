@@ -6,6 +6,10 @@ class Post < ActiveRecord::Base
   has_many :post_taggings
   has_many :tags, :through => :post_taggings
 
+  accepts_nested_attributes_for :comments,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
+
   before_destroy :dissociate
 
   def dissociate
