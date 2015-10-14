@@ -1,0 +1,174 @@
+<header class="page-header">
+  <h1>
+    <%= action %>
+    <%= link_to('Post', posts_path) %>
+    <% if post.persisted? %>
+      :
+      <small>
+        <%= link_to(post.title, post_path(post)) %>
+      </small>
+    <% end %>
+  </h1>
+</header>
+
+<!-- 1. form_for collection_check_boxes -->
+<h2>
+  1. <code>form_for</code> with <code>f.collection_check_boxes</code>
+</h2>
+<%= form_for(post, :html => {
+  :id => 'my-form-id',
+  :class => 'my-form-class'
+}) do |f| %>
+  <p>
+    ID: <%= post.id || '-'  %>
+  </p>
+  <div class="form-group">
+    <%= f.label(:title) %>
+    <%= f.text_field(:title, :class => 'form-control') %>
+  </div>
+  <div class="form-group">
+    <%= f.label(:body) %>
+    <%= f.text_area(:body, :class => 'form-control') %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label(:category_id, 'Category') %>
+    <%= f.collection_select(
+      :category_id,
+      Category.all,
+      :id,
+      :name,
+      {:include_blank => true},
+      {:class => 'form-control'}
+    ) %>
+  </div>
+
+  <%= f.label(:tag_ids, 'Tags') %>
+  <%= f.collection_check_boxes(
+    :tag_ids,
+    Tag.all,
+    :id,
+    :name
+  ) do |b|
+    checkbox = b.label {b.check_box + b.text}
+    %Q[ <div class="checkbox">
+      #{checkbox}
+    </div>].html_safe
+  end %>
+
+  <%= f.submit(:class => 'btn btn-primary') %>
+<% end %>
+
+<!-- 2. form_for collection_radio_buttons -->
+<h2>
+  2. <code>form_for</code> with <code>collection_radio_buttons</code>
+</h2>
+<%= form_for(post) do |f| %>
+  <p>
+    ID: <%= post.id || '-'  %>
+  </p>
+  <div class="form-group">
+    <%= f.label(:title) %>
+    <%= f.text_field(:title, :class => 'form-control') %>
+  </div>
+  <div class="form-group">
+    <%= f.label(:body) %>
+    <%= f.text_area(:body, :class => 'form-control') %>
+  </div>
+
+  <%= f.label(:category_id, 'Category') %>
+  <%= f.collection_radio_buttons(
+    :category_id,
+    Category.all,
+    :id,
+    :name
+  ) do |r|
+    radio = r.label {r.radio_button + r.text}
+    %Q[<div class="radio">
+      #{radio}
+    </div>].html_safe
+  end %>
+
+  <%= f.label(:tag_ids, 'Tags') %>
+  <%= f.collection_select(
+    :tag_ids,
+    Tag.all,
+    :id,
+    :name,
+    {:include_blank => true},
+    {
+      :class => 'form-control',
+      :multiple => true
+    }
+  ) %>
+
+  <%= f.submit(:class => 'btn btn-primary') %>
+<% end %>
+
+<!-- 3. form_tag select_tag -->
+<h2>
+  3. <code>form_tag</code> with <code>select_tag</code>
+</h2>
+<%= form_tag(
+  post.persisted? ? post_path(post) : posts_path,
+  :method => post.persisted? ? :put : :post
+) do %>
+  <p>
+    ID: <%= post.id || '-' %>
+  </p>
+  <div class="form-group">
+    <%= label_tag('post_title', 'Title') %>
+    <%= text_field_tag('post[title]', post.title, :class => 'form-control') %>
+  </div>
+  <div class="form-group">
+    <%= label_tag('post_body', 'Body') %>
+    <%= text_area_tag('post[body]', post.body, :class => 'form-control') %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag('post_category_id', 'Category') %>
+    <%= select_tag(
+      'post[category_id]',
+      options_from_collection_for_select(Category.all, :id, :name),
+      :class => 'form-control',
+      :include_blank => true
+    ) %>
+  </div>
+
+  <%= label_tag(:tag_ids, 'Tags') %>
+  <%= collection_check_boxes(
+    :post,
+    :tag_ids,
+    Tag.all,
+    :id,
+    :name
+  ) do |b|
+    checkbox = b.label {b.check_box + b.text}
+    %Q[<div class="checkbox">
+      #{checkbox}
+    </div>].html_safe
+  end %>
+
+  <%= submit_tag(
+    post.persisted? ? 'Update Post' : 'Create Post',
+    :class => 'btn btn-primary'
+  ) %>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
