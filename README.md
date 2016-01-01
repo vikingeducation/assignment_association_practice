@@ -7,37 +7,37 @@ by Sia Karamalegos
 
 **User** - has many post-authors, comments
 
-  name
+  - name
 
 **Post_Authors** - belongs to post, user
 
-  post_id
-  author_id
+  - post_id
+  - author_id
 
 **Post** - has many post-authors, comments, post-tags; belongs to category
 
-  title
-  body
-  category_id
+  - title
+  - body
+  - category_id
 
 **Category** - has many posts
 
-  name
+  - name
 
 **Comment** - belongs to user, post
 
-  body
-  post_id
-  author_id
+  - body
+  - post_id
+  - author_id
 
 **Post_Tags** - belongs to post, tag
 
-  post_id
-  tag_id
+  - post_id
+  - tag_id
 
 **Tag** - has many post-tags
 
-  name
+  - name
 
 ## Relationships
 
