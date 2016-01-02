@@ -9,7 +9,7 @@ by Sia Karamalegos
 
   - name
 
-**Post_Authors** - belongs to post, user
+**PostAuthors** - belongs to post, user
 
   - post_id
   - author_id
@@ -30,7 +30,7 @@ by Sia Karamalegos
   - post_id
   - author_id
 
-**Post_Tags** - belongs to post, tag
+**PostTags** - belongs to post, tag
 
   - post_id
   - tag_id

@@ -12,6 +12,14 @@ namespace :db do
       # ActiveRecord::Base.connection.reset_pk_sequence!(table.table_name)
     end
 
+    User.populate(10) do |user|
+      user.name = Faker::Name.name
+    end
+
+    Tag.populate(15) do |tag|
+      tag.name = Faker::Company.buzzword
+    end
+
     Category.populate(5) do |category|
       category.name = Faker::Commerce.department(1)
 
@@ -19,11 +27,18 @@ namespace :db do
         post.category_id = category.id
         post.title = Faker::Company.catch_phrase
         post.body = Faker::Lorem.paragraph
-      end
-    end
 
-    User.populate(10) do |user|
-      user.name = Faker::Name.name
+        Comment.populate(5) do |comment|
+          comment.post_id = post.id
+          comment.author_id = User.pluck(:id).sample
+          comment.body = Faker::Lorem.sentence
+        end
+
+        PostTag.populate(1..3) do |ptag|
+          ptag.post_id = post.id
+          ptag.tag_id = Tag.pluck(:id).sample
+        end
+      end
     end
 
     Post.all.each do |post|
