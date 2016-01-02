@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160102194327) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "comments", ["author_id"], name: "index_comments_on_author_id"
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
 
   create_table "post_authors", force: :cascade do |t|
