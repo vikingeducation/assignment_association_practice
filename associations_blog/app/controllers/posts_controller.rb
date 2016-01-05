@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @comment = @post.comments.build
     @tag_options = Tag.all.map{|tag| [ tag.name, tag.id ] }
   end
 
@@ -35,6 +36,7 @@ class PostsController < ApplicationController
 
   def show
     @tags = @post.tags
+    @comments = @post.comments
   end
 
   private
@@ -44,6 +46,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [], :comments_attributes => [:author_id, :body])
   end
 end

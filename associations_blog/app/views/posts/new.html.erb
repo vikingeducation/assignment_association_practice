@@ -1,21 +1,32 @@
 <h1>New Post</h1>
 
-<%= form_for @post do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+<%= form_for @post do |post_fields| %>
+  <%= post_fields.label :title %>
+  <%= post_fields.text_field :title %>
   <br>
 
-  <%= f.label :body %>
-  <%= f.text_area :body %>
+  <%= post_fields.label :body %>
+  <%= post_fields.text_area :body %>
   <br>
 
-  <%= f.label :category_id %>
-  <%= f.collection_radio_buttons :category_id, Category.all, :id, :name %>
+  <%= post_fields.label :category_id %>
+  <%= post_fields.collection_radio_buttons :category_id, Category.all, :id, :name %>
   <br>
 
-  <%= f.label :tag_ids %>
-  <%= f.select :tag_ids, @tag_options, {}, multiple: true %>
+  <%= post_fields.label :tag_ids %>
+  <%= post_fields.select :tag_ids, @tag_options, {}, multiple: true %>
   <br>
 
-  <%= f.submit %>
+  <h4>Comments</h4>
+  <%= post_fields.fields_for :comments do |comment_fields| %>
+    <%= comment_fields.label :author_id %>
+    <%= comment_fields.collection_select :author_id, User.all, :id, :name %>
+    <br>
+
+    <%= comment_fields.label :body %>
+    <%= comment_fields.text_area :body %>
+    <br>
+  <% end %>
+
+  <%= post_fields.submit %>
 <% end %>
