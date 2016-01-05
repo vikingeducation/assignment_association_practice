@@ -23,6 +23,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post.comments.build
   end
 
   def update
@@ -46,6 +47,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [], :comments_attributes => [:author_id, :body])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [], :comments_attributes => [:author_id, :body, :id, :_destroy])
   end
 end

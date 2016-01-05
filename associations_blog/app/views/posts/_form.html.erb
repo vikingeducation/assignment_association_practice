@@ -19,5 +19,19 @@
   <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
   <br>
 
+  <h4>Comments</h4>
+  <%= f.fields_for :comments do |comment_fields| %>
+    <%= comment_fields.label :author_id %>
+    <%= comment_fields.collection_select :author_id, User.all, :id, :name %>
+    <br>
+
+    <%= comment_fields.label :body %>
+    <%= comment_fields.text_area :body %>
+    <br>
+
+    <%= comment_fields.label :_destroy, 'Delete comment?' %>
+    <%= comment_fields.check_box :_destroy %>
+  <% end %>
+
   <%= f.submit %>
 <% end %>
