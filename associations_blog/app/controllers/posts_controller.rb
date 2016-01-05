@@ -33,6 +33,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @tags = @post.tags
   end
 
   private
@@ -42,6 +43,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
   end
 end

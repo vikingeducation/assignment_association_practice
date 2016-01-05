@@ -7,5 +7,15 @@
   <%= link_to 'edit', edit_post_path(@post) %>
 </p>
 
+<h3>Category</h3>
+<p><%= @post.category.name %></p>
+
+<h3>Tags</h3>
+<ul>
+  <% @tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
+
 <p><%= @post.created_at %></p>
 <p><%= @post.body %></p>
