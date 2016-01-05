@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @tag_options = Tag.all.map{|tag| [ tag.name, tag.id ] }
   end
 
   def create
