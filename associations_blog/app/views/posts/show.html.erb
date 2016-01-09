@@ -1,0 +1,26 @@
+<p>
+  <%= link_to '< back to all posts', posts_path %>
+</p>
+
+<h1><%= @post.title %></h1>
+<p>
+  <%= link_to 'edit', edit_post_path(@post) %>
+</p>
+
+<h3>Category</h3>
+<p><%= @post.category.name %></p>
+
+<h3>Tags</h3>
+<ul>
+  <% @tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
+
+<p><%= @post.created_at %></p>
+<p><%= @post.body %></p>
+
+<h3>Comments</h3>
+<% @comments.each do |comment| %>
+  <p><%= comment.body %> - <%= comment.author.try(:name) %></p>
+<% end %>
