@@ -33,6 +33,8 @@ The implementation of the associations can be found in the model files:
 - app/models/user.rb
 - app/models/user_posting.rb
 
+**NOTE: the use of `:class_name => 'ModelNameHere'` to specify the model of a custom association name**
+
 **NOTE: the use of `:dependent => :destroy` to destroy dependent associations**
 **NOTE: the use of `:dependent => :nullify` to nullify dependent associations**
 
