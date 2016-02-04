@@ -5,6 +5,5 @@ class User < ActiveRecord::Base
               class_name: "UserPost"
 
   has_many :authored_posts, through: :post_authorings,
-              class_name: "UserPost",
               source: :post
 end
