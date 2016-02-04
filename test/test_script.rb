@@ -13,20 +13,20 @@ p UserPost.all
 
 puts "Checking associations"
 puts "User..."
-p User.posts
-p User.comments
+p User.first.posts
+p User.first.comments
 puts 'Post...'
-p Post.users
-p Post.comments
-p Post.categories
-p Post.tags
+p Post.first.users
+p Post.first.comments
+p Post.first.categories
+p Post.first.tags
 
 puts 'Comment...'
-p Comment.users
-p Comment.posts
+p Comment.first.users
+p Comment.first.posts
 
 puts 'Tag...'
-p Tag.posts
+p Tag.first.posts
 
 puts 'Category...'
-p Category.posts
+p Category.first.posts
