@@ -59,8 +59,10 @@ end
 
 def generate_user_posts(user)
   post = generate_post
+  second_author = User.all.sample
   generate_post_tags(post)
   UserPost.create(author_id: user.id, post_id: post.id)
+  UserPost.create(author_id: second_author.id, post_id: post.id)
 end
 
 def generate_user_comments(user)
