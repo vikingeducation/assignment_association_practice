@@ -24,11 +24,15 @@ ActiveRecord::Schema.define(version: 20160204124418) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
+    t.integer  "user_id"
+    t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "post_tags", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,8 +40,9 @@ ActiveRecord::Schema.define(version: 20160204124418) do
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "tags", force: :cascade do |t|
@@ -47,6 +52,8 @@ ActiveRecord::Schema.define(version: 20160204124418) do
   end
 
   create_table "user_posts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

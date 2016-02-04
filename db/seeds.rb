@@ -12,33 +12,37 @@ seed_multiplier = 1
 
 users = []
 (10 * seed_multiplier).times do |i|
-  u = User.new( name: Faker::Name.last_name )
+  u = User.create( name: Faker::Name.last_name )
   users << u
 end
 
 posts = []
 (10 * seed_multiplier).times do |i|
-  p = Post.new( title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph )
+  p = Post.create( title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph )
   posts << p
 end
 
 comments = []
 (40 * seed_multiplier).times do |i|
-  c = Comment.new( body: Faker::Lorem.paragraph )
+  c = Comment.create( body: Faker::Lorem.paragraph )
   comments << c
 end
 
 categories = []
 (10 * seed_multiplier).times do |i|
-  c = Category.new( name: Faker::Lorem.word )
+  c = Category.create( name: Faker::Lorem.word )
   categories << c
 end
 
 tags = []
 ( 50 * seed_multiplier).times do |i|
-  t = Tag.new( name: Faker::Lorem.word )
+  t = Tag.create( name: Faker::Lorem.word )
   tags << t
 end
+
+# comments.each_with_index do | comment, i |
+#   puts comment.body
+# end
 
 comments.each_with_index do | comment, i |
   comment.user = users[i % users.length]
@@ -54,7 +58,7 @@ end
 
 user_posts = []
 ( 50 * seed_multiplier).times do |i|
-  up = UserPost.new
+  up = UserPost.create
   users[i % users.length].user_posts << up
   up.user = users[i % users.length]
   posts[i % posts.length].user_posts << up
@@ -63,10 +67,17 @@ end
 
 post_tags = []
 ( 50 * seed_multiplier).times do |i|
-  pt = PostTag.new
+  pt = PostTag.create
   posts[i % posts.length].post_tags << pt
   pt.post = posts[i % posts.length]
   tags[i % tags.length].post_tags << pt
   pt.tag = tags[i % tags.length]
 end
+
+users.each { |user| user.save }
+comments.each { |comment| comment.save }
+posts.each { |post| post.save }
+user_posts.each { |user_post| user_post.save }
+post_tags.each { |post_tag| post_tag.save }
+
 
