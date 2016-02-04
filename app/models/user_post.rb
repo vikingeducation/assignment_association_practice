@@ -1,6 +1,6 @@
 class UserPost < ActiveRecord::Base
-  has_many :posts
-  has_many :users
+  belongs_to :post
+  belongs_to :user
 
   validates :user_id, :uniqueness => { :scope => :post_id }
 end

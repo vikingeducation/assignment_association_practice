@@ -1,6 +1,6 @@
 class PostTag < ActiveRecord::Base
-  has_many :posts
-  has_many :tags
+  belongs_to :post
+  belongs_to :tag
 
   validates :post_id, :uniqueness => { :scope => :tag_id }
 end
