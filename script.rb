@@ -1,7 +1,12 @@
 Hirb.enable
 
 @new_comments = []
+@new_posts = []
+@new_authors = []
 5.times { @new_comments << Comment.all.sample }
+5.times { @new_posts << Post.all.sample }
+3.times { @new_authors << User.all.sample }
+
 @array = [User.all, Category.all, Tag.all, Comment.all, Post.all]
 
 def table_render(table)
@@ -59,6 +64,39 @@ def list_all_ids(user)
   table_render(user.post_ids)
 end
 
-def show_comments
-  puts Hirb::Helpers::AutoTable.render(@new_comments)
+def replace_user_posts(user, new_posts)
+  user.posts = new_posts
+  table_render(user.posts)
+end
+
+def list_post_authors(post)
+  table_render(post.authors)
+end
+
+def replace_post_authors(post, new_authors)
+  post.authors = new_authors
+  table_render(post.authors)
+end
+
+def replace_post_authors_by_id(post, new_author_ids)
+  post.author_ids = new_author_ids
+  table_render(post.authors)
+end
+
+def list_tag_posts(tag)
+  table_render(tag.posts)
+end
+
+def add_post_to_tag_by_id(tag, new_post_id)
+  tag.post_ids = tag.post_ids << new_post_id
+  table_render(tag.posts)
+end
+
+def add_tag_to_post_by_id(post, new_tag_id)
+  post.tag_ids = post.tag_ids << new_tag_id
+  table_render(post.tags)
+end
+
+def list_post_tags(post)
+  table_render(post.tags)
 end
