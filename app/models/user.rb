@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
-  has_many :comments, foreign_key: :author_id
-  has_many :user_posts, foreign_key: :author_id
-  has_many :posts, through: :user_posts
+  has_many :authored_comments, foreign_key: :author_id, 
+              class_name: "Comment"
+  has_many :post_authorings, foreign_key: :author_id,
+              class_name: "UserPost"
+
+  has_many :authored_posts, through: :post_authorings,
+              class_name: "UserPost",
+              source: :post
 end

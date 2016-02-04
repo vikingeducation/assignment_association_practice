@@ -1,13 +1,14 @@
 Hirb.enable
 
-@new_comments = []
-@new_posts = []
-@new_authors = []
-5.times { @new_comments << Comment.all.sample }
-5.times { @new_posts << Post.all.sample }
-3.times { @new_authors << User.all.sample }
-
-@array = [User.all, Category.all, Tag.all, Comment.all, Post.all]
+def populate_sample
+  @new_comments = []
+  @new_posts = []
+  @new_authors = []
+  5.times { @new_comments << Comment.all.sample }
+  5.times { @new_posts << Post.all.sample }
+  3.times { @new_authors << User.all.sample }
+  @array = [User.all, Category.all, Tag.all, Comment.all, Post.all]
+end
 
 def table_render(table)
   puts Hirb::Helpers::AutoTable.render(table)
