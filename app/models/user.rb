@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :comments, :dependent => :destroy
-  has_many :posts, through: :user_posts
+  has_many :authored_comments, :dependent => :destroy, class_name: "Comment"
+  has_many :authored_posts, through: :user_posts, class_name: "Post"
   has_many :user_posts, :dependent => :destroy
 end

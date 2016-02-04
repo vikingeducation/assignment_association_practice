@@ -78,27 +78,44 @@ category = Category.first
 
 # p user.post_ids
 
-puts "Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]"
-p user.first.posts
-user.first.posts = [Post.first, Post.second]
-user.save
-p user.comments
+# puts "Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]"
+# p User.first.posts
+# User.first.posts = [Post.first, Post.second]
+# user.save
+# p user.posts
+#
+# puts "List the authors of a given post"
+# p post.users
+#
+# puts "Set a collection of Users to replace a given Post's authors in a similar way
+# Accomplish the same thing by only using IDs (hint: there's an association method for this..)"
+# p "--------Initial------"
+# p post.user_ids
+# p "--------Do Operation------"
+# p post.user_ids = [User.first.id, User.last.id]
+# p "--------After------"
+# p post.user_ids
+#
+# puts "List the posts under a given tag"
+# p tag.posts
 
-puts "List the authors of a given post"
-p "post.user_ids"
+# puts "Add a new post to a given tag by only using its ID"
+# puts "before adding post"
+# p tag.posts
+# new_post = Post.create(title: "New Title", body: "New Body", category_id: 1)
+# tag.posts << Post.where(id: new_post.id)
+# puts "after adding post"
+# p tag.posts
 
-puts "Set a collection of Users to replace a given Post's authors in a similar way
-Accomplish the same thing by only using IDs (hint: there's an association method for this..)"
-p "--------Initial------"
-p post.user_ids
-p "--------Do Operation------"
-p post.user_ids = [User.first.id, User.last.id]
-p "--------After------"
-p post.user_ids
 
-puts "List the posts under a given tag"
-p tag.posts
-
-puts "Add a new post to a given tag by only using its ID"
-puts "Add a new tag to a given post by only using its ID"
-puts "List the tags on a given post"
+# puts "Add a new tag to a given post by only using its ID"
+# puts "before adding tag"
+# p post.tags
+# new_tag = Tag.create(name: "TagTag")
+# post.tags << Tag.where(id: new_tag.id)
+# puts "after adding tag"
+# p post.tags
+# 
+#
+# puts "List the tags on a given post"
+# p post.tags
