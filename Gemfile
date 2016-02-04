@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5.1'
 
 gem 'faker'
-
+gem 'json'
 gem 'pg'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'

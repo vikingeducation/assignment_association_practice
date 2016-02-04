@@ -149,6 +149,7 @@ DEPENDENCIES
   faker
   jbuilder (~> 2.0)
   jquery-rails
+  json
   pg
   rails (= 4.2.5.1)
   sass-rails (~> 5.0)
