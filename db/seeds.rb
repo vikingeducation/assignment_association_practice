@@ -21,9 +21,9 @@ end
 
 User.find_each do |user|
   5.times do |index|
-    post = user.posts.create(title: "Title #{index}", body: "Body #{index}", category: Category.all.sample)
+    post = user.posts.create(title: "Post title #{index}", body: "Post body #{index}", category: Category.all.sample)
     3.times do |comment_index|
-      post.comments.create(body: "Body #{comment_index}", user: User.all.sample)
+      post.comments.create(body: "Comment body #{comment_index}", user: User.all.sample)
       post.tags.create(name: "Tag #{comment_index}")
     end
   end
