@@ -21,7 +21,7 @@ def render_all(array)
 end
 
 def user_comments(user)
-  table_render(user.comments)
+  table_render(user.authored_comments)
 end
 
 def set_comment_to_user(comment, user)
@@ -35,8 +35,8 @@ def set_post_to_category(post, category)
 end
 
 def replace_user_comments(user, new_comments)
-  user.comments = new_comments
-  table_render(user.comments)
+  user.authored_comments = new_comments
+  table_render(user.authored_comments)
 end
 
 def return_comment_author(comment)
@@ -48,7 +48,7 @@ def list_post_comments(post)
 end
 
 def list_comment_post(comment)
-  table_render(comment.post)
+  table_render(comment.parent_post)
 end
 
 def remove_category_post(category)
@@ -58,7 +58,7 @@ def remove_category_post(category)
 end
 
 def list_author_post(user)
-  table_render(user.posts)
+  table_render(user.authored_posts)
 end
 
 def list_all_ids(user)
@@ -66,8 +66,8 @@ def list_all_ids(user)
 end
 
 def replace_user_posts(user, new_posts)
-  user.posts = new_posts
-  table_render(user.posts)
+  user.authored_posts = new_posts
+  table_render(user.authored_posts)
 end
 
 def list_post_authors(post)
@@ -85,12 +85,12 @@ def replace_post_authors_by_id(post, new_author_ids)
 end
 
 def list_tag_posts(tag)
-  table_render(tag.posts)
+  table_render(tag.tagged_posts)
 end
 
 def add_post_to_tag_by_id(tag, new_post_id)
-  tag.post_ids = tag.post_ids << new_post_id
-  table_render(tag.posts)
+  tag.tagged_post_ids = tag.tagged_post_ids << new_post_id
+  table_render(tag.tagged_posts)
 end
 
 def add_tag_to_post_by_id(post, new_tag_id)
