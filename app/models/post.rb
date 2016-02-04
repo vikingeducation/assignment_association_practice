@@ -1,8 +1,9 @@
 class Post < ActiveRecord::Base
   belongs_to :category
   has_many :comments
-  has_many :posts_users
-  has_many :authors, through: :posts_users, class_name: "User"
-  has_many :taggings
-  has_many :tags, through: :taggings
+  has_many :post_authorings, class_name: "PostsUser"
+  has_many :authors, through: :post_authorings
+
+  has_many :post_taggings, class_name: "Tagging"
+  has_many :tags, through: :post_taggings
 end
