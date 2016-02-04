@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 20160204124418) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "post_tags", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "tag_id"
