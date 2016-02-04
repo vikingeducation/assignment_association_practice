@@ -21,6 +21,7 @@ def generate_user
   u.save
 end
 
+
 def generate_category
   name = Faker::Commerce.department(1)
   c = Category.new
@@ -42,28 +43,61 @@ def generate_post
   p = Post.new
   p[:title] = title
   p[:body] = body
+  p[:category_id] = Category.all.sample.id
   p.save
+  p
 end
 
-def generate_comemnt
+def generate_comment
   body = Faker::Lorem.sentence(2)
 
   c  = Comment.new
   c[:body] = body
   c.save
+  c
 end
 
 def generate_user_posts(user)
-  p = generate_post
-  p.author_id = user.id
+  post = generate_post
+  generate_post_tags(post)
+  UserPost.create(author_id: user.id, post_id: post.id)
 end
 
-def generate_user_comments(user, post)
-  c = generate_comment
-  c.author_id = user.id
-  c.post_id = post.id
+def generate_user_comments(user)
+  5.times do
+    c = generate_comment
+    c.author_id = user.id
+
+    post = Post.all.sample
+    c.post_id = post.id
+  end
 end
 
+def generate_post_tags(post)
+  3.times do
+    tag = Tag.all.sample
+    PostTag.create(post_id: post.id, tag_id: tag.id)
+  end
+end
 
+puts "Generating users"
 (15).times { generate_user }
 
+puts "Generating categories"
+(10).times { generate_category }
+
+puts "Generating tags"
+(10).times { generate_tag }
+
+puts "Assigning posts to users"
+User.all.each do |user|
+  5.times do
+    generate_user_posts(user)
+  end
+end
+
+puts "Assigning comments to posts and users"
+
+User.all.each do |user|
+  generate_user_comments(user)
+end
