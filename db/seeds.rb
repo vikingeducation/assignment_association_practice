@@ -65,11 +65,9 @@ end
 
 def generate_user_comments(user)
   5.times do
-    c = generate_comment
-    c.author_id = user.id
-
     post = Post.all.sample
-    c.post_id = post.id
+    c = generate_comment
+    c.update(author_id: user.id, post_id: post.id)
   end
 end
 
