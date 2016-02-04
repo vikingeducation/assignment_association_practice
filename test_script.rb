@@ -89,3 +89,55 @@ category.posts.each { |cp| puts "#{cp.id} #{cp.title}"}
 User.all.sample.posts.each { |p| puts "#{p.id} #{p.title}"}
 
 #12.
+p User.all.sample.post_ids
+
+
+#13.
+
+p User.first.posts
+User.first.posts = [Post.last, Post.last]
+p User.first.posts
+
+#14.
+
+puts "#14"
+p = Post.last
+p.users.each{ |u| puts "#{u.name}" }
+
+#15
+
+puts "#15"
+us = [ User.all.sample, User.all.sample, User.all.sample, User.all.sample ]
+p = Post.last
+p.users.each{ |u| puts "#{u.name}" }
+p.users = us
+p.users.each{ |u| puts "#{u.name}" }
+
+#16
+
+puts "#16"
+p = Post.last 
+print p.user_ids
+p.user_ids = [1, 2, 3, 4]
+p.reload
+print p.user_ids
+
+#17.
+puts "#17"
+t = Tag.all.sample
+t.posts.each { |p| puts "#{p.title}" }
+
+#18
+puts "#18"
+t = Tag.all.sample
+print t.post_ids 
+t.post_ids << Post.all.sample.id
+t.save
+t.reload
+print t.post_ids 
+
+
+
+
+
+
