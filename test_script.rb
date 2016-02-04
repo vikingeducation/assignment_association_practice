@@ -131,11 +131,20 @@ t.posts.each { |p| puts "#{p.title}" }
 puts "#18"
 t = Tag.all.sample
 print t.post_ids 
-t.post_ids << Post.all.sample.id
-t.save
-t.reload
+t.posts<< Post.find( Post.all.sample.id )
 print t.post_ids 
 
+#19. 
+puts "#19"
+p = Post.all.sample
+print p.tag_ids 
+p.tags << Tag.find( Tag.all.sample.id )
+print p.tag_ids 
+
+#20
+
+puts "#20"
+Post.all.sample.tags.each { |t| puts "#{t.name}" }
 
 
 
