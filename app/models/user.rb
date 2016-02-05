@@ -14,11 +14,7 @@ class User < ActiveRecord::Base
             class_name: 'Post',
             source: :post
 
-  has_many :post_taggings, 
-            through: :authored_posts
-
   has_many :tags_on_authored_posts, 
-            through: :post_taggings, 
-            class_name: 'Tag', 
-            source: :tag
+            through: :authored_posts, 
+            source: :tags
 end

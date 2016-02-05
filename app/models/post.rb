@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
             dependent: :destroy
 
   has_many :post_authorings,
-            class_name: "UserPost"
+            class_name: "UserPost",
             dependent: :destroy
 
   has_many :authors, 
@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
             source: :user
               
   has_many :post_taggings, 
-            class_name: "PostTag"
+            class_name: "PostTag",
             dependent: :destroy
 
   has_many :tags,
