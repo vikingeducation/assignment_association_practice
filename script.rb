@@ -101,3 +101,11 @@ end
 def list_post_tags(post)
   table_render(post.tags)
 end
+
+def list_tags_on_authored_posts(user)
+  table_render(user.tags_on_authored_posts)
+end
+
+def list_authors_of_tagged_posts(tag)
+  table_render(tag.authors_of_tagged_posts)
+end
