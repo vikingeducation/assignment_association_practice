@@ -15,7 +15,7 @@ multiplier = 1
   #Posts
   (5*multiplier).times do
     post = Post.create({title:Faker::Hipster.sentence(rand(1..4)), body: Faker::Hipster.paragraph, category_id: rand(1..Category.all.length)})
-    user.posts << post
+    user.authored_posts << post
 
     Comment.create({body: Faker::Hipster.paragraph, post_id: post.id, user_id: rand(1..User.all.length)})
 
