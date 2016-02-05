@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204184138) do
+ActiveRecord::Schema.define(version: 20160205001937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,21 +43,21 @@ ActiveRecord::Schema.define(version: 20160204184138) do
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id", using: :btree
 
-  create_table "posts_users", id: false, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
+  create_table "posts_users", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "user_id"
   end
 
-  add_index "posts_users", ["post_id", "user_id"], name: "index_posts_users_on_post_id_and_user_id", using: :btree
-  add_index "posts_users", ["user_id", "post_id"], name: "index_posts_users_on_user_id_and_post_id", using: :btree
+  add_index "posts_users", ["post_id"], name: "index_posts_users_on_post_id", using: :btree
+  add_index "posts_users", ["user_id"], name: "index_posts_users_on_user_id", using: :btree
 
-  create_table "taggings", id: false, force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "tag_id",  null: false
+  create_table "taggings", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
   end
 
-  add_index "taggings", ["post_id", "tag_id"], name: "index_taggings_on_post_id_and_tag_id", using: :btree
-  add_index "taggings", ["tag_id", "post_id"], name: "index_taggings_on_tag_id_and_post_id", using: :btree
+  add_index "taggings", ["post_id"], name: "index_taggings_on_post_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
@@ -74,4 +74,8 @@ ActiveRecord::Schema.define(version: 20160204184138) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "categories"
+  add_foreign_key "posts_users", "posts"
+  add_foreign_key "posts_users", "users"
+  add_foreign_key "taggings", "posts"
+  add_foreign_key "taggings", "tags"
 end
