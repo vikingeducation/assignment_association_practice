@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
 
   has_many :authors, :through => :post_authorings, source: :user 
 
-  has_many :post_taggings, class_name: 'PostTag'
+  has_many :post_tagginngs, class_name: 'PostTag'
   has_many :tags, :through => :post_taggings 
 
 private

@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 
   
   has_many  :tags_on_authored_posts,
-            :through => :post_authorings,
-            :source => :post #jointable, source => new association btw user_posts + post_tag
+            :through => :post_taggings,
+            :source => :tag, 
+            :class_name => 'Tag' #jointable, source => new association btw user_posts + post_tag
 end
