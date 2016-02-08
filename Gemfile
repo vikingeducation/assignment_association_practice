@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'faker'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use postgresql as the database for Active Record
@@ -38,14 +38,11 @@ gem 'bootstrap-sass'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-<<<<<<< HEAD
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-=======
+
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
   gem 'pry-byebug'
   gem 'better_errors'
->>>>>>> 2bfd8140b2053f98a6b34d9da79f4ab46e784577
+
 end
 
 group :development do

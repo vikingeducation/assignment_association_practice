@@ -1,0 +1,18 @@
+
+
+<%= form_for @post do |f| %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+<%= f.label :body %>
+<%= f.text_area :body %><br>
+<%= f.label :tags %><br>
+<%= f.collection_check_boxes(
+  :tag_ids,
+  Tag.all,
+  :id,
+  :name) %>
+
+<%= f.submit %>
+
+
+<% end%>

@@ -27,7 +27,7 @@ User.find_each do |user|
     post = user.authored_posts.create(title: "Post title #{index}", body: "Post body #{index}", category: Category.all.sample)
     3.times do |comment_index|
       post.comments.create(body: "Comment body #{comment_index}", author: User.all.sample)
-      post.tags.create(name: "Tag #{comment_index}")
+      post.tags.create(name: "Tag #{Faker::Hipster.word}")
     end
   end
 end
