@@ -1,0 +1,10 @@
+<%= form_for @post do |f| %>
+
+  <h3>Tags</h3>
+
+  <%= f.label :tags %>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+
+  <%= f.submit %>
+
+<% end %>
