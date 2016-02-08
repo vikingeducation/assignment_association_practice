@@ -5,8 +5,23 @@
   <%= post_field.label :body %>
   <%= post_field.text_area :body %><br>
   <%= post_field.label :tag_ids %>
-  <%= post_field.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
-  <%= post_field.collection_radio_buttons(:category_id, Category.all, :id, :name)%>
-  <%= post_field.collection_select(:category_id, Category.all, :id, :name)%>
+  <%= post_field.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
+  <%= post_field.collection_radio_buttons(:category_id, Category.all, :id, :name) %><br>
+  <%= post_field.collection_select(:category_id, Category.all, :id, :name) %><br>
+  
+  <%= select_tag("post[category_id]", 
+                  options_for_select( 
+                    @category_options, 
+                    @post.category_id )
+                 ) %>
+
+  <%= post_field.collection_select(
+                  :tag_ids, 
+                  Tag.all, 
+                  :id, 
+                  :name, 
+                  {},
+                  multiple: true) %><br>
+
   <%= post_field.submit %>
 <% end %>
