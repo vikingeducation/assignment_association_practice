@@ -1,0 +1,13 @@
+<h2> Post Comments </h2>
+  <%= post_field.fields_for :comments do |comment_fields| %>
+
+  <h3>Comment:</h3>
+  <%= comment_fields.label :body %>
+  <%= comment_fields.text_field :body %>
+  <br>
+
+  <% if comment_fields.object.persisted? %>
+  <%= comment_fields.label :_destroy, "Delete this comment?" %>
+  <%= comment_fields.check_box :_destroy %>
+  <% end %>
+<% end %>

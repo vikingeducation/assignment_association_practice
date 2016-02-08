@@ -24,5 +24,7 @@
                   {},
                   multiple: true, class: 'dropdown') %><br>
 
+  <%= render partial: 'comment_form', locals: { post: @post, post_field: post_field } %>
+
   <%= post_field.submit %>
 <% end %>

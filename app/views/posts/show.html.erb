@@ -4,3 +4,6 @@
   <p><%= tag.name %></p>
 <% end %>
 <p>Category:<%= @post.category.id %>: <%= @post.category.name %></p>
+<% @post.comments.each do |comment| %>
+  <p>Comment: <%= comment.body %></p>
+<% end %>
