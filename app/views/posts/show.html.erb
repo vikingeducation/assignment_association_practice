@@ -3,3 +3,4 @@
 <% @post.tags.each do |tag| %>
   <p><%= tag.name %></p>
 <% end %>
+<p>Category:<%= @post.category.id %>: <%= @post.category.name %></p>

@@ -13,6 +13,19 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(whitelisted_params)
+      redirect_to post_path(@post)
+    else
+      render 'edit'
+    end
+  end
+
   def show
     @post = Post.find(params[:id])
   end
@@ -23,6 +36,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(
       :title,
       :body, 
+      :category_id,
       :tag_ids => [])
   end
 end
