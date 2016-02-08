@@ -25,7 +25,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post.save(secret_params)
+    if @post.update(secret_params)
       redirect_to post_path(@post)
     else
       render :edit
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
 private
 
   def secret_params
-    params.require(:post).permit(:title, :body, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
   end
 
 
