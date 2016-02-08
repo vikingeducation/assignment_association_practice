@@ -5,9 +5,10 @@
   <%= post_field.label :body %>
   <%= post_field.text_area :body %><br>
   <%= post_field.label :tag_ids %>
+  <input type="checkbox" name="post[tag_ids][]" value="">
   <%= post_field.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
   <%= post_field.collection_radio_buttons(:category_id, Category.all, :id, :name) %><br>
-  <%= post_field.collection_select(:category_id, Category.all, :id, :name) %><br>
+  <%= post_field.collection_select(:category_id, Category.all, :id, :name,{},class: 'dropdown', id:"this_id") %><br>
   
   <%= select_tag("post[category_id]", 
                   options_for_select( 
@@ -21,7 +22,7 @@
                   :id, 
                   :name, 
                   {},
-                  multiple: true) %><br>
+                  multiple: true, class: 'dropdown') %><br>
 
   <%= post_field.submit %>
 <% end %>
