@@ -2,7 +2,7 @@
 <p><%= @post.body %></p>
 
 <p>
-  <%= @post.category.name %>
+  <%= @post.category.name if @post.category %>
 </p>
 
 <ul>

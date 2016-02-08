@@ -12,17 +12,22 @@
   <br>
   <br>
 
-  <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %>
+  <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name, {include_blank: true}) %>
   <br>
   <br>
 
-  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+  <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: true}) %>
   <br>
   <br>
 
-  <%= f.collection_select(:tag_ids, Tag.all, :id, :name, {}, multiple: true) %>
+  <%= f.collection_select(:tag_ids, Tag.all, :id, :name, {include_blank: true}, multiple: true) %>
   <br>
   <br>
 
   <%= f.submit %>
+<% end %>
+<hr>
+<%= form_tag @post do %>
+  <%= select_tag("post[category_id]" , options_for_select(@post_options)) %>
+  <%= submit_tag %>
 <% end %>
