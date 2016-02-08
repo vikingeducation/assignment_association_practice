@@ -1,26 +1,42 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
+
+# This file should contain all the record creation needed to seed the database with its default values.# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).#
+
 # Examples:
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-multiplier = 1
+#
 
-(5*multiplier).times do 
-  user = User.create({name: Faker::Name.name})
-  Category.create({name: Faker::Hipster.word})
+Comment.destroy_all
+Post.destroy_all
+Category.destroy_all
+Tag.destroy_all
+User.destroy_all
 
-  #Posts
-  (5*multiplier).times do
-    post = Post.create({title:Faker::Hipster.sentence(rand(1..4)), body: Faker::Hipster.paragraph, category_id: rand(1..Category.all.length)})
-    user.authored_posts << post
+10.times do |i|
+  User.create(name: "User #{i}")
+end
 
-    Comment.create({body: Faker::Hipster.paragraph, post_id: post.id, user_id: rand(1..User.all.length)})
+10.times do |i|
+  Category.create(name: "Category #{i}")
+end
 
-    post.tags << Tag.create({name: Faker::Hipster.word})
-
+User.find_each do |user|
+  5.times do |index|
+    post = user.authored_posts.create(title: "Post title #{index}", body: "Post body #{index}", category: Category.all.sample)
+    3.times do |comment_index|
+      post.comments.create(body: "Comment body #{comment_index}", author: User.all.sample)
+      post.tags.create(name: "Tag #{comment_index}")
+    end
   end
+end
+
+Tag.find_each do |tag|
+  Post.all.sample.tags << tag
+end
+
+Post.find_each do |post|
+  User.all.sample.authored_posts << post
 
 end
