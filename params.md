@@ -6,7 +6,6 @@
   <input type="text" name="post[title]" value="My Super Title">
   <input type="text" name="post[body]" value="Some Body of a post">
 
-
   <input type="hidden" id="post_tag_ids_0" name="post[tag_ids][]" value="">
 
   <label for="post_tag_ids_1">footag1</label>
