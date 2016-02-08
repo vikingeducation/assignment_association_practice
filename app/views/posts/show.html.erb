@@ -11,4 +11,11 @@
   <% end %>
 </ul>
 
+<ul>
+  <% @post.comments.each do |comment| %>
+    <li><%= comment.id %></li>
+    <li><%= comment.body %></li>
+  <% end %>
+</ul>
+
 <%= link_to "Edit", edit_post_path(@post) %>
