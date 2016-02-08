@@ -15,6 +15,12 @@
   <% if @post.persisted? %>
     <%= post_field.fields_for :comments do |comment_fields| %>
       <p><%= comment_fields.text_field :body %></p>
+
+      <% if comment_fields.object.persisted? %>
+        <%= comment_fields.label :_destroy, "Delete this review?" %>
+        <%= comment_fields.check_box :_destroy %>
+      <% end %>
+      
     <% end %>
   <% end %>
 
