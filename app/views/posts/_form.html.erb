@@ -1,0 +1,12 @@
+
+<%= form_for @post do |post_field| %>
+  <%= post_field.label :title %>
+  <%= post_field.text_field :title %><br>
+  <%= post_field.label :body %>
+  <%= post_field.text_area :body %><br>
+  <%= post_field.label :tag_ids %>
+  <%= post_field.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+  <%= post_field.collection_radio_buttons(:category_id, Category.all, :id, :name)%>
+  <%= post_field.collection_select(:category_id, Category.all, :id, :name)%>
+  <%= post_field.submit %>
+<% end %>
