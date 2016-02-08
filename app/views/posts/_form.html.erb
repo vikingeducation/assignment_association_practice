@@ -10,7 +10,19 @@
   <%= f.label :category, "Pick a category" %>
   <br/>
   <%= f.collection_radio_buttons( :category_id, Category.all, :id, :name ) %>
+  <%= f.submit %>
+  <br>
 
+  <%= f.label :category, "Select Another Category" %>
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
   <%= f.submit %>
 
 <% end%>
+
+<%= form_tag @post do %>
+
+  <%= select_tag('post[category_id]', options_for_select(@category_options, @post.category_id)) %>
+  <%= submit_tag %>
+
+<%end%>
+
