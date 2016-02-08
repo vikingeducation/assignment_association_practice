@@ -40,7 +40,7 @@ class PostsController < ApplicationController
     params.require(:post).permit( :title,
                                   :body,
                                   :category_id,
-                                  :tags_id
+                                  :tag_ids => []
     )
   end
 end
