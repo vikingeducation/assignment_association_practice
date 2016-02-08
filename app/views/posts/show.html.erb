@@ -1,0 +1,9 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.body %></p>
+<% @post.tags.each do |tag| %>
+  <p><%= tag.name %></p>
+<% end %>
+<p>Category:<%= @post.category.id %>: <%= @post.category.name %></p>
+<% @post.comments.each do |comment| %>
+  <p>Comment: <%= comment.body %></p>
+<% end %>
