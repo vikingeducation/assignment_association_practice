@@ -1,7 +1,23 @@
 <h2><%= @post.title %></h2>
 <p><%= @post.body %></p>
+
+<br>
+
+<h3>Tags</h3>
 <% @post.tags.each do |tag| %>
   <div><%= tag.name %></div>
+<% end %>
+
+<br>
+
+<h3>Category</h3>
+<p><%= @post.category.name %></p>
+
+<br>
+
+<h3>Comments</h3>
+<% @post.comments.each do |comment| %>
+  <p><%= comment.body %></p>
 <% end %>
 
 <%= link_to "Edit", edit_post_path %>

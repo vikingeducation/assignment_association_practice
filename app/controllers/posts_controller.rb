@@ -45,7 +45,8 @@ class PostsController < ApplicationController
                                     :id,
                                     :body,
                                     :post_id,
-                                    :user_id]
+                                    :user_id,
+                                    :_destroy]
     )
   end
 end
