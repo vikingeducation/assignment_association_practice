@@ -7,4 +7,7 @@ class Post < ActiveRecord::Base
   has_many :post_taggings, class_name: "Tagging"
   has_many :tags, through: :post_taggings, dependent: :destroy
 
+
+  accepts_nested_attributes_for :comments, :allow_destroy => :true
+
 end

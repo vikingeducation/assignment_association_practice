@@ -6,3 +6,8 @@
 <%end%>
 
 <h4><%= @post.category.name %></h4>
+
+
+<% @post.comments.each do |comment| %>
+  <h4><%= comment.body %></h4>
+<%end%>

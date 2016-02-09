@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @category_options = Category.all.map{|category| [category.name, category.id]}
+    @post.comments.build
   end
 
   def create
@@ -23,6 +24,8 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @category_options = Category.all.map{|category| [category.name, category.id]}
+    @comments = @post.comments
+    @post.comments.build
   end
 
   def update
@@ -38,8 +41,9 @@ class PostsController < ApplicationController
 private
 
   def secret_params
-    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :category_id, { :comments_attributes => [:id, :body, :_destroy]}, :tag_ids => [])
   end
+
 
 
 end

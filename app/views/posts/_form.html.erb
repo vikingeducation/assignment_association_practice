@@ -6,20 +6,27 @@
   <%= f.label :tags %><br>
   <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) 
   %>
-  <%= f.fields_for :comments do |c| %>
-    <%= c.label :body, "Comment" %>
-    <%= c.text_area :body %>
-  <% end %>
 
+    <br/>
+    <br/>
+    <%= f.fields_for :comments do |c| %>
+      <%= c.label :body, "Comment" %>
+      <%= c.text_area :body %>
+
+        <%= c.label :_destroy, "Delete comment?" %>
+        <%= c.check_box :_destroy %>
+
+    <% end %>
 
 
   <br/>
   <br/>
   <%= f.label :category, "Pick a category" %>
   <br/>
-  <%= f.collection_radio_buttons( :category_id, Category.all, :id, :name, include_blank: true, id: "radio" ) %>
+  <%= f.collection_radio_buttons( :category_id, Category.all, :id, :name) %>
   <%= f.submit %>
   <br>
+  <br/>
 
   <%= f.label :category, "Select Another Category" %>
   <%= f.collection_select(:category_id, Category.all, :id, :name, prompt: true ) %>
