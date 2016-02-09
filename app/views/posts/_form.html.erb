@@ -4,7 +4,14 @@
   <%= f.label :body %>
   <%= f.text_area :body %><br>
   <%= f.label :tags %><br>
-  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) 
+  %>
+  <%= f.fields_for :comments do |c| %>
+    <%= c.label :body, "Comment" %>
+    <%= c.text_area :body %>
+  <% end %>
+
+
 
   <br/>
   <br/>
