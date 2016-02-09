@@ -1,0 +1,16 @@
+<h1>Title: <%= @post.title %></h1>
+<h3>Body:  <%= @post.body %><h3>
+<hr>
+
+<h5>Here be tagz:</h5>
+<% @post.tags.each do |tag| %>
+  <h4><%= tag.name %></h4>
+<%end%>
+<hr>
+
+<h4>Category:<%= @post.category.name %></h4>
+<hr>
+
+<% @post.comments.each do |comment| %>
+  <h4>Comment: <%= comment.body %></h4>
+<%end%>

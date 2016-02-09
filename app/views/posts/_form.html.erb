@@ -1,0 +1,53 @@
+<%= form_for(@post, html: {id: "your_id"}) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :body %>
+  <%= f.text_area :body %><br><br/>
+  <%= f.label :tags %><br>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) 
+  %>
+
+  <br/><br/>
+  <%= f.label :category_id, "Pick a category:" %>
+  <br/>
+  <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name, {include_blank: true} ) %>
+  <br/><br/>
+
+  <%= f.submit %><br/><br/>
+
+  <%= f.label :category_id, "Or Select a Category Here:" %>
+  <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
+  <%= f.submit %>
+
+    <br/>
+    <%= f.fields_for :comments do |c| %>
+      <%= c.label :body, "Comment" %>
+      <%= c.text_area :body %>
+
+
+      <% if c.object.persisted? %>
+        <%= c.label :_destroy, "Delete comment?" %>
+        <%= c.check_box :_destroy %><br/>
+      <% end %>
+
+    <% end %><br/>
+  <%= f.submit %><br/><br/>
+
+<% end%><br/>
+
+<h4>Form_tag version:</h4>
+<%= form_tag @post do %>
+  <%= select_tag('post[category_id]', options_for_select(@category_options, @post.category_id), include_blank: true) %>
+  <%= submit_tag %>
+
+<%end%>
+
+<%= form_for @post do |f| %>
+
+  <%= f.label :tags, "This is a combo-box" %>
+  <%= f.collection_select :tag_ids, Tag.all, :id, :name, {include_blank: true}, multiple: true, class: "text-center" %>
+  <%= f.submit %>
+
+
+  
+<% end %>
