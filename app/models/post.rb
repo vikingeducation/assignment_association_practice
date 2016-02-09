@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
   belongs_to :category
 
   accepts_nested_attributes_for :comments,
-    reject_if: proc { |attributes| attributes['body'].blank? },
+    #reject_if: proc { |attributes| attributes['body'].blank? },
+    reject_if: :all_blank,
     :allow_destroy => true
 end
