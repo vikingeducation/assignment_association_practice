@@ -1,0 +1,12 @@
+<h2>Edit Post</h2>
+
+<%= render partial: "form" %>
+
+<%= form_tag( "post_path(@post)", method: :patch) do %>
+  <h3>Categories</h3>
+  <%= select_tag(
+      "post[category_id]",
+      options_from_collection_for_select(Category.all, "id", "name", selected: @post.category.id)
+    ) %>
+  <%= submit_tag %>
+<% end %>
