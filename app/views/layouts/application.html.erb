@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>AssignmentAssociationPractice</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+	<head>
+	  <title>Assignment Association Practice <%= @page_title %></title>
+	  <%= stylesheet_link_tag    'application', media: 'all' %>
+	  <%= javascript_include_tag 'application' %>
+	  <%= csrf_meta_tags %>
 
-<%= yield %>
+	  <!-- Meta Stuff -->
+	  <meta charset="utf-8">
 
-</body>
+	  <!-- Bootstrap CSS -->
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	  <!-- jQuery -->
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	  <!-- Bootstrap Javascripts -->
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<main class="container">
+
+			<%= yield %>
+
+			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+					<!-- Include all compiled plugins (below), or include individual files as needed -->
+					<script src="js/bootstrap.min.js"></script>
+
+		</main>
+	</body>
 </html>
