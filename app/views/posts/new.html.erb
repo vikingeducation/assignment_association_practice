@@ -5,3 +5,21 @@
 		<h1>Create New Post</h1>
 	</div>
 </div>
+
+<%= form_for @post do |f| %>
+
+	<div class="row">
+	  <div class="col-xs-1">
+	  	<div class="side-header">
+	  		<%= f.label :title, 'Title:'%>
+	  	</div>
+	  </div>
+
+	  <div class="col-xs-10">
+	  	<div class="side-content">
+	  		<%= f.text_field :title%>
+	  	</div>
+	  </div>
+	</div>
+
+<% end %>
