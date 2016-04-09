@@ -15,6 +15,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @page_header = "Post #{@post.id}: #{@post.title} "
+    @tags = @post.tags.map{|tag| tag.name}.join(", ")
   end
 
 end
