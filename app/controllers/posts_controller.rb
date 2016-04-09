@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def edit
-    @page_header = "Edit Post #{@post.id}: #{@post.name}"
+    @page_header = "Edit Post #{@post.id}: #{@post.title}"
   end
 
   def index
@@ -13,7 +13,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @page_header = "Post #{@post.id}: #{@post.name} "
+    @post = Post.find(params[:id])
+    @page_header = "Post #{@post.id}: #{@post.title} "
   end
 
 end
