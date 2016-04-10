@@ -5,3 +5,50 @@
 		<h1><%= @page_header %></h1>
 	</div>
 </div>
+
+
+<%= form_for @post do |f| %>
+
+	<div class="row">
+	  <div class="col-xs-1">
+	  	<div class="side-header">
+	  		<%= f.label :title, 'Title:'%>
+	  	</div>
+	  </div>
+
+	  <div class="col-xs-11">
+	  	<div class="side-content">
+	  		<%= f.text_field :title%>
+	  	</div>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-1">
+	  	<div class="side-header">
+	  		<%= f.label :body, 'Body:'%>
+	  	</div>
+	  </div>
+
+	  <div class="col-xs-11">
+	  	<div class="side-content">
+	  		<%= f.text_field :body%>
+	  	</div>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-11 col-xs-offset-1">
+	  	<div class="side-content">
+	  		<%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+	  	</div>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-10 col-xs-offset-1">
+	  	<%= f.submit "Update Post", :class => "btn btn-primary btn-lg center-block" %>
+	  </div>
+	</div>
+
+<% end %>
