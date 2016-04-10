@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @column_headers = ["ID", "Title", "Tags", "Show", "Edit"]
+    @column_headers = ["ID", "Title", "Category", "Tags", "Show", "Edit"]
     @posts = Post.all
   end
 
