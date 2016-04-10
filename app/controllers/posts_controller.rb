@@ -30,8 +30,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.new(whitelisted_params)
-    if @post.save
+    @post = Post.find(params[:id])
+    if @post.update_attributes(whitelisted_params)
       redirect_to @post
     else
       render :new
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   private
 
   def whitelisted_params
-    params.require(:post).permit(:title,:body,:tag_ids => [])
+    params.require(:post).permit(:title,:body, :category_id, :tag_ids => [])
   end
 
 end
