@@ -11,6 +11,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @comments = @post.comments.build
     @page_header = "Edit Post #{@post.id}: #{@post.title}"
     @tag_options = Tag.all.map{ |tag| [tag.name,tag.id] }
   end
@@ -22,6 +23,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @comment = @post.comments.build
     @tag_options = Tag.all.map{ |tag| [tag.name,tag.id] }
   end
 
@@ -43,7 +45,11 @@ class PostsController < ApplicationController
   private
 
   def whitelisted_params
-    params.require(:post).permit(:title,:body, :category_id, :tag_ids => [])
+    params.require(:post).permit(:title,
+                                 :body, 
+                                 :category_id, 
+                                 :tag_ids => [],
+                                 :comments_attributes => [:body, :id, :user_id, :post_id, :_destroy] )
   end
 
 end
