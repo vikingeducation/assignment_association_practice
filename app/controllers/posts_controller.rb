@@ -12,6 +12,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @page_header = "Edit Post #{@post.id}: #{@post.title}"
+    @tag_options = Tag.all.map{ |tag| [tag.name,tag.id] }
   end
 
   def index
@@ -21,6 +22,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @tag_options = Tag.all.map{ |tag| [tag.name,tag.id] }
   end
 
   def show
