@@ -72,6 +72,11 @@
 		  </div>
 		</div>
 
+		<% if comment.object.persisted? %>
+			<%= comment.label :_destroy, "Delete this comment?" %>
+			<%= comment.check_box :_destroy %>
+		<% end %>
+
 	<% end %>
 
 	<div class="row">
