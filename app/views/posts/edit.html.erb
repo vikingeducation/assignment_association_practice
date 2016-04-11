@@ -53,6 +53,27 @@
 	  </div>
 	</div>
 
+	<br>
+	<h4>Comments</h4>
+	
+	<%= f.fields_for :comments do |comment| %>
+
+		<div class="row">
+		  <div class="col-xs-1">
+		  	<div class="side-header">
+		  		<%= comment.label :body %>
+		  	</div>
+		  </div>
+
+		  <div class="col-xs-11">
+		  	<div class="side-content">
+		  		<%= comment.text_field :body %>
+		  	</div>
+		  </div>
+		</div>
+
+	<% end %>
+
 	<div class="row">
 	  <div class="col-xs-10 col-xs-offset-1">
 	  	<%= f.submit "Update Post", :class => "btn btn-primary btn-lg center-block" %>
