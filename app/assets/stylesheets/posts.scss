@@ -1,0 +1,38 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.main-container {
+  border: 1px solid gray;
+  margin-top: 45px;
+  margin-bottom: 45px;
+  padding-bottom: 30px;
+}
+
+.blue-box {
+  border: 3px solid blue;
+}
+
+#red-box {
+  background: red;
+}
+
+.side-content {
+  margin-bottom: 5px;
+}
+
+.side-header {
+  margin-bottom: 5px;
+}
+
+.side-content label{ 
+  margin: 0 10px 0 5px;
+}
+
+.side-content input[type=text]{ 
+  width: 100%;
+}
+
+.stats-table {
+  margin-top: 15px;
+}

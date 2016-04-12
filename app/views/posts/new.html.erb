@@ -1,0 +1,87 @@
+<% @page_title = "| New Post" %>
+
+<div class="row">
+	<div class="col-xs-12 text-center">
+		<h1>Create New Post</h1>
+	</div>
+</div>
+
+<%= form_for @post do |f| %>
+
+	<div class="row">
+	  <div class="col-xs-1">
+	  	<div class="side-header">
+	  		<%= f.label :title, 'Title:'%>
+	  	</div>
+	  </div>
+
+	  <div class="col-xs-11">
+	  	<div class="side-content">
+	  		<%= f.text_field :title%>
+	  	</div>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-1">
+	  	<div class="side-header">
+	  		<%= f.label :body, 'Body:'%>
+	  	</div>
+	  </div>
+
+	  <div class="col-xs-11">
+	  	<div class="side-content">
+	  		<%= f.text_field :body%>
+	  	</div>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-11 col-xs-offset-1">
+	  	<div class="side-content">
+	  		<%= f.collection_select(:category_id, Category.all, :id, :name) %>
+	  	</div>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-11 col-xs-offset-1">
+	  	<div class="side-content">
+	  		<%= f.select(
+	  					:tag_ids, 
+	  					@tag_options, 
+	  					{ include_blank: true },
+	  					multiple: true)
+	  					%>
+	  	</div>
+	  </div>
+	</div>
+
+	<br>
+	<h4>Comments</h4>
+	
+	<%= f.fields_for :comment do |comment| %>
+
+		<div class="row">
+		  <div class="col-xs-1">
+		  	<div class="side-header">
+		  		<%= comment.label :body %>
+		  	</div>
+		  </div>
+
+		  <div class="col-xs-11">
+		  	<div class="side-content">
+		  		<%= comment.text_field :body %>
+		  	</div>
+		  </div>
+		</div>
+
+	<% end %>
+
+	<div class="row">
+	  <div class="col-xs-10 col-xs-offset-1">
+	  	<%= f.submit "Create New Post", :class => "btn btn-primary btn-lg center-block" %>
+	  </div>
+	</div>
+
+<% end %>

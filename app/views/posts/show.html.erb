@@ -1,0 +1,35 @@
+<% @page_title = "| #{@post.title}" %>
+
+<div class="row">
+	<div class="col-xs-12 text-center">
+		<h1><%= @page_header %></h1>
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-xs-1">
+  	<div class="side-header">
+  		<p><b>Body:</b></p>
+  	</div>
+  </div>
+
+  <div class="col-xs-10">
+  	<div class="side-content">
+  		<p><%= @post.body %></p>
+  	</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-1">
+  	<div class="side-header">
+  		<p><b>Tags:</b></p>
+  	</div>
+  </div>
+
+  <div class="col-xs-10">
+  	<div class="side-content">
+  		<p><%= @tags %></p>
+  	</div>
+  </div>
+</div>
