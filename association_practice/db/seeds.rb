@@ -11,15 +11,28 @@ MULTIPLIER.times do
   User.create(name: Faker::Name.name)
 end
 
-User.each do |user|
-  3.times do
-    Post.create(title: Faker::Book.title, body: Faker::ChuckNorris.fact, user_id: user.id)
-  end
-end
-
 categories = ['Funny', 'Hilarious', 'Gut-busting', 'Fine', 'Ignorant']
 categories.each do |category|
   Category.create(name: category)
+end
+
+(MULTIPLIER * 3).times do
+  Post.create(title: Faker::Book.title, body: Faker::ChuckNorris.fact, category_id: Category.all.sample.id)
+  Tag.create(name: Faker::Superhero.power)
+end
+
+Post.each do |post|
+  [1,2,3].sample.times do 
+  user = User.all.sample.id
+  UsersPost.create(post_id: post.id, user_id: user) unless UserPost.exists?(:post_id => post.id, :user_id => user)
+  end
+end
+
+Post.each do |post|
+  [1,2,3].sample.times do
+    tag = Tag.all.sample.id
+    Tagging.create(post_id: post.id, tag_id: tag) unless Tagging.exists?(:post_id => post.id, :tag_id => tag)
+  end
 end
 
 Post.each do |post|
@@ -27,3 +40,9 @@ Post.each do |post|
     Comment.create(body: Faker::Hipster.sentence, post_id: post.id, user_id: User.all.sample.id)
   end
 end
+
+
+
+
+
+
