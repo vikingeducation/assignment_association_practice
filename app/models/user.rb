@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :comments
-  has_and_belongs_to_many :posts, :join_table => :user_postings
+  has_many :authored_comments, class_name: "Comment"
+  has_many :post_authorings, class_name: "UserPosting"
+  has_many :authored_posts, through: :user_postings, source: :post
 end
