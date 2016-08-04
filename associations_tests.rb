@@ -54,3 +54,54 @@ user.posts
 user = User.all.sample
 user.post_ids
 
+# 12. Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]
+posts = [Post.all.sample, Post.all.sample]
+user = User.all.sample
+user.posts = posts
+
+#13. List the authors of a given post
+p = Post.all.sample
+p.users
+
+# 14. Set a collection of Users to replace a given Post's authors in a similar way
+user_list = [User.all.sample, User.all.sample]
+p = Post.all.sample
+p.users = user_list
+
+# 15. Accomplish the same thing by only using IDs (hint: there's an association method for this...)
+user_id_list = [User.all.sample.id, User.all.sample.id]
+p = Post.all.sample
+p.user_ids = user_id_list
+
+# 16. List the posts under a given tag
+t = Tag.all.sample
+t.posts
+
+#17. Add a new post to a given tag by only using its ID
+t = Tag.all.sample
+p = Post.all.sample
+new_post_ids = t.post_ids << p.id
+t.post_ids = new_ids
+
+#18. Add a new tag to a given post by only using its ID
+p = Post.all.sample
+t = Tag.all.sample
+new_tag_ids = p.tag_ids << t.id
+p.tag_ids = new_tag_ids
+
+#19. List the tags on a given post
+p = Post.all.sample
+p.tags
+
+
+
+
+
+
+
+
+
+
+
+
+
