@@ -1,4 +1,9 @@
 require 'hirb'
+  
+def f(table)
+  puts Hirb::Helpers::AutoTable.
+  render(table)
+end
 
 # 1
 puts "1. List all Users, Comments, Posts, Categories or Tags."
@@ -68,8 +73,20 @@ puts "10. List the posts authored by a given user"
 
 puts Hirb::Helpers::AutoTable.
   render(User.all.sample.posts)
-# List the IDs of all posts authored by a given user (hint: there's an association method for this)
-# Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]
+
+# 11
+puts "11. List the IDs of all posts authored by a given user (hint: there's an association method for this)"
+f(User.all.sample.posts.pluck(:id))
+
+puts "12. Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]"
+puts "First user's posts before transfer:"
+f(User.first.posts)
+puts
+f(User.first.posts = User.last.posts)
+puts "Second user's posts after transfer:"
+puts
+f(User.first.posts)
+
 # List the authors of a given post
 # Set a collection of Users to replace a given Post's authors in a similar way
 # Accomplish the same thing by only using IDs (hint: there's an association method for this...)
