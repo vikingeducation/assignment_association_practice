@@ -59,11 +59,11 @@ class Verification
   end
 
   def self.list_users_posts
-    user_with_posts.posts
+    Post.all.first.users.last.posts
   end
 
   def self.list_users_posts_ids
-    user_with_posts.post_ids
+    Post.all.first.users.last.post_ids
   end
 
   def self.replace_users_posts
@@ -78,6 +78,30 @@ class Verification
     Post.first.users = [User.first, User.second]
   end
 
-  def
+  def self.set_posts_authors_ids
+    Post.first.user_ids = [User.pluck(:id).sample,User.pluck(:id).sample ]
+  end
 
+  def self.tag_posts
+    Tag.first.posts
+  end
+
+  def self.add_post_to_tag_id
+    Tag.first.post_ids << Post.pluck(:id).sample
+  end
+
+  def self.add_tag_to_post_id
+    Post.first.tag_ids << Tag.ids.sample
+  end
+
+  def self.tags_on_post
+    Post.first.tags
+  end
+
+end
+
+
+%w(all_users all_comments all_posts all_categories all_tags list_user_comments set_comment_new_user set_post_dif_cat set_new_users_comments return_comment_author list_posts_comments comments_parent_post remove_post_from_category list_users_posts list_users_posts_ids replace_users_posts posts_authors set_posts_authors set_posts_authors_ids tag_posts add_post_to_tag_id add_tag_to_post_id tags_on_post).each do |method|
+
+  Verification.send(method.to_sym)
 end
