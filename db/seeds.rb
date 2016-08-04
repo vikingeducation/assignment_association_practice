@@ -26,14 +26,14 @@ multiplier.times do |n|
      )
 
     # post.users << user
-    
+
     # post.user_id = user.id
     # post.save
 
     3.times do |comment_num|
       p post
       comment = post.comments.create(body: "comment body #{comment_num}")
-      comment.user = user
+      comment.author = user
       comment.save
     end
 

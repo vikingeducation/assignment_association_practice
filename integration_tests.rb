@@ -1,5 +1,5 @@
 require 'hirb'
-  
+
 def f(table)
   puts Hirb::Helpers::AutoTable.
   render(table)
@@ -44,7 +44,7 @@ puts Hirb::Helpers::AutoTable.
 #6
 puts "Return a given comment's author"
 puts Hirb::Helpers::AutoTable.
-  render(Comment.all.sample.user)
+  render(Comment.all.sample.author)
 
 #7
 puts "List a given post's comments"
