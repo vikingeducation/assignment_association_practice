@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804215905) do
+ActiveRecord::Schema.define(version: 20160804231450) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -21,20 +21,29 @@ ActiveRecord::Schema.define(version: 20160804215905) do
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "author_id"
+    t.integer  "parent_post"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["author_id"], name: "index_comments_on_author_id"
+    t.index ["parent_post"], name: "index_comments_on_parent_post"
+  end
+
+  create_table "post_authorings", force: :cascade do |t|
+    t.integer  "user_id"
     t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_comments_on_author_id"
-    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["post_id"], name: "index_post_authorings_on_post_id"
+    t.index ["user_id"], name: "index_post_authorings_on_user_id"
   end
 
-  create_table "post_tags", force: :cascade do |t|
+  create_table "post_taggings", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_post_tags_on_post_id"
-    t.index ["tag_id"], name: "index_post_tags_on_tag_id"
+    t.index ["post_id"], name: "index_post_taggings_on_post_id"
+    t.index ["tag_id"], name: "index_post_taggings_on_tag_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -50,15 +59,6 @@ ActiveRecord::Schema.define(version: 20160804215905) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "user_posts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_user_posts_on_post_id"
-    t.index ["user_id"], name: "index_user_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

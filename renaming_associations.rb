@@ -9,7 +9,7 @@ User.first.authored_posts
 Post.first.authors
 
 # join table
-User.first.post_authorings
+User.first.post_authorings #
 Post.first.post_authorings
 
 # post comments
@@ -17,11 +17,11 @@ Post.first.comments     # No change
 Comment.first.parent_post
 
 # tags
-Tag.first.tagged_posts
+Tag.first.tagged_posts   
 Post.first.tags         # No change
 
 # The tag join table
-Tag.first.post_taggings
+Tag.first.post_taggings # @
 Post.first.post_taggings
 
 # Let's add a NEW association that chains even more
