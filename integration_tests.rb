@@ -119,5 +119,9 @@ puts "\n16. Add a new post to a given tag by only using its ID"
 f(Tag.all.sample.post_ids << Post.all.sample.id)
 
 # 17
-Add a new tag to a given post by only using its ID
-# List the tags on a given post
+puts "\nAdd a new tag to a given post by only using its identifier"
+f(Post.all.sample.tag_ids << Tag.all.sample.id)
+
+# 18
+puts "List the tags on a given post"
+f(Post.all.sample.tags)
