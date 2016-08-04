@@ -52,9 +52,9 @@ puts "16. A tag's posts:"
 tag = Tag.first
 puts Hirb::Helpers::AutoTable.render tag.posts
 puts "17. Adding a new post to the tag using IDs"
-# tagged_post = Post.where("id NOT IN ?", tag.post_ids).first
-tagged_post = Post.all.sample
-tagged_post = Post.all.sample until !tagged_post.tags.include? tag
+tagged_post = Post.where("id NOT IN ?", tag.post_ids).first
+# tagged_post = Post.all.sample
+# tagged_post = Post.all.sample until !tagged_post.tags.include? tag
 Tagging.create(post_id: tagged_post.id, tag_id: tag.id)
 tag.reload
 puts Hirb::Helpers::AutoTable.render tag.posts
