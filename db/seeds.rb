@@ -5,3 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+multiplier = 10
+
+multiplier.times do |n|
+  a = User.create {
+    name: "user#{n}"
+  }
+  (multiplier/2).times do |m|
+  a.create_post {
+    title: "title#{m}",
+    body: "Some long blurb #{m}"
+  }
+  end
+end
+
+puts "users created"
+
+multiplier.times do |n|
+  Post.create {
+
+  }
+end
