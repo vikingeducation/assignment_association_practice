@@ -87,10 +87,37 @@ puts "Second user's posts after transfer:"
 puts
 f(User.first.posts)
 
-# List the authors of a given post
-# Set a collection of Users to replace a given Post's authors in a similar way
-# Accomplish the same thing by only using IDs (hint: there's an association method for this...)
-# List the posts under a given tag
-# Add a new post to a given tag by only using its ID
-# Add a new tag to a given post by only using its ID
+# 12
+puts "12. List the authors of a given post"
+f(Post.all.sample.users)
+
+# 13
+puts "\n13. Set a collection of Users to replace a given Post's authors in a similar way"
+puts "posts users before"
+f(Post.first.users)
+puts "switching..."
+f(Post.first.users = Post.last.users)
+puts "posts users after"
+f(Post.first.users)
+
+#14
+puts "\n14. Accomplish the same thing by only using IDs (hint: there's an association method for this...)"
+puts "Post users before"
+f(Post.first.user_ids)
+puts "switching..."
+f(Post.first.user_ids = Post.all.sample.user_ids)
+puts "Post user ids after"
+f(Post.first.user_ids)
+
+#15
+puts "\n15. List the posts under a given tag"
+f(Tag.all.sample.posts)
+
+
+# 16
+puts "\n16. Add a new post to a given tag by only using its ID"
+f(Tag.all.sample.post_ids << Post.all.sample.id)
+
+# 17
+Add a new tag to a given post by only using its ID
 # List the tags on a given post
