@@ -17,7 +17,6 @@ PostTag.destroy_all
 puts "Database cleared!"
 
 
-
 puts "Creating Users..."
 5.times do
   User.create(name: Faker::Name.name)
@@ -32,7 +31,7 @@ puts "Creating Posts..."
 10.times do
   Post.create(title: Faker::Lorem.sentence[1..15], 
            body: Faker::Lorem.paragraph[1..30],
-           category: Category.all.sample)
+           category_id: Category.all.sample.id)
 end
 
 puts "Creating Comments..."
