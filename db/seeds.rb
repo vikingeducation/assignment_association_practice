@@ -27,13 +27,13 @@ puts "building users"
 end
 
 puts "building posts"
-20.times do |i|
-  post = Post.create(title: "post#{i}", body: "body crap ##{i}", category_id: Category.all.sample.id)
+10.times do |i|
+  post = Post.create(title: "post#{i}", body: "body crap ##{i}", category_id: Category.all[i % 3].id)
 end
 
 puts "building comments"
-50.times do |i|
-  c = Comment.create(body: "body comment #{i}", user_id: User.all.sample.id, post_id: Post.all.sample.id)
+10.times do |i|
+  c = Comment.create(body: "body comment #{i}", user_id: User.all.sample.id, post_id: Post.all[i].id)
 end
 
 puts "building tags"
@@ -41,6 +41,7 @@ puts "building tags"
   t = Tag.create(name: "tag name #{i}")
 end
 
+i = 0
 puts "connect posts and user"
 User.all.each do |user|
   user.posts << Post.all.sample
@@ -48,7 +49,9 @@ User.all.each do |user|
 end
 
 puts "connecting tags and posts"
+i = 0
 Post.all.each do |post|
-  post.tags << Tag.all.sample
+  post.tags << Tag.all[(i % Tag.all.length)]
+  i += 1
   post.save
 end
