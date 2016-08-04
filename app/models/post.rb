@@ -9,5 +9,5 @@ class Post < ApplicationRecord
 
   # Many to many with Posts.
   has_many :post_authorings, class_name: 'UserPost'
-  has_many :users, through: :user_posts
+  has_many :users, through: :post_authorings
 end
