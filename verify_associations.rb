@@ -79,15 +79,15 @@ class Verification
   end
 
   def self.set_posts_authors_ids
-    Post.first.user_ids = [User.pluck(:id).sample,User.pluck(:id).sample ]
+    Post.first.author_ids = [User.pluck(:id).sample,User.pluck(:id).sample ]
   end
 
   def self.tag_posts
-    Tag.first.posts
+    Tag.first.tagged_posts
   end
 
   def self.add_post_to_tag_id
-    Tag.first.post_ids << Post.pluck(:id).sample
+    Tag.first.tagged_post_ids << Post.pluck(:id).sample
   end
 
   def self.add_tag_to_post_id
