@@ -63,7 +63,7 @@ class Verification
   end
 
   def self.list_users_posts_ids
-    Post.all.first.authors.last.authored_post_ids
+    Post.first.authors.last.authored_post_ids
   end
 
   def self.replace_users_posts
