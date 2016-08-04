@@ -25,11 +25,11 @@ class Verification
   end
 
   def self.list_user_comments
-    user = Comment.first.user.comments
+    user = Comment.first.author.authored_comments
   end
 
   def self.set_comment_new_user
-    Comment.first.user = User.first
+    Comment.first.author = User.first
   end
 
   def self.set_post_dif_cat
@@ -37,19 +37,19 @@ class Verification
   end
 
   def self.set_new_users_comments
-    User.first.comments = [Comment.first, Comment.second]
+    User.first.authored_comments = [Comment.first, Comment.second]
   end
 
   def self.return_comment_author
-    Comment.first.user
+    Comment.first.author
   end
 
   def self.list_posts_comments
-    Comment.all.shuffle.first.post.comments
+    Comment.all.shuffle.first.parent_post.comments
   end
 
   def self.comments_parent_post
-    Comment.all.shuffle.first.post
+    Comment.all.shuffle.first.parent_post
   end
 
   def self.remove_post_from_category
@@ -59,23 +59,23 @@ class Verification
   end
 
   def self.list_users_posts
-    Post.all.first.users.last.posts
+    Post.all.first.authors.last.authored_posts
   end
 
   def self.list_users_posts_ids
-    Post.all.first.users.last.post_ids
+    Post.all.first.authors.last.authored_post_ids
   end
 
   def self.replace_users_posts
-    User.first.posts = [Post.first, Post.second]
+    User.first.authored_posts = [Post.first, Post.second]
   end
 
   def self.posts_authors
-    Post.first.users
+    Post.first.authors
   end
 
   def self.set_posts_authors
-    Post.first.users = [User.first, User.second]
+    Post.first.authors = [User.first, User.second]
   end
 
   def self.set_posts_authors_ids
