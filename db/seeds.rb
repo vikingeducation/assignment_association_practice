@@ -8,9 +8,9 @@
 
 User.destroy_all
 Comment.destroy_all
-Post.destroy_all 
-Category.destroy_all 
-Tag.destroy_all 
+Post.destroy_all
+Category.destroy_all
+Tag.destroy_all
 
 multiplier = 10
 
@@ -24,7 +24,12 @@ multiplier.times do |n|
       title: "title#{m}",
       body: "Some long blurb #{m}"
      )
-    
+
+    # post.users << user
+
+    post.user_id << user.id
+    post.save
+
     3.times do |comment_num|
       p post
       comment = post.comments.create(body: "comment body #{comment_num}")

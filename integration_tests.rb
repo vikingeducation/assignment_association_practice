@@ -47,12 +47,12 @@ puts Hirb::Helpers::AutoTable.
   render(Post.all.sample.comments.all)
 
 #8
-puts "Return a given comment's parent post"
+puts "8. Return a given comment's parent post"
 puts Hirb::Helpers::AutoTable.
   render(Comment.all.sample.post)
 
 #9
-puts "Remove one post from a category's collection of posts"
+puts "9. Remove one post from a category's collection of posts"
 puts "Category before post deleted"
 puts Hirb::Helpers::AutoTable.
   render(category_posts = Category.all.sample.posts)
@@ -63,7 +63,11 @@ puts Hirb::Helpers::AutoTable.
 puts Hirb::Helpers::AutoTable.
   render(category_posts)
 
-# List the posts authored by a given user
+# 10.
+puts "10. List the posts authored by a given user"
+
+puts Hirb::Helpers::AutoTable.
+  render(User.all.sample.posts)
 # List the IDs of all posts authored by a given user (hint: there's an association method for this)
 # Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]
 # List the authors of a given post
