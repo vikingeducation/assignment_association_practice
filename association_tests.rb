@@ -73,48 +73,48 @@ puts Hirb::Helpers::AutoTable.render(post_ids_by_author)
 
 puts "\n\n12. Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]"
 puts "\nUsers post before changing collection"
-puts Hirb::Helpers::AutoTable.render(User.first.posts)
+puts Hirb::Helpers::AutoTable.render(User.first.authored_posts)
 puts "\nUser posts after changing collection"
-user_posts = User.first.posts
+user_posts = User.first.authored_posts
 user_posts = [Post.first, Post.second]
 puts Hirb::Helpers::AutoTable.render(user_posts)
 
 puts "\n\n13. List the authors of a given post"
 puts "Post author(s)"
-puts Hirb::Helpers::AutoTable.render(Post.first.users)
+puts Hirb::Helpers::AutoTable.render(Post.first.authors)
 
 puts "\n\n14. Set a collection of Users to replace a given Post's authors in a similar way"
 puts "Author collection before:"
 post = Post.first
-puts Hirb::Helpers::AutoTable.render(post.users)
-post.users = [User.first, User.second]
+puts Hirb::Helpers::AutoTable.render(post.authors)
+post.authors = [User.first, User.second]
 post.save
 puts "\nAuthor collection after:"
-puts Hirb::Helpers::AutoTable.render(Post.first.users)
+puts Hirb::Helpers::AutoTable.render(Post.first.authors)
 
 puts "\n\n15. Accomplish the same thing by only using IDs (hint: there's an association method for this...)"
 puts "Author collection before:"
 post = Post.first
-puts Hirb::Helpers::AutoTable.render(post.user_ids)
-post.user_ids = [User.second.id, User.third.id]
+puts Hirb::Helpers::AutoTable.render(post.author_ids)
+post.author_ids = [User.second.id, User.third.id]
 post.save
 puts "\nAuthor collection after:"
-puts Hirb::Helpers::AutoTable.render(Post.first.user_ids)
+puts Hirb::Helpers::AutoTable.render(Post.first.author_ids)
 
 puts "\n\n16. List the posts under a given tag"
 tag = Tag.first
 puts "Posts under tag 1"
-puts Hirb::Helpers::AutoTable.render(tag.posts)
+puts Hirb::Helpers::AutoTable.render(tag.tagged_posts)
 
 puts "\n\n17. Add a new post to a given tag by only using its ID"
 tag = Tag.first
 puts "Posts under tag 1 before"
-puts Hirb::Helpers::AutoTable.render(tag.post_ids)
+puts Hirb::Helpers::AutoTable.render(tag.tagged_post_ids)
 postses = Post.all[0..4].map(&:id)
-tag.post_ids =  postses
+tag.tagged_post_ids =  postses
 tag.save
 puts "\nPosts under tag 1 after"
-puts Hirb::Helpers::AutoTable.render(tag.post_ids)
+puts Hirb::Helpers::AutoTable.render(tag.tagged_post_ids)
 
 puts "\n\n18. Add a new tag to a given post by only using its ID"
 post = Post.last
