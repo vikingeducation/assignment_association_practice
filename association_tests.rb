@@ -1,4 +1,6 @@
-#!/env/ruby
+require 'jazz_hands'
+
+Hirb.enable
 
 puts "here lie users"
 pp User.all
@@ -15,5 +17,7 @@ pp Tag.all
 puts "here lie categories"
 pp Category.all
 
+puts "listing user comments"
+pp User.first.comments
 
-puts "Listing "
+puts "set comment to different user"
