@@ -108,6 +108,3 @@ puts "destroying a comment should not destroy its authors or its parent posts"
 #destroying a post should destroy all comment on it
 puts "destroying a post should destroy all comment on it"
 
-
-
-
