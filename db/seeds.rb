@@ -44,7 +44,7 @@ end
 i = 0
 puts "connect posts and user"
 User.all.each do |user|
-  user.posts << Post.all[(i)]
+  user.authored_posts << Post.all[(i)]
   i += 1
   user.save
 end

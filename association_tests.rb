@@ -19,7 +19,7 @@ puts "\n\n1e. here lie categories"
 puts Hirb::Helpers::AutoTable.render(Category.all)
 
 puts "\n\n2. listing user comments"
-puts Hirb::Helpers::AutoTable.render(User.first.comments)
+puts Hirb::Helpers::AutoTable.render(User.first.authored_comments)
 
 puts "\n\n3. set comment to different user"
 x = Comment.first.user_id
@@ -34,7 +34,7 @@ post = Category.all.sample.id
 puts "Post category id after: #{post}"
 
 puts "\n\n5. replace a user's comments with new collection of comments"
-user_comms = User.first.comments
+user_comms = User.first.authored_comments
 print "User comment ids before: "
 user_comms.each {|comment| print " #{comment.id},"}
 user_comms = [Comment.first, Comment.second]
@@ -43,7 +43,7 @@ user_comms.each {|comment| print " #{comment.id},"}
 puts "\n"
 
 puts "\n\n6. Return a given comment's author"
-comm_author = Comment.first.user
+comm_author = Comment.first.author
 puts "#{comm_author.name}"
 
 puts "\n\n7. List a given post's comments"
@@ -51,8 +51,8 @@ post_comms = Post.first.comments
 puts Hirb::Helpers::AutoTable.render(post_comms)
 
 puts "\n\n8. Return a given comment's parent post"
-parent_post = Comment.first.post
-puts Hirb::Helpers::AutoTable.render(parent_post)
+parent = Comment.first.parent_post
+puts Hirb::Helpers::AutoTable.render(parent)
 
 puts "\n\n9. Remove one post from a category's collection of posts"
 cat_posts = Category.third.posts
@@ -64,11 +64,11 @@ puts Hirb::Helpers::AutoTable.render(cat_posts)
 cat_posts << post_tainer
 
 puts "\n\n10. List the posts authored by a given user\n"
-posts_by_author = User.second.posts
+posts_by_author = User.second.authored_posts
 puts Hirb::Helpers::AutoTable.render(posts_by_author)
 
 puts "\n\n11. List the IDs of all posts authored by a given user (hint: there's an association method for this)\n"
-post_ids_by_author = User.second.post_ids
+post_ids_by_author = User.second.authored_post_ids
 puts Hirb::Helpers::AutoTable.render(post_ids_by_author)
 
 puts "\n\n12. Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]"
