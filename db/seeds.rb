@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.destroy_all
+Comment.destroy_all
+Post.destroy_all 
+Category.destroy_all 
+Tag.destroy_all 
+
 multiplier = 10
 
 multiplier.times do |n|
@@ -18,11 +24,12 @@ multiplier.times do |n|
       title: "title#{m}",
       body: "Some long blurb #{m}"
      )
-    post.save
+    
     3.times do |comment_num|
       p post
-      post.comments.create(body: "comment body #{comment_num}")
-
+      comment = post.comments.create(body: "comment body #{comment_num}")
+      comment.user = user
+      comment.save
     end
 
     3.times do |tag_num|
