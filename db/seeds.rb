@@ -44,7 +44,7 @@ end
 i = 0
 puts "connect posts and user"
 User.all.each do |user|
-  user.posts << Post.all.sample
+  user.first.posts << Post.all.sample
   user.save
 end
 

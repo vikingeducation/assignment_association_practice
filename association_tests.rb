@@ -74,11 +74,21 @@ puts Hirb::Helpers::AutoTable.render(post_ids_by_author)
 puts "\n\n12. Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]"
 puts "\nUsers post before changing collection"
 puts Hirb::Helpers::AutoTable.render(User.first.posts)
-puts "\nUser psots after changing collection"
+puts "\nUser posts after changing collection"
 user_posts = User.first.posts
 user_posts = [Post.first, Post.second]
 puts Hirb::Helpers::AutoTable.render(user_posts)
 
 puts "\n\n13. List the authors of a given post"
-puts
+puts "Post author(s)"
 puts Hirb::Helpers::AutoTable.render(Post.first.users)
+
+puts "\n\n14. Set a collection of Users to replace a given Post's authors in a similar way"
+puts "Author collection before:"
+post = Post.first
+puts Hirb::Helpers::AutoTable.render(post.users)
+post.users = [User.first, User.second]
+post.save
+puts "Author collection after:"
+puts Hirb::Helpers::AutoTable.render(Post.first.users)
+
