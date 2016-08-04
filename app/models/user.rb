@@ -1,8 +1,9 @@
 class User < ApplicationRecord
-  has_many :comments
+  has_many :authored_comments, class_name: 'Comment'
 
   # Many to many with Posts.
-  has_many :user_posts
-  has_many :posts, through: :user_posts,
-                               dependent: :destroy
+  has_many :post_authorings, class_name: 'UserPost'
+  has_many :authored_posts, through: :user_posts,
+                            source: :post,
+                            dependent: :destroy
 end

@@ -22,7 +22,7 @@ end
   c = Comment.create!(:body => "body_#{i}", 
                       user_id: i+1,
                       post_id: i+1)
-  User.find(i+1).comments << c
+  User.find(i+1).authored_comments << c
   Post.find(i+1).comments << c
 end
 
@@ -33,8 +33,8 @@ end
 5.times do | i |
   ut = UserPost.create!(user_id: i+1,
                         post_id: i+1)
-  User.find(i+1).user_posts << ut
-  Post.find(i+1).user_posts << ut
+  User.find(i+1).post_authorings << ut
+  Post.find(i+1).post_authorings << ut
 end
 
 5.times do | i |
