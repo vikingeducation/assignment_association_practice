@@ -26,8 +26,10 @@ cat_ids = Category.ids
 
 50.times do |i|
 
-  Post.create(title: "title#{i}", body: "i am title#{i}'s body",
+  post = Post.create(title: "title#{i}", body: "i am title#{i}'s body",
               category_id: cat_ids.sample)
+  UserPost.create(user_id: user_ids.sample,
+                  post_id: post.id)
 end
 
 post_ids = Post.ids
@@ -46,10 +48,5 @@ end
 30.times do |i|
   TagPost.create( tag_id:  tag_ids.sample,
                   post_id: post_ids.sample )
-end
-
-30.times do |i| 
-  UserPost.create(user_id: user_ids.sample,
-                  post_id: post_ids.sample)
 end
 
