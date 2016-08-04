@@ -23,8 +23,9 @@ puts "creating seed"
   u = User.create!(name: Faker::Name.name)
   5.times do
     post = u.posts.create(title: Faker::Hipster.word, body: Faker::Hipster.sentence)
-    post.comments.create(body: Faker::Team.name)
-    post.create_category(name: Faker::Book.genre)
+    post.comments.create(body: Faker::Team.name, user_id: u.id)
+    c = post.create_category(name: Faker::Book.genre)
+    post.update(category_id: c.id)
     post.tags.create(name: Faker::App.name)
   end
 
