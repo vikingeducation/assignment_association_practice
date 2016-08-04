@@ -18,9 +18,9 @@ multiplier.times do |n|
       title: "title#{m}",
       body: "Some long blurb #{m}"
      )
-
-
+    post.save
     3.times do |comment_num|
+      p post
       post.comments.create(body: "comment body #{comment_num}")
 
     end
