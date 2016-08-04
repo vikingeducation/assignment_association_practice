@@ -89,6 +89,43 @@ post = Post.first
 puts Hirb::Helpers::AutoTable.render(post.users)
 post.users = [User.first, User.second]
 post.save
-puts "Author collection after:"
+puts "\nAuthor collection after:"
 puts Hirb::Helpers::AutoTable.render(Post.first.users)
 
+puts "\n\n15. Accomplish the same thing by only using IDs (hint: there's an association method for this...)"
+puts "Author collection before:"
+post = Post.first
+puts Hirb::Helpers::AutoTable.render(post.user_ids)
+post.user_ids = [User.second.id, User.third.id]
+post.save
+puts "\nAuthor collection after:"
+puts Hirb::Helpers::AutoTable.render(Post.first.user_ids)
+
+puts "\n\n16. List the posts under a given tag"
+tag = Tag.first
+puts "Posts under tag 1"
+puts Hirb::Helpers::AutoTable.render(tag.posts)
+
+puts "\n\n17. Add a new post to a given tag by only using its ID"
+tag = Tag.first
+puts "Posts under tag 1 before"
+puts Hirb::Helpers::AutoTable.render(tag.post_ids)
+postses = Post.all[0..4].map(&:id)
+tag.post_ids =  postses
+tag.save
+puts "\nPosts under tag 1 after"
+puts Hirb::Helpers::AutoTable.render(tag.post_ids)
+
+puts "\n\n18. Add a new tag to a given post by only using its ID"
+post = Post.last
+puts "Tags on last post"
+puts Hirb::Helpers::AutoTable.render(post.tag_ids)
+post.tag_ids = Tag.first.id
+post.save
+puts "\nTags under last post after"
+puts Hirb::Helpers::AutoTable.render(Post.last.tag_ids)
+
+puts "\n\n19. List the tags on a given post"
+post = Post.first
+puts "Tags on first post"
+puts Hirb::Helpers::AutoTable.render(post.tags)
