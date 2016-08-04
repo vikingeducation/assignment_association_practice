@@ -103,5 +103,5 @@ end
 
 %w(all_users all_comments all_posts all_categories all_tags list_user_comments set_comment_new_user set_post_dif_cat set_new_users_comments return_comment_author list_posts_comments comments_parent_post remove_post_from_category list_users_posts list_users_posts_ids replace_users_posts posts_authors set_posts_authors set_posts_authors_ids tag_posts add_post_to_tag_id add_tag_to_post_id tags_on_post).each do |method|
 
-  Verification.send(method.to_sym)
+  puts Verification.send(method.to_sym)
 end
