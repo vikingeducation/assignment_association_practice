@@ -27,12 +27,12 @@ puts "building users"
 end
 
 puts "building posts"
-5.times do |i|
+20.times do |i|
   post = Post.create(title: "post#{i}", body: "body crap ##{i}", category_id: Category.all.sample.id)
 end
 
 puts "building comments"
-3.times do |i|
+50.times do |i|
   c = Comment.create(body: "body comment #{i}", user_id: User.all.sample.id, post_id: Post.all.sample.id)
 end
 
