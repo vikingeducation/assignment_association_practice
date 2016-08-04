@@ -52,7 +52,62 @@ User.first.post_ids
 puts "Set a collection of Posts to replace that user's currently authored posts"
 u = User.first
 
-posts = []
-2.times do | i |
-  posts.push Post.create!({title: "new_post_#{i}"})
+count = u.posts.count
+u.posts = [Post.find(3), Post.find(4), Post.find(2), Post.find(1)]
+p count != u.posts.count
+
+#13 List the authors of a given post
+puts "List the authors of a given post"
+p = Post.first
+p.users.each do |u|
+  puts u.name
 end
+
+#14 set a collection of users to replace a given post's authors in a similar way
+puts "set a collection of users to replace a given post's authors in a similar way"
+p = Post.first
+count = p.users.count
+p.users = [User.find(1)]
+p count != p.users.count
+
+#15 Accomplish the same thing only by using IDs
+puts "Accomplish the same thing only by using IDs"
+p = Post.first
+init_arr = p.user_ids
+p.user_ids = [3,4,5]
+p init_arr != p.user_ids
+
+#16 list the post under a given tag
+puts "list the post under a given tag"
+p Tag.first.posts.to_a
+
+#17 add a new post to a given tag by only using its ID
+puts "add a new tag to a given post by only using its id"
+
+count = Tag.first.posts.count
+Tag.first.posts <<  Post.where(:id => 3)
+p count != Tag.first.posts.count
+
+#18 add a new tag to a given post by only using its id
+puts "add a new tag to a given post by only using its id"
+count = Post.first.tags.count
+Post.first.tags <<  Tag.where(:id => 4)
+p count != Post.first.tags.count
+
+#19 list the tags on a given post
+puts "list the tags on a given post"
+p Post.first.tags.to_a
+
+#destroying a user should also destroy all of the comments that user authored
+puts "destroying a user should also destroy all of the comments that user authored"
+
+
+#destroying a comment should not destroy its authors or its parent posts
+puts "destroying a comment should not destroy its authors or its parent posts"
+
+#destroying a post should destroy all comment on it
+puts "destroying a post should destroy all comment on it"
+
+
+
+
