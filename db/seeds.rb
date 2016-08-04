@@ -12,5 +12,13 @@ end
 
 5.times do | i |
   Category.create!(:name => "category_#{i}")
-
 end
+
+5.times do | i |
+  Category.posts.build(:name => "post_#{i}").save
+end
+
+5.times do | i |
+  User.comments.build(:body => "body_#{i}").save
+end
+
