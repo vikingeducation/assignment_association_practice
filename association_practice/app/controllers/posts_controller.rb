@@ -6,7 +6,6 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    fail
     if @post.save!
       flash[:success] = "Create worked"
       redirect_to @post
@@ -38,6 +37,6 @@ class PostsController < ApplicationController
 
 private
   def post_params
-    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [], :comments_attributes => [:body, :id, :_destroy ])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [], :comments_attributes => [:body, :id, :_destroy])
   end
 end

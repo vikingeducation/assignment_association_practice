@@ -8,8 +8,8 @@ class Post < ApplicationRecord
 
   belongs_to :category
 
-  has_many :comments, :dependent => :destroy
+  has_many :comments, :dependent => :destroy, inverse_of: :parent_post
   accepts_nested_attributes_for :comments,
                                 :reject_if => :all_blank,
-                                :allow_destroy => true;
+                                :allow_destroy => true
 end

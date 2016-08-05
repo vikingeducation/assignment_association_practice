@@ -4,8 +4,8 @@
   <%= comment_fields.label :body %>
   <%= comment_fields.text_field :body %>
   <br>
-  <% if post_fields.object.persisted? %>
-    <%= post_fields.label :_destroy, "delete this comment" %>
-    <%= post_fields.check_box :_destroy %>
+  <% if comment_fields.object.persisted? %>
+    <%= comment_fields.label :_destroy, "delete this comment" %>
+    <%= comment_fields.check_box :_destroy %>
   <% end %>
 <% end %>
