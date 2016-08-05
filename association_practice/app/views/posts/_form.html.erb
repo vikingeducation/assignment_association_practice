@@ -7,20 +7,20 @@
   <br>
 
   <%= f.label :category %>
-    
+
   <% if false %>
     <%= select_tag(:category_id, '<option value="1">Funny</option><option value="2">Hilarious</option>'.html_safe) %>
   <% end %>
-  
-    
+
+
   <%= f.collection_select(
     :category_id,
     Category.all,
     :id,
     :name
   ) %>
-  
-  
+
+
   <% if false %>
     <%= f.collection_radio_buttons(
     :category_id,
@@ -52,7 +52,18 @@
     ) %>
   <% end %>
 
+
+  <%= render partial: "comment_form", locals: {post_fields: f} %>
+
+
   <br>
+
+
+
+
   <%= f.submit %>
+
+
+
 
 <% end %>
