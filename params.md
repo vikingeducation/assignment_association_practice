@@ -8,5 +8,5 @@
   <input type='checkbox' name='post[tag_ids][]' value='3' checked='checked'>
   <input type='checkbox' name='post[tag_ids][]' value='4' checked=''>
   <input type='checkbox' name='post[tag_ids][]' value='5' checked='checked'>
-  <input type='submit' value='Update Post'>
+  <input type='submit' name='commit' value='Update Post'>
 </form>

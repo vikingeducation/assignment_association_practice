@@ -4,6 +4,17 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def create
+    @post = Post.new(whitelisted_post_params)
+    if @post.save
+      flash[:success] = "Post saved."
+      redirect_to @post
+    else
+      flash[:danger] = "Post not saved."
+      render 'new'
+    end
+  end
+
   def show
     @post = Post.find(params[:id])
   end
@@ -13,7 +24,14 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.new(whitelisted_post_params)
+    @post = Post.find(params[:id])
+    if @post = Post.update(whitelisted_post_params)
+      flash[:success] = "Post updated."
+      redirect_to @post
+    else
+      flash[:danger] = "Post not updated."
+      render 'new'
+    end
   end
 
 

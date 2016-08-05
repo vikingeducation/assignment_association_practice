@@ -1,0 +1,11 @@
+<h1>Show Post</h1>
+<%= content_tag(:p,@post.title) %>
+<%= content_tag(:p,@post.body) %>
+<%= link_to "Edit this post",edit_post_path(@post) %>
+
+<h1>Show Tags</h1>
+<ul>
+<% @post.tags.each do |tag| %>
+  <%= content_tag(:li,tag.name)%>
+<% end %>
+</ul>
