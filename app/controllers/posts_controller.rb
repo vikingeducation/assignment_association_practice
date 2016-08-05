@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @comment = @post.comments.build
   end
 
   def show
@@ -52,7 +53,8 @@ class PostsController < ApplicationController
   def post_params
     params
       .require(:post)
-      .permit(:title, :body, :category_id , :tag_ids => [])
+      .permit(:title, :body, :category_id, 
+        { :comments_attributes => [:body] }, :tag_ids => [] )
   end
 
 end

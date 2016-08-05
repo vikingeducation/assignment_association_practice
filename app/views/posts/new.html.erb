@@ -1,4 +1,4 @@
-<h1>Hello world: New</h1>
+<h1>Hello world: New Product</h1>
 
 <%= form_for @post do |form_builder| %>
   <%= form_builder.label :title, class: "background-red" %>
@@ -21,10 +21,28 @@
   :tag_ids, Tag.all, :id,
   :name, {include_blank: true}, multiple: true)%></br>
 
-  <%= form_builder.submit "Submit me" %>
+  
+
+  <%=form_builder.fields_for :comments, @comment do |c| %>
+    <%= c.label "Comment:" %>
+    <%= c.text_area :body %>
+  <% end %>
+
+<%= form_builder.submit "Submit me" %>
 <% end %>
 
-<%= form_tag "/posts", method: :post do %>
+
+
+
+
+
+
+
+
+
+
+
+<% form_tag "/posts", method: :post do %>
   <%= label_tag(:title, "Title") %>
   <%= text_field_tag("post[title]") %>
   <%= label_tag(:body, "Body") %>
