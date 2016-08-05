@@ -1,0 +1,31 @@
+<%= form_for post do |post_fields| %>
+
+  <div>
+    <%= post_fields.label :title %>
+    <%= post_fields.text_field :title %>
+  </div>
+  <div>
+    <%= post_fields.label :body %>
+    <%= post_fields.text_area :body %>
+  </div>
+  <div>
+    <%= post_fields.label "Choose Your Tags" %>
+    <%= post_fields.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+  <div>
+    <%= post_fields.label "Choose Your Category As Radio" %>
+    <%= post_fields.collection_radio_buttons(:category_id, Category.all,
+                                             :id, :name) %>
+  </div>
+  <div>
+    <%= post_fields.label "Choose Your Category As Dropdown" %>
+    <%= post_fields.collection_select(:category_id, Category.all, :id, :name) %>
+  </div>
+
+  <%= post_fields.submit %>
+<% end %>
+
+<%= form_tag posts_path, method: :post do %>
+  <%= select_tag("user[category_id]",
+        options_for_select(Category.all.map{ |item| [item.name, item.id,{selected: post.category_id == item.id }] })) %>
+  <%= submit_tag %>
+<% end %>

@@ -1,0 +1,12 @@
+<h1><%= @post.title %></h1>
+<p>
+  <%= @post.body %>
+</p>
+<ul>
+  <% @post.tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+    <li><%= @post.category.name %></li>
+</ul>
+
+<%= link_to "Edit", edit_post_path(@post) %>
