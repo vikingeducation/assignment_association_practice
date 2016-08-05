@@ -4,15 +4,16 @@
     <%= f.text_field(:title)  %><br>
     <%= f.label("body") %><br>
     <%= f.text_field(:body) %><br>
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
-    <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %><br>
+    <%# f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
+    <%# f.collection_radio_buttons(:category_id, Category.all, :id, :name) %><br>
     <%= f.collection_select(:category_id, Category.all, :id, :name, :include_blank => "Nothing Selected") %><br>
-    <%= select_tag("post[category_id]", options_for_select(@category_options, @post.category_id)) %><br>
+    
     <%= f.select(
           :tag_ids,
-          @tag_options,
+          tag_options,
           {},
-          multiple: true) %>
+          multiple: true) %><br>
+          <h3>Comments</h3>
       <%= f.fields_for :comments do |comment_field| %>
         <%= comment_field.label :body %>
         <%= comment_field.text_field :body %>
@@ -23,13 +24,13 @@
 <% end %>
 
 <%if false %>
-<%= form_tag(
-  post.persisted? ? post_path(post) : posts_path,
- method: post.persisted? ? :patch : :post
- ) do %>
-  <%= label_tag 'title' %>
-  <%= text_field_tag('post[title]', @post.title) %>
-  <%= select_tag('post[category_id]', options_for_select(@category_options, @post.category_id)) %><br>
-  <%= submit_tag %>
-<% end %>
+  <%= form_tag(
+    post.persisted? ? post_path(post) : posts_path,
+   method: post.persisted? ? :patch : :post
+   ) do %>
+    <%= label_tag 'title' %>
+    <%= text_field_tag('post[title]', @post.title) %>
+    <%= select_tag('post[category_id]', options_for_select(category_options, @post.category_id)) %><br>
+    <%= submit_tag %>
+  <% end %>
 <% end %>

@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  has_many :comments
+  has_many :comments, foreign_key: :parent_post
   accepts_nested_attributes_for :comments 
 
   has_many :post_taggings
