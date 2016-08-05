@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
   def new
     @post = Post.new
+    @post.comments.build
   end
 
   def create
     @post = Post.new(post_params)
+    fail
     if @post.save!
       flash[:success] = "Create worked"
       redirect_to @post
@@ -16,6 +18,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @post.comments.build
   end
 
   def update
@@ -35,6 +38,6 @@ class PostsController < ApplicationController
 
 private
   def post_params
-    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [], :comment_attributes => [:body, :id, :_destroy ])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [], :comments_attributes => [:body, :id, :_destroy ])
   end
 end
