@@ -1,0 +1,14 @@
+<h1>Post <%= @post.id %></h1>
+<h2>Post Title</h2>
+<%= @post.title %>
+<p>
+<%= @post.body %>
+</p>
+<h4>Tags</h4>
+<% @post.tags.each do |tag| %>
+  <p><%= tag.name  %></p>
+<% end %>
+<%= link_to 'Edit', edit_post_path  %>
+
+
+
