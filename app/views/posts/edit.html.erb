@@ -1,7 +1,10 @@
-<!-- <%= render partial: 'form', locals: {post: @post} %> -->
 
-<%= render 'form', post: @post, category_options: @category_options %>
 
+<%= render 'form', post: @post,
+                   category_options: @category_options,
+                   tag_options: @tag_options %>
+
+<h1>form_tag</h1>
   <%= form_tag post_path(@post), method: 'put' do %>
     <%= label(:post, :title) %>
     <%= text_field(:post,  :title, class: "form-control") %>
