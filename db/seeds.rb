@@ -36,7 +36,7 @@ end
 
 puts "Creating Comments..."
 10.times do
-  Comment.create(body: Faker::Lorem.sentence[1..20],
+  Comment.create!(body: Faker::Lorem.sentence[1..20],
               post_id: Post.all.sample.id,
               user_id: User.all.sample.id)
 end
