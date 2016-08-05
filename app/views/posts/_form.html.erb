@@ -20,6 +20,8 @@
     <%= post_fields.label "Choose Your Category As Dropdown" %>
     <%= post_fields.collection_select(:category_id, Category.all, :id, :name) %>
   </div>
+  <br>
+  <h2>Make A Comment(Nested)</h2>
   <%= post_fields.fields_for :comments do |comment_field| %>
     <%if comment_field.object.persisted? %>
       <%= comment_field.label :_destroy, "Delete this comment?" %>
@@ -32,11 +34,17 @@
   <%= post_fields.submit %>
 <% end %>
 
+<h2>EXAMPLE OF SELECT_TAG</h2>
+
 <%= form_tag posts_path, method: :post do %>
   <%= select_tag("post[category_id]",
         options_for_select(Category.all.map{ |item| [item.name, item.id,{selected: post.category_id == item.id }] })) %>
   <%= submit_tag %>
 <% end %>
+
+<br>
+
+<h2>EXAMPLE OF COMBO SELECT AND ADDING CLASSES AND INCLUDING BLANK</h2>
 
 <%= form_for post, :html => {class: "category_form", id: "categories"} do |post_fields| %>
   <div>
@@ -54,4 +62,3 @@
 
   <%= post_fields.submit %>
 <% end %>
-
