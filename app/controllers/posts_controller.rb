@@ -1,4 +1,8 @@
 class PostsController < ApplicationController
+  def index
+    @posts = Post.all
+  end
+
   def new
     @post = Post.new
   end
@@ -36,6 +40,6 @@ class PostsController < ApplicationController
   private
 
     def white_listed_post_params
-      params.require(:post).permit(:title, :body)
+      params.require(:post).permit(:title, :body,  :category_id, tag_ids: [] )
     end
 end
