@@ -1,0 +1,41 @@
+class PostsController < ApplicationController
+  def new
+    @post = Post.new
+  end
+
+  def create
+    @post = Post.new(white_listed_post_params)
+    if @post.save
+      flash[:success] = "its been created"
+      redirect_to @post
+    else
+      flash.now[:error] = "somethings wrong"
+      render :new
+    end
+  end
+
+  def show
+    @post = Post.find(params[:id])
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(white_listed_post_params)
+      flash[:success] = "Update successful"
+      redirect_to @post
+    else
+      flash[:error] = "YOu have an error"
+      render :edit
+    end
+  end
+
+  private
+
+    def white_listed_post_params
+      params.require(:post).permit(:title, :body)
+    end
+end

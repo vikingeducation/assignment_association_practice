@@ -1,3 +1,4 @@
+
 ```html
 <form action="/posts/1" method="post" accept-charset="UTF-8">
 	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
@@ -12,8 +13,8 @@
   
     <input checked="unchecked" id="post_tag_ids_4" name="post[tag_ids][]" type="checkbox" value="4">
   
-    <input checked="checked" id="post_tag_ids_5" name="post[tag_ids][]" type="checkbox" value="5">
+    <input checked id="post_tag_ids_5" name="post[tag_ids][]" type="checkbox" value="5">
 		
-	<input name="post[tag_ids][]" type="hidden" value="">
+	<input checked="checked" name="post[tag_ids][]" type="hidden" value="">
 </form>
 ```
