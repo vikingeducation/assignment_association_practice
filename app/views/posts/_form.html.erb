@@ -4,21 +4,17 @@
     <%= f.text_field(:title)  %><br>
     <%= f.label("body") %><br>
     <%= f.text_field(:body) %><br>
-    <%# f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
-    <%# f.collection_radio_buttons(:category_id, Category.all, :id, :name) %><br>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
+    <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %><br>
     <%= f.collection_select(:category_id, Category.all, :id, :name, :include_blank => "Nothing Selected") %><br>
-    
     <%= f.select(
           :tag_ids,
-          tag_options,
+          tags_options,
           {},
           multiple: true) %><br>
           <h3>Comments</h3>
-      <%= f.fields_for :comments do |comment_field| %>
-        <%= comment_field.label :body %>
-        <%= comment_field.text_field :body %>
-        <br>
-      <% end %>
+      <%= render partial: 'comment_fields', locals: {post: @post, f: f}
+
     <%= f.submit %>
   <% end %>
 <% end %>

@@ -3,7 +3,7 @@ module PostHelper
     Category.all.map { |c| [c.name, c.id]} << ['na', 'na']
   end
 
-  def tag_options
+  def tags_options
     Tag.all.map{ |t| [t.name, t.id]}
   end
 
