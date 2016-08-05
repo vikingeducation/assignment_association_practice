@@ -1,0 +1,36 @@
+<%= form_for @post do |post_fields| %>
+  <%= post_fields.label :title %>
+  <%= post_fields.text_field :title %>
+  <%= post_fields.label :body %>
+  <%= post_fields.text_field :body %>
+  <br>
+  <%= post_fields.collection_radio_buttons(:category_id,Category.all,:id,:name) %>
+  <br>
+  <%= post_fields.collection_select(:category_id,Category.all,:id,:name) %>
+  <h3>Combo-box</h1>
+  <%= post_fields.collection_select(:tag_ids,Tag.all,:id,:name, {}, multiple: true, class: 'blue') %>
+  <%= post_fields.collection_check_boxes(:tag_ids,Tag.all,:id,:name, class: 'blue') %>
+
+  <%= label_tag 'Empty Checkbox' %>
+  <%= check_box_tag("post[tag_ids]", []) %>
+
+
+  <h3>Comment text_field</h3>
+  <%= render partial: 'shared/comment_form', locals: { post_fields: post_fields } %>
+
+  <%= post_fields.submit %>
+<% end %>
+
+
+
+
+<!-- <h1>Second form</h1> -->
+<%#= form_tag posts_path do %>
+  <%#= label_tag 'title' %>
+  <%#= text_field_tag('post[title]', @post.title) %>
+  <%#= label_tag 'body' %>
+  <%#= text_field_tag('post[body]', @post.body) %>
+  <%#= select_tag "post[category_id]",
+  options_for_select(@category_options, @post.category_id) %>
+  <%#= submit_tag "Submit other form" %>
+<%# end %>
