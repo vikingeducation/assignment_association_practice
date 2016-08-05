@@ -1,0 +1,64 @@
+<%= form_for post do |post_fields| %>
+
+  <div>
+    <%= post_fields.label :title %>
+    <%= post_fields.text_field :title %>
+  </div>
+  <div>
+    <%= post_fields.label :body %>
+    <%= post_fields.text_area :body %>
+  </div>
+  <div>
+    <%= post_fields.label "Choose Your Tags" %>
+    <%= post_fields.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+  <div>
+    <%= post_fields.label "Choose Your Category As Radio" %>
+    <%= post_fields.collection_radio_buttons(:category_id, Category.all,
+                                             :id, :name) %>
+  </div>
+  <div>
+    <%= post_fields.label "Choose Your Category As Dropdown" %>
+    <%= post_fields.collection_select(:category_id, Category.all, :id, :name) %>
+  </div>
+  <br>
+  <h2>Make A Comment(Nested)</h2>
+  <%= post_fields.fields_for :comments do |comment_field| %>
+    <%if comment_field.object.persisted? %>
+      <%= comment_field.label :_destroy, "Delete this comment?" %>
+      <%= comment_field.check_box :_destroy %>
+    <% end %>
+    <%= comment_field.label :body %>
+    <%= comment_field.text_field :body %>
+  <% end %>
+
+  <%= post_fields.submit %>
+<% end %>
+
+<h2>EXAMPLE OF SELECT_TAG</h2>
+
+<%= form_tag posts_path, method: :post do %>
+  <%= select_tag("post[category_id]",
+        options_for_select(Category.all.map{ |item| [item.name, item.id,{selected: post.category_id == item.id }] })) %>
+  <%= submit_tag %>
+<% end %>
+
+<br>
+
+<h2>EXAMPLE OF COMBO SELECT AND ADDING CLASSES AND INCLUDING BLANK</h2>
+
+<%= form_for post, :html => {class: "category_form", id: "categories"} do |post_fields| %>
+  <div>
+    <%= post_fields.label :title %>
+    <%= post_fields.text_field :title %>
+  </div>
+  <div>
+    <%= post_fields.label :body %>
+    <%= post_fields.text_area :body %>
+  </div>
+  <div>
+    <%= post_fields.label "Choose Your Tags As Dropdown" %>
+    <%= post_fields.collection_select(:tag_ids, Tag.all, :id, :name, {include_blank: true}, multiple: true) %>
+  </div>
+
+  <%= post_fields.submit %>
+<% end %>
