@@ -9,6 +9,15 @@
     :tag_ids,
     Tag.all,
     :id,
+    :name) %></br>
+
+  <%= form_builder.collection_radio_buttons(
+    :category,
+    Category.all,
+    :id,
     :name) %>
   <%= form_builder.submit "Submit me" %>
+
 <% end %>
+
+    

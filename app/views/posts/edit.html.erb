@@ -9,6 +9,21 @@
     :tag_ids,
     Tag.all,
     :id,
-    :name) %>
+    :name ) %></br>
+
+  <%= form_builder.collection_radio_buttons(
+    :category_id,
+    Category.all,
+    :id,
+    :name ) %><br>
+
+  <%= form_builder.collection_select(
+    :category_id,
+    Category.all,
+    :id,
+    :name ) %><br>
+
   <%= form_builder.submit "Submit me" %>
 <% end %>
+
+<%= form_tag('/posts', method: :post) %>
