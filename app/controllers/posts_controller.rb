@@ -16,18 +16,30 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(post_params)
-    redirect_to post_path(@post)
+    @post = Post.new(post_params)
+    if @post.save
+      flash[:success] = "Good job."
+      redirect_to post_path(@post)
+    else
+      flash.now = "oops."
+      render :new
+    end
   end
 
   def update
-    @post = Post.update(post_params)
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      flash[:sucess] = "It saved the update."
     redirect_to post_path(@post)
+    else
+      flash.now = "It did not save the update."
+      render :edit
+    end
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
   end
 end
