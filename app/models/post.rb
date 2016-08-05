@@ -4,8 +4,7 @@ class Post < ApplicationRecord
 
   # Many to many with Tags.
   has_many :post_taggings, dependent: :destroy
-  has_many :tags, through: :post_taggings,
-                           dependent: :nullify
+  has_many :tags, through: :post_taggings
 
 
   # Many to many with Posts.
