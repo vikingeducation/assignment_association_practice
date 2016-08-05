@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
-    if @post.save
+    if @post.save!
       flash[:success] = "Post successfully created!"
 
       redirect_to @post
@@ -54,7 +54,7 @@ class PostsController < ApplicationController
     params
       .require(:post)
       .permit(:title, :body, :category_id, 
-        { :comments_attributes => [:body] }, :tag_ids => [] )
+    :comments_attributes => [:body], :tag_ids => [] )
   end
 
 end

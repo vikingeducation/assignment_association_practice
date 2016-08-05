@@ -11,47 +11,34 @@
     :id,
     :name) %></br>
 
-  <%= form_builder.collection_radio_buttons(
-    :category,
-    Category.all,
-    :id,
-    :name) %>
+    <%= form_builder.collection_radio_buttons(
+      :category,
+      Category.all,
+      :id,
+      :name) %>
 
-<%= form_builder.collection_select(
-  :tag_ids, Tag.all, :id,
-  :name, {include_blank: true}, multiple: true)%></br>
+    <%= form_builder.collection_select(
+      :tag_ids, Tag.all, :id,
+      :name, {include_blank: true}, multiple: true)%></br>
 
-  
+      <%=form_builder.fields_for :comments do |comment_fields| %>
+        <%= comment_fields.label "Comment:" %>
+        <%= comment_fields.text_area :body %>
+      <% end %>
 
-  <%=form_builder.fields_for :comments, @comment do |c| %>
-    <%= c.label "Comment:" %>
-    <%= c.text_area :body %>
-  <% end %>
+      <%= form_builder.submit "Submit me" %>
+    <% end %>
 
-<%= form_builder.submit "Submit me" %>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-<% form_tag "/posts", method: :post do %>
-  <%= label_tag(:title, "Title") %>
-  <%= text_field_tag("post[title]") %>
-  <%= label_tag(:body, "Body") %>
-  <%= text_field_tag("post[body]") %>
-  <%= select_tag "post[tag_ids]",
-    options_from_collection_for_select(Tag.all, "id", "name"),
-    :multiple => true %>
-  <%= select_tag "post[category_id]",
-    options_from_collection_for_select(Category.all, "id", "name") %>
-  <%= submit_tag(:submit) %> 
-<% end %>
+    <% form_tag "/posts", method: :post do %>
+      <%= label_tag(:title, "Title") %>
+      <%= text_field_tag("post[title]") %>
+      <%= label_tag(:body, "Body") %>
+      <%= text_field_tag("post[body]") %>
+      <%= select_tag "post[tag_ids]",
+        options_from_collection_for_select(Tag.all, "id", "name"),
+        :multiple => true %>
+      <%= select_tag "post[category_id]",
+        options_from_collection_for_select(Category.all, "id", "name") %>
+      <%= submit_tag(:submit) %> 
+    <% end %>
 
