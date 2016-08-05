@@ -45,6 +45,6 @@ class PostsController < ApplicationController
 
 
   def whitelisted_post_params
-    params.require(:post).permit(:title, :body, {:category_id => []}, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
   end
 end
