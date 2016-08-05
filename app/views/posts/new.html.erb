@@ -1,33 +1,38 @@
 <h1>Hello world: New</h1>
 
 <%= form_for @post do |form_builder| %>
-  <%= form_builder.label :title %>
+  <%= form_builder.label :title, class: "background-red" %>
   <%= form_builder.text_field :title %>
-  <%= form_builder.label :body %>
+  <%= form_builder.label :body, class: "background-red" %>
   <%= form_builder.text_area :body %></br>
   <%= form_builder.collection_check_boxes(
     :tag_ids,
     Tag.all,
     :id,
-    :name) %></br>
+    :name,
+    {include_blank: true}) %></br>
 
   <%= form_builder.collection_radio_buttons(
     :category,
     Category.all,
     :id,
-    :name) %>
+    :name,
+    {include_blank: true}) %>
+  <%= form_builder.collection_select(:tag_ids, Tag.all, :id, :name, {}, multiple: true)%></br>
   <%= form_builder.submit "Submit me" %>
+
+
 
 <% end %>
 
-<%= form_tag "/posts", method: :post do %>
+<% form_tag "/posts", method: :post do %>
   <%= label_tag(:title, "Title") %>
   <%= text_field_tag(:title) %>
   <%= label_tag(:body, "Body") %>
   <%= text_field_tag(:body) %>
-  <%= select_tag "tags",
+  <%= select_tag "tag_id",
     options_from_collection_for_select(Tag.all, "id", "name") %>
-  <%= select_tag "categories",
+  <%= select_tag "category_id",
     options_from_collection_for_select(Category.all, "id", "name") %>
   <%= submit_tag(:submit) %> 
 <% end %>
