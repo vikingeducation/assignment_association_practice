@@ -13,6 +13,11 @@
           @tag_options,
           {},
           multiple: true) %>
+      <%= f.fields_for :comments do |comment_field| %>
+        <%= comment_field.label :body %>
+        <%= comment_field.text_field :body %>
+        <br>
+      <% end %>
     <%= f.submit %>
   <% end %>
 <% end %>
