@@ -20,6 +20,12 @@
 
 
   <%= post_fields.select(:tag_ids, tag_options, { }, multiple: true) %>
+  <h3>SHOULD SEE COMMENT UNDER HERE</h3>
+  <%= fields_for :comments do |comments_fields| %>
+    <h5>inside the comments field_for</h5>
+   <%= comments_fields.text_field :body %>
+
+ <% end %>
 
   <%= post_fields.submit %>
 

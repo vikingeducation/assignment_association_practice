@@ -12,6 +12,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(white_listed_post_params)
+    a;sfjadlf
     if @post.save
       flash[:success] = "its been created"
       redirect_to @post
@@ -46,6 +47,6 @@ class PostsController < ApplicationController
   private
 
     def white_listed_post_params
-      params.require(:post).permit(:title, :body,  :category_id, tag_ids: [] )
+      params.require(:post).permit(:title, :body,  :category_id, {tag_ids: [], :comments_attributes => [:body]})
     end
 end
