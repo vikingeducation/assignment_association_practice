@@ -29,3 +29,20 @@
         options_for_select(Category.all.map{ |item| [item.name, item.id,{selected: post.category_id == item.id }] })) %>
   <%= submit_tag %>
 <% end %>
+
+<%= form_for post, :html => {class: "category_form", id: "categories"} do |post_fields| %>
+  <div>
+    <%= post_fields.label :title %>
+    <%= post_fields.text_field :title %>
+  </div>
+  <div>
+    <%= post_fields.label :body %>
+    <%= post_fields.text_area :body %>
+  </div>
+  <div>
+    <%= post_fields.label "Choose Your Tags As Dropdown" %>
+    <%= post_fields.collection_select(:tag_ids, Tag.all, :id, :name, {include_blank: true}, multiple: true) %>
+  </div>
+
+  <%= post_fields.submit %>
+<% end %>

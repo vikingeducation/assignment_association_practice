@@ -6,7 +6,9 @@
   <% @post.tags.each do |tag| %>
     <li><%= tag.name %></li>
   <% end %>
+  <% if @post.category %>
     <li><%= @post.category.name %></li>
+  <% end %>
 </ul>
 
 <%= link_to "Edit", edit_post_path(@post) %>
