@@ -6,5 +6,15 @@
   <%= post_fields.submit %>
   <%= post_fields.collection_check_boxes(:tag_ids,Tag.all,:id,:name) %>
   <!-- Working on Radio Buttons -->
-  <%= post_fields.collection_radio_buttons(:) %>
+  <br>
+  <%= post_fields.collection_radio_buttons(:category_id,Category.all,:id,:name) %>
+  <br>
+  <%= post_fields.collection_select(:category_id,Category.all,:id,:name) %>
+<% end %>
+
+
+<%= form_tag posts_path do %>
+  <%= select_tag :category_id,
+  options_for_select(@category_options, @post.id) %>
+  <%= submit_tag "Submit other form" %>
 <% end %>
