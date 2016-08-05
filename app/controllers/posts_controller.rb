@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.comments.build
     @category_options = Category.all.map { |c| [c.name, c.id] }
   end
 
@@ -22,6 +23,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @post.comments.build
     @category_options = Category.all.map { |c| [c.name, c.id] }
   end
 
@@ -52,6 +54,8 @@ class PostsController < ApplicationController
                                  :comments_attributes => [
                                    :body,
                                    :user_id,
-                                   :post_id ]  )
+                                   :post_id,
+                                   :id,
+                                   :_destroy]  )
   end
 end
