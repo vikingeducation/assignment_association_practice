@@ -47,7 +47,7 @@ class PostsController < ApplicationController
   end
 
   def form_options
-    @category_options = Category.all.map { |c| [c.name, c.id]}
+    @category_options = Category.all.map { |c| [c.name, c.id]} << ['n/a', 'na']
     @tag_options = Tag.all.map{ |t| [t.name, t.id]}
   end
 end
