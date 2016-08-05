@@ -1,3 +1,13 @@
 <!-- <%= render partial: 'form', locals: {post: @post} %> -->
 
-<%= render 'form', post: @post %>
+<%= render 'form', post: @post, category_options: @category_options %>
+
+  <%= form_tag post_path(@post), method: 'put' do %>
+    <%= label(:post, :title) %>
+    <%= text_field(:post,  :title, class: "form-control") %>
+    <%= label(:post, :body) %>
+    <%= text_area(:post,  :body, class: "form-control") %>
+    <%= label(:post, :category_id, "Categories") %>
+    <%= select(:post, :category_id, options_for_select(@category_options, @post.category_id)) %>
+    <%= submit_tag("Category Update Now") %>
+  <% end %>
