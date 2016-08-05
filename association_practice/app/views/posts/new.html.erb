@@ -7,6 +7,17 @@
   <br>
   <%= f.label :tags %>
   <br>
+  <%= f.label :tags %>
+  <%= f.collection_radio_buttons(
+  :category_id,
+  Category.all,
+  :id,
+  :name
+  ) %>
+
+
+  <%= f.submit %>
+  <br>
   <%= f.collection_check_boxes(
     :tag_ids,
     Tag.all,
@@ -14,7 +25,6 @@
     :name
     ) %>
 
+  <br>
 
-  <%= f.submit %>
-
-<% end %> 
+<% end %>

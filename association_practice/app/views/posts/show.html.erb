@@ -1,0 +1,15 @@
+<%= @post.title %>
+<br>
+<%= @post.authors %>
+<br>
+<%= @post.body %>
+<br>
+<%= @post.category %>
+<br>
+<ul>
+<%= @post.tags.each do |t| %>
+  <li>
+    <%= t.name %>
+  </li>
+<% end %>
+</ul>
