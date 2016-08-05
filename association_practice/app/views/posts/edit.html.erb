@@ -3,19 +3,58 @@
   <%= post_fields.text_field :title %>
 
   <%= post_fields.label :body %>
-  <%= post_fields.text_area :body %>
+  <%= post_fields.text_area :body, id: "nice-body" %>
   <br>
 
   <%= post_fields.collection_check_boxes(
                 :tag_ids,
-                Tag.all,
+                Tag.all.sample(5),
                 :id,
-                :name
-                ) 
+                :name,
+                {},
+                class: "check-box",
+                id: "check-box-id"
+                )
                 %>
   <br>
+
+  <%= post_fields.collection_radio_buttons(
+                :category_id,
+                Category.all,
+                :id,
+                :name
+                )
+                %>
+
+   <%= post_fields.collection_select(
+                :category_id,
+                Category.all,
+                :id,
+                :name,
+                { include_blank: true }, 
+                )
+                %><br />
+
+    <%= post_fields.collection_select(
+                 :tag_ids,
+                 Tag.all,
+                 :id,
+                 :name,
+                 {},
+                 multiple: true
+                 ) %>
+
+
 
   <%= post_fields.submit %>
 
 
+<% end %>
+
+
+
+<%= form_tag posts_path do %>
+    <%= select_tag(:category_id, options_for_select(@category_options, @post.id)) %>
+
+    <%= submit_tag "Submit!" %>
 <% end %>

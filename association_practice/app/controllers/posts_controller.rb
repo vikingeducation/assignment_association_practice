@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @category_options = Category.all.map{ |c| [c.name, c.id] }
   end
 
   def create
@@ -16,7 +17,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-
+    @category_options = Category.all.map{ |c| [c.name, c.id] }
   end
 
   def update
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
     else
       render :edit
     end
-    
+
   end
 
   def show
@@ -37,7 +38,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
   end
 
 end

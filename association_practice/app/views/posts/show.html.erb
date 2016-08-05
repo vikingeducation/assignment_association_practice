@@ -1,6 +1,9 @@
 <h1><%= @post.title %></h1>
-<h3><%= @post.body %></h3>
+<h3><%= @post.category.name if @post.category %></h3>
+<p>
+  <%= @post.body %>
+</p>
 
 <% @post.tags.each do |tag| %>
-  <%= tag.name %>
+  | <%= tag.name %>
 <% end %>

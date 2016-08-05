@@ -11,7 +11,7 @@
                 Tag.all.sample(5),
                 :id,
                 :name
-                ) 
+                )
                 %>
   <br>
 
@@ -29,7 +29,16 @@
                 :id,
                 :name
                 )
-                %>
+                %><br />
+
+    <%= post_fields.collection_select(
+                 :tag_ids,
+                 Tag.all,
+                 :id,
+                 :name,
+                 {},
+                 multiple: true
+                 ) %>
 
 
 
@@ -40,10 +49,8 @@
 
 
 
-<%# form_tag posts_path do %>
-    <%# select_tag(:category_id) %>
+<%= form_tag posts_path do %>
+    <%= select_tag(:category_id, options_for_select(@category_options, @post.id)) %>
 
-
-
-
-
+    <%= submit_tag "Submit!" %>
+<% end %>
