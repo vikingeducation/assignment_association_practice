@@ -1,0 +1,6 @@
+<h1><%= @post.title %></h1>
+<h3><%= @post.body %></h3>
+
+<% @post.tags.each do |tag| %>
+  <%= tag.name %>
+<% end %>
