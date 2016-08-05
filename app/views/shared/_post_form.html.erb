@@ -3,15 +3,14 @@
   <%= post_fields.text_field :title %>
   <%= post_fields.label :body %>
   <%= post_fields.text_field :body %>
-  <%= post_fields.submit %>
-  <%= post_fields.collection_check_boxes(:tag_ids,Tag.all,:id,:name) %>
   <br>
   <%= post_fields.collection_radio_buttons(:category_id,Category.all,:id,:name) %>
   <br>
   <%= post_fields.collection_select(:category_id,Category.all,:id,:name) %>
   <h3>Combo-box</h1>
-  <%= post_fields.collection_select(:category_id,Category.all,:id,:name, multiple: true) %>
-  
+  <%= post_fields.collection_select(:category_id,Category.all,:id,:name, {}, multiple: true) %>
+  <%= post_fields.collection_check_boxes(:tag_ids,Tag.all,:id,:name) %>
+  <%= post_fields.submit %>
 <% end %>
 
 
