@@ -13,8 +13,13 @@
 <% end %>
 
 
+<h1>Second form</h1>
 <%= form_tag posts_path do %>
-  <%= select_tag :category_id,
-  options_for_select(@category_options, @post.id) %>
+  <%= label_tag 'title' %>
+  <%= text_field_tag('post[title]', @post.title) %>
+  <%= label_tag 'body' %>
+  <%= text_field_tag('post[body]', @post.body) %>
+  <%= select_tag "post[category_id]",
+  options_for_select(@category_options, @post.category_id) %>
   <%= submit_tag "Submit other form" %>
 <% end %>
