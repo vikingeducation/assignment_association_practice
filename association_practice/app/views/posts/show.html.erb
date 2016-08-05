@@ -1,0 +1,20 @@
+<%= @post.title %>
+<br>
+<%= @post.body %>
+<br>
+Category: <%= @post.category.name %>
+<br>
+<ul>
+<% @post.tags.each do |t| %>
+  <li>
+    <%= t.name %>
+  </li>
+<% end %>
+</ul>
+
+<% @post.comments.each do |comment| %>
+  <%= comment.body %>
+<% end %>
+
+
+<%= link_to "Edit Post", edit_post_path(@post) %>

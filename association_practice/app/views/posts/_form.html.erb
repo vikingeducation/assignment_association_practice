@@ -1,0 +1,69 @@
+<%= form_for post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br>
+  <%= f.label :body %>
+  <%= f.text_field :body %>
+  <br>
+
+  <%= f.label :category %>
+
+  <% if false %>
+    <%= select_tag(:category_id, '<option value="1">Funny</option><option value="2">Hilarious</option>'.html_safe) %>
+  <% end %>
+
+
+  <%= f.collection_select(
+    :category_id,
+    Category.all,
+    :id,
+    :name
+  ) %>
+
+
+  <% if false %>
+    <%= f.collection_radio_buttons(
+    :category_id,
+    Category.all,
+    :id,
+    :name
+  ) %>
+  <% end %>
+
+  <br>
+  <%= f.label :tags %>
+
+  <%= f.collection_select(
+    :tag_ids,
+    Tag.all,
+    :id,
+    :name,
+    {},
+    :multiple => true,
+    :class => "dropdown"
+    ) %>
+
+  <% if false %>
+  <%= f.collection_check_boxes(
+    :tag_ids,
+    Tag.all,
+    :id,
+    :name
+    ) %>
+  <% end %>
+
+
+  <%= render partial: "comment_form", locals: {post: post, post_fields: f} %>
+
+
+  <br>
+
+
+
+
+  <%= f.submit %>
+
+
+
+
+<% end %>
