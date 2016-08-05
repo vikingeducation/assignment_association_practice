@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    if @post.save
+    if @post.save!
       flash[:success] = "Create worked"
       redirect_to @post
     else
@@ -15,6 +15,18 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+     @post = Post.find(params[:id])
+    if @post.update(post_params)
+      flash[:success] = "Update worked"
+      redirect_to @post
+    else
+      flash[:alert] = "Update didn't work"
+      render :edit
+    end
   end
 
   def show

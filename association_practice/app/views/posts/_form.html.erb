@@ -1,0 +1,30 @@
+<%= form_for post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br>
+  <%= f.label :body %>
+  <%= f.text_field :body %>
+  <br>
+  <%= f.label :tags %>
+  <br>
+  <%= f.label :tags %>
+  <%= f.collection_radio_buttons(
+  :category_id,
+  Category.all,
+  :id,
+  :name
+  ) %>
+
+
+  <%= f.submit %>
+  <br>
+  <%= f.collection_check_boxes(
+    :tag_ids,
+    Tag.all,
+    :id,
+    :name
+    ) %>
+
+  <br>
+
+<% end %>
