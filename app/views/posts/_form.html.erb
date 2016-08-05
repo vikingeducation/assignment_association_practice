@@ -20,12 +20,20 @@
     <%= post_fields.label "Choose Your Category As Dropdown" %>
     <%= post_fields.collection_select(:category_id, Category.all, :id, :name) %>
   </div>
+  <%= post_fields.fields_for :comments do |comment_field| %>
+    <%if comment_field.object.persisted? %>
+      <%= comment_field.label :_destroy, "Delete this comment?" %>
+      <%= comment_field.check_box :_destroy %>
+    <% end %>
+    <%= comment_field.label :body %>
+    <%= comment_field.text_field :body %>
+  <% end %>
 
   <%= post_fields.submit %>
 <% end %>
 
 <%= form_tag posts_path, method: :post do %>
-  <%= select_tag("user[category_id]",
+  <%= select_tag("post[category_id]",
         options_for_select(Category.all.map{ |item| [item.name, item.id,{selected: post.category_id == item.id }] })) %>
   <%= submit_tag %>
 <% end %>
@@ -46,3 +54,4 @@
 
   <%= post_fields.submit %>
 <% end %>
+
