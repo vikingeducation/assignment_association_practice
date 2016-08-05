@@ -5,12 +5,12 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    category_options
+    form_options
   end
 
   def edit
+    form_options
     @post = Post.find(params[:id])
-    category_options
   end
 
   def show
@@ -29,6 +29,7 @@ class PostsController < ApplicationController
   end
 
   def update
+    #fail
     @post = Post.find(params[:id])
     if @post.update(post_params)
       flash[:sucess] = "It saved the update."
@@ -43,10 +44,10 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
-    params.permit(:category_id)
   end
 
-  def category_options
+  def form_options
     @category_options = Category.all.map { |c| [c.name, c.id]}
+    @tag_options = Tag.all.map{ |t| [t.name, t.id]}
   end
 end

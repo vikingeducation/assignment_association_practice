@@ -1,5 +1,4 @@
 <%= form_for(post) do |f| %>
-<% @category_options = Category.all.map { |c| [c.name, c.id]} %>
   <%= f.label("title") %><br>
   <%= f.text_field(:title)  %><br>
   <%= f.label("body") %><br>
@@ -7,7 +6,22 @@
   <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
   <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %><br>
   <%= f.collection_select(:category_id, Category.all, :id, :name) %><br>
-  <%= select_tag(:category_id, options_for_select(@category_options, @post.category_id)) %><br>
+  <%= select_tag("post[category_id]", options_for_select(@category_options, @post.category_id)) %><br>
+  <%= f.select(
+          :tag_ids,
+          @tag_options,
+          {},
+          multiple: true) %>
 <%= f.submit %>
     
 <% end %>
+
+<%= form_tag post_path(@post) do %>
+  <%= label_tag 'Title' %>
+  <%= text_field_tag('Title', @post.title) %>
+  <%= select_tag(:category_id, options_for_select(@category_options, @post.category_id)) %><br>
+  <%= submit_tag %>
+
+<% end %>
+
+
