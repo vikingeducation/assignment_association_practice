@@ -1,0 +1,4 @@
+<%= post_fields.fields_for :comments, Comment.new do |comment_fields| %>
+  <%= comment_fields.label :body %>
+  <%= comment_fields.text_field :body %>
+<% end %>

@@ -5,4 +5,6 @@ class Post < ApplicationRecord
   has_many :post_taggings, class_name: "TagPost", dependent: :destroy
   has_many :tags, through: :post_taggings, source: :tag
   belongs_to :category, optional: true
+
+  accepts_nested_attributes_for :comments
 end

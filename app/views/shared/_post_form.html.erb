@@ -12,6 +12,11 @@
   <%= post_fields.collection_check_boxes(:tag_ids,Tag.all,:id,:name, class: 'blue') %>
   <%= label_tag 'Empty Checkbox' %>
   <%= check_box_tag("post[tag_ids]", []) %>
+
+
+  <h3>Comment text_field</h3>
+  <%= render partial: 'shared/comment_form', locals: { post_fields: post_fields } %>
+
   <%= post_fields.submit %>
 <% end %>
 
