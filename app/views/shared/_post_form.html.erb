@@ -10,6 +10,8 @@
   <h3>Combo-box</h1>
   <%= post_fields.collection_select(:tag_ids,Tag.all,:id,:name, {}, multiple: true, class: 'blue') %>
   <%= post_fields.collection_check_boxes(:tag_ids,Tag.all,:id,:name, class: 'blue') %>
+  <%= label_tag 'Empty Checkbox' %>
+  <%= check_box_tag("post[tag_ids]", []) %>
   <%= post_fields.submit %>
 <% end %>
 
