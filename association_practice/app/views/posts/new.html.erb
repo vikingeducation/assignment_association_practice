@@ -38,7 +38,15 @@
                  :name,
                  {},
                  multiple: true
-                 ) %>
+                 ) %> <br />
+
+    <%= post_fields.fields_for :comments do |comment_fields| %>
+
+      <%= comment_fields.label :body, "Add A Comment" %>
+      <%= comment_fields.text_field :body %>
+
+    <% end %>
+
 
 
 
