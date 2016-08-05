@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(whitelisted_post_params)
-    if @post.save
+    if @post.save!
       flash[:success] = "Post saved."
       redirect_to @post
     else
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post = Post.update(whitelisted_post_params)
+    if @post.update(whitelisted_post_params)
       flash[:success] = "Post updated."
       redirect_to @post
     else
@@ -45,13 +45,13 @@ class PostsController < ApplicationController
 
 
   def whitelisted_post_params
-    params.require(:post).permit(:title, 
-                                 :body, 
-                                 :category_id, 
-                                 { :tag_ids => [] },
-                                 { :comments => [
-                                     :body,
-                                     :user_id,
-                                     :post_id ] } )
+    params.require(:post).permit(:title,
+                                 :body,
+                                 :category_id,
+                                 :tag_ids => [],
+                                 :comments_attributes => [
+                                   :body,
+                                   :user_id,
+                                   :post_id ]  )
   end
 end

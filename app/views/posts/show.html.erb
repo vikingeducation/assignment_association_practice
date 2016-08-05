@@ -12,3 +12,10 @@
 
 <h1>Category</h1>
 <%= content_tag(:p, @post.category.name) %>
+
+<h1>Comments</h1>
+<ul>
+<% @post.comments.each do |comment| %>
+  <%= content_tag(:li, comment.body) %>
+<% end %>
+</ul>
