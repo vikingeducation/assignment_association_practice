@@ -11,19 +11,32 @@
     :id,
     :name ) %></br>
 
-  <%= form_builder.collection_radio_buttons(
-    :category_id,
-    Category.all,
-    :id,
-    :name ) %><br>
+    <%= form_builder.collection_radio_buttons(
+      :category_id,
+      Category.all,
+      :id,
+      :name ) %><br>
 
-  <%= form_builder.collection_select(
-    :category_id,
-    Category.all,
-    :id,
-    :name ) %><br>
+      <%= form_builder.collection_select(
+        :category_id,
+        Category.all,
+        :id,
+        :name ) %><br>
 
-  <%= form_builder.submit "Submit me" %>
-<% end %>
+        <%= form_builder.submit "Submit me" %>
+      <% end %>
 
-<%= form_tag('/posts', method: :post) %>
+      <%= form_tag(
+        @post.persisted? ? post_path(@post) : posts_path,
+        :method => @post.persisted? ? :put : :post) do %>
+        <%= label_tag(:title, "Title") %>
+        <%= text_field_tag("post[title]") %>
+        <%= label_tag(:body, "Body") %>
+        <%= text_field_tag("post[body]") %>
+        <%= select_tag "post[tag_ids]",
+          options_from_collection_for_select(Tag.all, "id", "name"),
+          :multiple => true %>
+        <%= select_tag "post[category_id]",
+          options_from_collection_for_select(Category.all, "id", "name") %>
+        <%= submit_tag(:submit) %> 
+      <% end %>
