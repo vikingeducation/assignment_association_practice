@@ -1,0 +1,12 @@
+<h1>Hello world: Show</h1>
+<%= @post.title %></br>
+<%= @post.body %><br>
+<% @post.comments.each do |comment| %>
+  Comment:<%= comment.body %></br>
+<% end %>
+<% @post.tags.each do |tag| %>
+  <div>Tag<%= tag.id %>:<%= tag.name %></div>
+<% end %>
+<%= link_to "Edit", edit_post_path(@post) %>
+<%= link_to "All Posts", posts_path %>
+
