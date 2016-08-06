@@ -7,6 +7,6 @@ class Post < ApplicationRecord
   belongs_to :category, optional: true
 
   validates :title, :body, :presence => true
-  accepts_nested_attributes_for :comments, allow_destroy: true
+  accepts_nested_attributes_for :comments, allow_destroy: true, reject_if: :all_blank
 end
 

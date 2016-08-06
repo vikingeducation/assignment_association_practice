@@ -11,20 +11,29 @@
     :id,
     :name ) %></br>
 
-    <%= form_builder.collection_radio_buttons(
-      :category_id,
-      Category.all,
-      :id,
-      :name ) %><br>
+  <%= form_builder.collection_radio_buttons(
+    :category_id,
+    Category.all,
+    :id,
+    :name ) %><br>
 
-      <%= form_builder.collection_select(
-        :category_id,
-        Category.all,
-        :id,
-        :name ) %><br>
+  <%= form_builder.collection_select(
+    :category_id,
+    Category.all,
+    :id,
+    :name ) %><br>
 
-        <%= form_builder.submit "Submit me" %>
-      <% end %>
+  <%=form_builder.fields_for :comments do |comment_fields| %>
+    <%= comment_fields.label "Comment:" %>
+    <%= comment_fields.text_area :body %>
+    <% if comment_fields.object.persisted? %>
+      <%= comment_fields.label :_destroy, "Delete this comment?" %>
+      <%= comment_fields.check_box :_destroy %>
+  <% end %>
+  <% end %>
+
+  <%= form_builder.submit "Submit me" %>
+<% end %>
 
       <%= form_tag(
         @post.persisted? ? post_path(@post) : posts_path,

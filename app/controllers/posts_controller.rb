@@ -15,6 +15,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @comment = @post.comments.build
   end
 
   def create
@@ -54,7 +55,7 @@ class PostsController < ApplicationController
     params
       .require(:post)
       .permit(:title, :body, :category_id, 
-    :comments_attributes => [:body], :tag_ids => [] )
+      :tag_ids => [], :comments_attributes => [:id, :body, :_destroy] )
   end
 
 end
