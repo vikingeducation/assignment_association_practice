@@ -1,6 +1,9 @@
 class Tag < ApplicationRecord
-  has_and_belongs_to_many :tagged_posts, :class_name => "Post",
-      :join_table => :post_tags
+  has_many :post_tags
+  has_many :posts, :through => :post_tags
+
+  has_many :post_taggings, :class_name => "PostTag"
+  has_many :tagged_posts, :through => :post_taggings, :source => :post
 
   has_many :authors_of_tagged_posts, :through => :tagged_posts,
           :source => :authors
