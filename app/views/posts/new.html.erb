@@ -1,5 +1,5 @@
 
-<h1>Create New User</h1>
+<h1>Create New Post</h1>
 <div class=row>
 <%=form_for @post do |f| %>
 
@@ -16,7 +16,16 @@
 
   <!-- <%= f.collection_select :category_id, Category.all, :id, :name %> -->
 
-  <%= f.select :category_id, @category_options %><br>
+  <%= f.select :category_id, @category_options %><br><br>
+
+  <%= f.fields_for :comments, Comment.new do |c| %>
+      <%= c.label :body, "Create Comment" %>
+      <%= c.text_area :body %>
+      <%= c.hidden_field :author, value: User.first %>
+
+    <% end %><br><br>
+
 <%= f.submit "Create Post" %>
+
 <% end %>
 </div>

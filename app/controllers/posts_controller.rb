@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @category_options = Category.all.map{|c| [ c.name, c.id ] }
     @tag_options = Tag.all.map{|c| [ c.name, c.id ] }
-
+    eeee
     if @post.save
       flash[:success] = "A new User has been created!"
       @post = Post.new
@@ -30,9 +30,9 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post1 = Post.first
     @category_options = Category.all.map{|c| [ c.name, c.id ] }
     @tag_options = Tag.all.map{|c| [ c.name, c.id ] }
+
     if @post.update(post_params)
       flash[:success] = "User has been updated!"
       @post = Post.new
@@ -50,9 +50,9 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [], :comments_attributes => [:id, :body, :user_id, :post_id, :_destroy])
   end
 
-
+# , {:comments_attributes => [:body, :user_id, :post_id]}
 
 end
