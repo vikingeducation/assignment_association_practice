@@ -1,0 +1,49 @@
+
+<h1>Edit User <%=@post.id%></h1>
+<div class=row>
+<%=form_for @post do |f| %>
+
+<%= f.label :title, "Title: " %>
+<%= f.text_field :title %>
+<%= f.label :body, "Body: " %>
+<%= f.text_area :body %>
+
+  <!-- <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %> -->
+
+  <%= f.select :tag_ids, @tag_options, {:class => "punk", :id => "ass"}, multiple: true %><br>
+
+  <%= f.select :category_id, @category_options %><br>
+
+  <!-- <% @post.comments.each_with_index do |comment, i| %>
+
+      <%= f.fields_for "comments_attribute][#{i}", comment do |c| %>
+
+      <%= c.label :body, "Edit Comment" %>
+      <%= c.text_area :body %>
+
+
+  <% end %><br><br>
+  <% end %> -->
+
+  <%= f.fields_for :comments do |c| %>
+
+
+
+      <%= c.label :body, "Edit Comment" %>
+      <%= c.text_area :body %>
+      <%= c.label :_destroy, "Delete Comment?" %>
+      <%= c.check_box :_destroy %>
+      <%= c.hidden_field :user_id %><br>
+
+
+    <% end %><br><br>
+
+  <%= f.fields_for :comments, Comment.new do |c| %>
+    <%= c.label :body, "Create Comment" %>
+    <%= c.text_area :body %>
+  
+  <% end %>
+
+<%= f.submit "Update Post" %>
+<% end %>
+</div>
