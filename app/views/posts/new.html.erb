@@ -1,0 +1,22 @@
+
+<h1>Create New User</h1>
+<div class=row>
+<%=form_for @post do |f| %>
+
+<%= f.label :title, "Title: " %>
+<%= f.text_field :title %>
+<%= f.label :body, "Body: " %>
+<%= f.text_area :body %>
+
+  <!-- <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br> -->
+
+  <%= f.select :tag_ids, @tag_options, {prompt: true, include_blank: true}, :class => "row", :id => "ass", multiple: true %><br>
+
+  <!-- <%=f.collection_radio_buttons :category_id, Category.all, :id, :name %><br> -->
+
+  <!-- <%= f.collection_select :category_id, Category.all, :id, :name %> -->
+
+  <%= f.select :category_id, @category_options %><br>
+<%= f.submit "Create Post" %>
+<% end %>
+</div>

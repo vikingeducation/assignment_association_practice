@@ -1,0 +1,19 @@
+
+<h1>Edit User <%=@post.id%></h1>
+<div class=row>
+<%=form_for @post do |f| %>
+
+<%= f.label :title, "Title: " %>
+<%= f.text_field :title %>
+<%= f.label :body, "Body: " %>
+<%= f.text_area :body %>
+
+  <!-- <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %> -->
+
+  <%= f.select :tag_ids, @tag_options, {:class => "punk", :id => "ass"}, multiple: true %><br>
+
+  <%= f.select :category_id, @category_options %><br>
+
+<%= f.submit "Update Post" %>
+<% end %>
+</div>
