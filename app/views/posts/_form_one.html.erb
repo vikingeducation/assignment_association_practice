@@ -1,0 +1,32 @@
+<div class="row">
+  <% unless flash[:error].nil? %>
+    <div class="col-md-12 alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Form One</h2>
+      </div>
+    </div>
+
+    <%= form_for @post do |f| %>
+      
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "title-field", id: "field-id" %>
+
+      <%= f.label :body %>
+      <%= f.text_area :body, class: "body-field", id: "this-id" %>
+
+      <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name, {}, class: "check-box-field", id: "check-box-id" %>
+      <%= f.submit %>
+
+
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Form Two</h2>
+      </div>
+    </div>
+
+    <%= form_for @post do |f| %>
+
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+
+      <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %> 
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div> 
+
+
+<div class="row">
+  <div class="col-md-12">
+
+    <%= form_for @post do |f| %>
+
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+
+      <%= f.label :category_id %>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, prompt: true) %> 
+
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div> 
+
+
+
+<div class="row">
+  <div class="col-md-12">
+
+    <%= form_tag posts_path do %>
+
+      <%= label_tag :title %>
+      <%= text_field_tag "post[title]", @post.title %>
+
+      <%= label_tag :body %>
+      <%= text_field_tag "post[body]", @post.body %>
+
+      <%= label_tag :category_id %>
+      <%= select_tag "post[category_id]", options_for_select(@author_options, @post.category.name), prompt: "Choose" %> 
+
+      <%= submit_tag %>
+    <% end %>
+  </div>
+</div> 
