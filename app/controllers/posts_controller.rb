@@ -8,9 +8,11 @@ class PostsController < ApplicationController
   def edit
     @author_options = author_options
     @post = Post.find(params[:id])
+    @post.comments.build
   end
 
   def update
+  
     @post = Post.find(params[:id])
     if @post.update(whitelisted_params)
       flash[:success] = "Post successfully updated"
@@ -25,6 +27,7 @@ class PostsController < ApplicationController
 
     @author_options = author_options
     @post = Post.new
+    @post.comments.build
   end
 
   def create
@@ -43,7 +46,9 @@ class PostsController < ApplicationController
   def whitelisted_params
     params.require(:post).permit(:title, :body,
                                  :category_id,
-                                 :tag_ids => [])
+                                 :tag_ids => [],
+                                 :comments_attributes => [:body, :user_id,
+                                  :_destroy, :id])
   end
 
   def author_options

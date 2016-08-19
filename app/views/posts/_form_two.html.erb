@@ -55,7 +55,7 @@
       <%= text_field_tag "post[body]", @post.body %>
 
       <%= label_tag :category_id %>
-      <%= select_tag "post[category_id]", options_for_select(@author_options, @post.category.name), prompt: "Choose" %> 
+      <%= select_tag "post[category_id]", options_for_select(@author_options), prompt: "Choose" %> 
 
       <%= submit_tag %>
     <% end %>

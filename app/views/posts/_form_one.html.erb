@@ -24,6 +24,13 @@
       <%= f.text_area :body, class: "body-field", id: "this-id" %>
 
       <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name, {}, class: "check-box-field", id: "check-box-id" %>
+      
+      <%= render partial: 'comment_form', locals: {
+                                        post: @post,
+                                        post_fields: f
+                                        } %>
+
+
       <%= f.submit %>
 
 
