@@ -8,6 +8,19 @@
   <%= f.collection_select :tag_ids, Tag.all, :id, :name, {include_blank: true}, multiple: true, class: "form-control" %>
   <br>
   <%= f.collection_select :category_id, Category.all, :id, :name, {}, class: "form-control" %>
+  <br>
+  <h3>Comments</h3>
+  <%= f.fields_for :comments do |c| %>
+    <%= c.label :user_id, "Comment Author" %>
+    <%= c.collection_select :user_id, User.all, :id, :name, {include_blank: true}, class: "form-control" %>
+    <%= c.label :body, "Body Content" %>
+    <br>
+    <%= c.text_area :body, class: "form-control"  %>
+    <% if c.object.persisted? %>
+      <%= c.label :_destroy, "Delete this comment?" %>
+      <%= c.check_box :_destroy %>
+    <% end %>
+  <% end %>
   <hr>
   <%= f.submit %>
 <% end %>
