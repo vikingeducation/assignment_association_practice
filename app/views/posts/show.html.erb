@@ -1,0 +1,13 @@
+<h1>Posts#show</h1>
+ID: <%= @post.id %>
+<br>
+title: <%= @post.title %>
+<br>
+body: <%= @post.body %>
+<br>
+Tags:
+<hr>
+<% @post.tags.each do |tag| %>
+  <%= tag.name %>
+  <br>
+<% end %>

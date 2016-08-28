@@ -6,6 +6,7 @@ class Post < ApplicationRecord
            :foreign_key => :post_id,
            :class_name => "PostTag",
            :dependent => :destroy
+
   has_many :tags, :through => :post_taggings
 
   has_many :post_authorings,

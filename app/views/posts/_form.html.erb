@@ -1,0 +1,13 @@
+<%= form_for @post do |f| %>
+  <%= f.label :title, "Title" %>
+  <%= f.text_field :title, class: "form-control" %>
+  <br>
+  <%= f.label :body, "Body" %>
+  <%= f.text_area :body, class: "form-control" %>
+  <br>
+  <%= f.collection_select :tag_ids, Tag.all, :id, :name, {include_blank: true}, multiple: true, class: "form-control" %>
+  <br>
+  <%= f.collection_select :category_id, Category.all, :id, :name, {}, class: "form-control" %>
+  <hr>
+  <%= f.submit %>
+<% end %>
