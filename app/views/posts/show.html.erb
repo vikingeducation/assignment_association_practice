@@ -1,0 +1,10 @@
+<div >
+<%= @post.title %>
+</div>
+<div>
+  <%= @post.body %>
+</div>
+<div>
+  <h5>Tags: <%= @post.tags.map { |tag| tag.name }.join(", ") %></h5>
+  <h5>Category: <%= @post.category.name if @post.category %></h5>
+</div>

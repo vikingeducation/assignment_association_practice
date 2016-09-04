@@ -1,0 +1,32 @@
+<h1>form_for</h1>
+
+<%= form_for post  do |post_fields| %>
+  <%= post_fields.label :title %>
+  <%= post_fields.text_field :title, class: "form-control" %>
+  <%= post_fields.label :body %>
+  <%= post_fields.text_area  :body, class: "form-control" %>
+  <br>
+  <%= post_fields.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+  <br>
+  <%= post_fields.collection_radio_buttons(:category_id, Category.all, :id, :name) %>
+
+  <br>
+
+  <%= post_fields.collection_select(:category_id, Category.all, :id, :name, {}, class: "pull-right") %>
+
+
+
+<h1>Combo Box</h1>
+
+
+  <%= post_fields.select(:tag_ids, tag_options, { }, multiple: true) %>
+  <h3>SHOULD SEE COMMENT UNDER HERE</h3>
+  <%= fields_for :comments do |comments_fields| %>
+    <h5>inside the comments field_for</h5>
+   <%= comments_fields.text_field :body %>
+
+ <% end %>
+
+  <%= post_fields.submit %>
+
+<% end %>
