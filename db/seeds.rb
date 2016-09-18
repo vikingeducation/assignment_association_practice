@@ -28,7 +28,7 @@ Post.all.each do |p|
   end
 end
 
-MULTIPLIER.times do
+(MULTIPLIER*10).times do
   Comment.create(body: Faker::Lorem.sentence(3), user_id: User.pluck(:id).sample,
                  post_id: Post.pluck(:id).sample)
 end

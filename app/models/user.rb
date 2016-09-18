@@ -9,4 +9,8 @@ class User < ApplicationRecord
            class_name: "UserPost",
            :dependent => :destroy
   has_many :authored_posts, :through => :post_authorings, :source => :post
+
+  has_many :tags_on_authored_posts,
+           :through => :authored_posts,
+           :source => :tags
 end
