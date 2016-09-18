@@ -1,9 +1,7 @@
 class Post < ApplicationRecord
   has_many :comments,
            :dependent => :destroy
-  # belongs_to :category
-  belongs_to :cat, :foreign_key => :category_id,
-             :class_name => "Category"
+  belongs_to :category
 
   has_many :post_authorings,
              :foreign_key => :post_id,
