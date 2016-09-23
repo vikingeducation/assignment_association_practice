@@ -8,4 +8,8 @@ class Tag < ApplicationRecord
   has_many :authors_of_tagged_posts,
            :through => :tagged_posts,
            :source => :authors
+
+  def to_s
+    self.name
+  end
 end

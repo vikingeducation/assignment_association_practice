@@ -1,0 +1,22 @@
+<%= form_for @post do |f| %>
+
+  Title
+  <%= f.text_field :title %>
+
+  Body
+  <%= f.text_area :body %><br>
+  <h4>Tags</h4>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
+  <h4>Categories Checkboxes</h4>
+  <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %><br>
+  <h4>Categories dropdown</h4>
+  <%= f.select(:category_id, Category.all.map { |c| [c.name, c.id] } ) %><br><br>
+
+  <%= f.submit %>
+<% end %>
+
+
+<%= form_tag post_path, method: :put do %>
+  <%= select_tag("post[category_id]", options_from_collection_for_select(Category.all, :id, :name)) %>
+  <%= submit_tag %>
+<% end %>
