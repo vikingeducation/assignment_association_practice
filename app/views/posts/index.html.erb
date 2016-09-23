@@ -12,7 +12,7 @@ Tags:
 <% end %>
 <p>
 Category:
-<%= post.category.name %>
+<%= post.category.name if post.category %>
 </p>
 <p>
   <%= post.body %>

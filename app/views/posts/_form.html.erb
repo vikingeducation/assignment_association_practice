@@ -6,11 +6,14 @@
   Body
   <%= f.text_area :body %><br>
   <h4>Tags</h4>
-  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
-  <h4>Categories Checkboxes</h4>
-  <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %><br>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, { include_blank: true }, class: "check_box", id: "check_box_id") %><br>
+  <h4>Tags Combo</h4>
+  <%= f.select(:tag_ids, Tag.all.map { |t| [t.name, t.id] } , { include_blank: true }, multiple: true) %><br><br>
+
+  <h4>Categories Radio</h4>
+  <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name, { include_blank: true }) %><br>
   <h4>Categories dropdown</h4>
-  <%= f.select(:category_id, Category.all.map { |c| [c.name, c.id] } ) %><br><br>
+  <%= f.select(:category_id, Category.all.map { |c| [c.name, c.id] }, { include_blank: true }) %><br><br>
 
   <%= f.submit %>
 <% end %>
