@@ -1,0 +1,21 @@
+<h3> Posts </h3>
+
+<% @posts.each do |post| %>
+<%= link_to post do %>
+  <h2>
+    <%= post.title %>
+  </h2>
+<% end %>
+Tags:
+<% post.tags.each do |t| %>
+  <%= t.name %>
+<% end %>
+<p>
+Category:
+<%= post.category.name if post.category %>
+</p>
+<p>
+  <%= post.body %>
+</p>
+
+<% end %>
