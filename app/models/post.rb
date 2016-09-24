@@ -1,5 +1,5 @@
   class Post < ApplicationRecord
-  has_many :comments,
+  has_many :comments, inverse_of: :parent_post,
            :dependent => :destroy
   belongs_to :category
 
@@ -14,4 +14,8 @@
              :class_name => "PostTag",
              :dependent => :destroy
     has_many :tags, :through => :post_taggings
+
+    accepts_nested_attributes_for :comments,
+                                  :reject_if => :all_blank,
+                                  :allow_destroy => true
 end

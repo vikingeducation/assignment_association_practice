@@ -15,11 +15,7 @@
   <h4>Categories dropdown</h4>
   <%= f.select(:category_id, Category.all.map { |c| [c.name, c.id] }, { include_blank: true }) %><br><br>
 
+  <%= render partial: "comments_fields", locals: { post: @post, post_fields: f } %>
+
   <%= f.submit %>
-<% end %>
-
-
-<%= form_tag post_path, method: :put do %>
-  <%= select_tag("post[category_id]", options_from_collection_for_select(Category.all, :id, :name)) %>
-  <%= submit_tag %>
 <% end %>
