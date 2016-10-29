@@ -1,0 +1,14 @@
+<%= form_for @post do |f| %>
+  <%= f.label :title, 'Title' %>
+  <%= f.text_field :title %>
+
+  <%= f.label :body, 'Body' %>
+  <%= f.text_field :body %>
+
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {}) %>
+  <%= f.collection_radio_buttons(:tag_ids, Tag.all, :id, :name, {}) %>
+
+  <%= f.submit 'Create New Post' %>
+<% end %>

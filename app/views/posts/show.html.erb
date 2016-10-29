@@ -1,0 +1,5 @@
+<p><%= @post.title %></p>
+<p><%= @post.body %></p>
+<p><%= @post.category.name %></p>
+<p><%= @post.tags.map{|tag| tag.name}.join(", ") %></p>
+<p><%= link_to "Edit", edit_post_path %></p>

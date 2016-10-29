@@ -29,10 +29,8 @@ end
 puts "Categories created."
 
 puts "Creating Posts..."
-User.all.each do |user|
-  MULTIPLIER.times do
-    user.posts << Post.new(title: Faker::Book.title, body: Faker::Lorem.paragraph, category_id: Category.pluck(:id).sample)
-  end
+(MULTIPLIER * 2).times do
+  Post.create(title: Faker::Book.title, body: Faker::Lorem.paragraph, category_id: Category.pluck(:id).sample)
 end
 puts "Posts created."
 
