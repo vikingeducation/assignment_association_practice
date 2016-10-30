@@ -1,0 +1,14 @@
+<div class="col-md-8">
+  <h5>Title: <%= @post.title %></h5>
+  <p>
+    ID:<%= @post.id %>
+  </p>
+  <p>Body:
+    <%= @post.body %>
+  </p>
+  <% @post.tags.each do |tag| %>
+    <%= link_to "##{tag.name}", "#" %>
+  <%  end %>
+
+  <br><%= link_to "Edit", edit_post_path(@post) %>
+</div>

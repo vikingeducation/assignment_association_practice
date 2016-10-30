@@ -1,0 +1,15 @@
+<h4>Edit Form Here</h4>
+<div class="form-group">
+  <p>ID:<%= @post.id %></p>
+
+  <%= form_for @post do |f| %>
+    <%= f.label :title, "Title" %>
+    <%= f.text_field :title, class: "form-control" %>
+    <%= f.label :body, "Body" %>
+    <%= f.text_area :body, class: "form-control" %>
+    <br>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name )%>
+    <br />
+    <%= f.submit "Update Post", class: "btn btn-primary btn-block" %>
+  <% end %>
+</div>
