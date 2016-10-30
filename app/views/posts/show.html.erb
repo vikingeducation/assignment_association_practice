@@ -7,8 +7,9 @@
     <%= @post.body %>
   </p>
   <% @post.tags.each do |tag| %>
-    <%= link_to "##{tag.name}", "#" %>
+    <%= link_to "##{tag.name}", tag_path(tag) %>
   <%  end %>
+  <p>Category: <%= @post.category.name %></p>
 
   <br><%= link_to "Edit", edit_post_path(@post) %>
 </div>

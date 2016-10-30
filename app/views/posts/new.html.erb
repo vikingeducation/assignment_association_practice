@@ -1,6 +1,9 @@
 <h4>New Form Here</h4>
 <div class="form-group">
   <%= form_for @post do |f| %>
+    Category:
+    <%= f.select( :category_id, @category_options, { class: "form-control"} ) %>
+    <br><br>
     <%= f.label :title, "Title" %>
     <%= f.text_field :title, class: "form-control" %>
     <%= f.label :body, "Body" %>
