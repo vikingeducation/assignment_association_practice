@@ -12,6 +12,7 @@
     <%= f.text_area :body, class: "form-control" %>
     <br>
     <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name ) %>
+    <%= render "comment_form", f: f%>
     <br />
     <%= f.submit "Update Post", class: "btn btn-primary btn-block" %>
   <% end %>

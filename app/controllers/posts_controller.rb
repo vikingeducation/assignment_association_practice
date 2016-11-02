@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def new
     @post = Post.new
+    @post.comments.build
     @category_options = Category.all.map {|c| [c.name] }
   end
 
@@ -16,6 +17,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post_comments = @post.comments
   end
 
   def index
@@ -24,6 +26,8 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @post.comments.build
+
     @category_options = Category.all.map {|c| [c.name] }
   end
 
@@ -38,6 +42,6 @@ class PostsController < ApplicationController
 
   private
   def white_listed_params
-    params.require(:post).permit(:title, :body, :tag_ids => [])
+    params.require(:post).permit(:title, :body, { :tag_ids => [], :comments_attributes => [ :body, :user_id, :_destroy ]} )
   end
 end

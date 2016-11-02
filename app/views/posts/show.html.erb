@@ -9,7 +9,12 @@
   <% @post.tags.each do |tag| %>
     <%= link_to "##{tag.name}", tag_path(tag) %>
   <%  end %>
-  <p>Category: <%= @post.category.name %></p>
+  <p>Category: <%= @post.category.name if @post.category %></p>
+
+  <h4>Comments</h4>
+  <% @post_comments.each do |comment| %>
+    <p><%= comment.body %></p>
+  <% end %>
 
   <br><%= link_to "Edit", edit_post_path(@post) %>
 </div>

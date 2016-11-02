@@ -9,6 +9,9 @@
     <%= f.label :body, "Body" %>
     <%= f.text_area :body, class: "form-control" %>
     <%= collection_check_boxes(:post, :tag_ids, Tag.all, :id, :name )%>
+
+    <%= render "comment_form", f: f %>
+
     <br />
     <%= f.submit "New Post", class: "btn btn-primary btn-block" %>
   <% end %>
