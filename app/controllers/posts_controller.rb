@@ -10,13 +10,13 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @tag_options = Tag.all.map{ |tag| [tag.name, tag.id] }
+    @comment = @post.comments.build
   end
 
   def create
     @post = Post.new(whitelisted_post_params)
     if @post.save
-      redirect_to @post
+      redirect_to post_path(@post)
     else
       render :new
     end
@@ -24,13 +24,13 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @tag_options = Tag.all.map{ |tag| [tag.name, tag.id] }
+    @post.comments.build
   end
 
   def update
     @post = Post.find(params[:id])
-    if @post.update_attributes(whitelisted_post_params)
-      redirect_to @post
+    if @post.update(whitelisted_post_params)
+      redirect_to post_path(@post)
     else
       render :edit
     end
@@ -42,7 +42,16 @@ class PostsController < ApplicationController
   private
 
   def whitelisted_post_params
-    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
+    params.require(:post).permit(:title,
+                                 :body,
+                                 :category_id,
+                                 :tag_ids => [],
+                                 :comments_attributes => [
+                                     :id,
+                                     :body,
+                                     :user_id,
+                                     :post_id,
+                                     :_destroy ] )
   end
 
 end

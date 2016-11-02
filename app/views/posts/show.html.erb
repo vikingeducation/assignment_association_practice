@@ -1,5 +1,9 @@
-<p><%= @post.title %></p>
-<p><%= @post.body %></p>
-<p><%= @post.category.name %></p>
-<p><%= @post.tags.map{|tag| tag.name}.join(", ") %></p>
-<p><%= link_to "Edit", edit_post_path %></p>
+<%= @post.title %><br/>
+<%= @post.body %><br/>
+<%= @post.category.name %><br/>
+<%= @post.tags.map{|tag| tag.name}.join(", ") %><br/>
+<h2>Comments</h2>
+  <% @post.comments.each do |comment| %>
+    <p><%= comment.body %></p><br/>
+  <% end %>
+<%= link_to "Edit", edit_post_path %>

@@ -1,14 +1,27 @@
-<%= form_for @post do |f| %>
-  <%= f.label :title, 'Title' %>
-  <%= f.text_field :title %>
+<%= form_for @post do |post_field| %>
 
-  <%= f.label :body, 'Body' %>
-  <%= f.text_field :body %>
+  <%= post_field.label :title, 'Title' %>
+  <%= post_field.text_field :title %>
+  <br/>
+  <%= post_field.label :body, 'Body' %>
+  <%= post_field.text_field :body %>
+  <br/>
+  <%= post_field.collection_radio_buttons(:category_id, Category.all, :id, :name) %>
+  <br/>
+  <%= post_field.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {}, multiple: true) %>
+  <br/>
 
-  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+  <%= post_field.fields_for :comments do |comment_fields| %>
+    <%= comment_fields.label :body, 'Comment' %>
+    <%= comment_fields.text_field :body %>
+    <br/>
+    <% if comment_fields.object.persisted? %>
+      <%= comment_fields.label :_destroy, 'Delete this comment?' %>
+      <%= comment_fields.check_box :_destroy %>
+    <% end %>
+    <br/>
+  <% end %>
 
-  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {}) %>
-  <%= f.collection_radio_buttons(:tag_ids, Tag.all, :id, :name, {}) %>
 
-  <%= f.submit 'Create New Post' %>
+  <%= post_field.submit %>
 <% end %>
