@@ -1,0 +1,12 @@
+
+<h3>Comments:</h3>
+<%= f.fields_for :comments do |comment| %>
+  <%= comment.label :body, "Body" %>
+  <%= comment.text_field :body, class: "form-control" %>
+
+  <% if comment.object.persisted? %>
+    <%= comment.label :_destroy, "Delete Comment?" %>
+    <%= comment.check_box :_destroy %>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,19 @@
+<h4>Edit Form Here</h4>
+<div class="form-group">
+  <p>ID:<%= @post.id %></p>
+
+  <%= form_for @post do |f| %>
+    Category:
+    <%= f.select( :category_id, @category_options, { class: "form-control"} ) %>
+    <br><br>
+    <%= f.label :title, "Title" %>
+    <%= f.text_field :title, class: "form-control" %>
+    <%= f.label :body, "Body" %>
+    <%= f.text_area :body, class: "form-control" %>
+    <br>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name ) %>
+    <%= render "comment_form", f: f%>
+    <br />
+    <%= f.submit "Update Post", class: "btn btn-primary btn-block" %>
+  <% end %>
+</div>
