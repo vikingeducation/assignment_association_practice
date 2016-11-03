@@ -42,6 +42,6 @@ class PostsController < ApplicationController
 
   private
   def white_listed_params
-    params.require(:post).permit(:title, :body, { :tag_ids => [], :comments_attributes => [ :body, :user_id, :_destroy ]} )
+    params.require(:post).permit(:title, :body, { :tag_ids => [], :comments_attributes => [ :id, :body, :user_id, :_destroy ]} )
   end
 end

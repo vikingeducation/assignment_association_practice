@@ -1,6 +1,10 @@
 class Post < ActiveRecord::Base
-  has_many :comments, dependent: :destroy, inverse_of: :post
-  accepts_nested_attributes_for :comments, :reject_if => :all_blank, :allow_destroy => true
+  has_many :comments,
+            dependent: :destroy,
+            inverse_of: :post
+  accepts_nested_attributes_for :comments,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
 
   belongs_to :category
 
