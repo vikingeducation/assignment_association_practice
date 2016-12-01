@@ -73,28 +73,29 @@ end
 def set_user_comments
   user = User.first
   puts '################ user\'s initial comments'
-  p user.comments
+  p user.comments.map { |c| c.body }
   puts '################ Setting two comments for user'
   user.comments = [Comment.all.sample, Comment.all.sample]
   user.save
   user.reload
   puts '################ Displaying two comments'
-  p user.comments
+  p user.comments.map { |c| c.body }
 end
 
 def show_comment_user
-  Comment.all.sample.user
+  p Comment.all.sample.user
 end
 
 def list_posts_comments
   begin
     post = Post.all.sample
   end while post.comments.empty?
-  p post.comments
+  p post.comments.map { |c| c.body }
+
 end
 
 def show_comments_post
-  p Comment.all.sample.post
+  p Comment.all.sample.post.title
 end
 
 
@@ -102,20 +103,20 @@ def remove_post_category
   category = Category.all.sample
   post = category.posts.sample
   puts '################ Category\'s posts'
-  p category.posts
+  p category.post_ids
   puts '################ Removing a post'
-  p category.posts.delete(post)
+  category.posts.delete(post)
   category.save
   category.reload
   puts '################ Category\'s new posts'
-  p category.posts
+  p category.post_ids
 end
 
 def list_users_posts
   begin
     user = User.all.sample
   end while user.posts.empty?
-  p user.posts
+  p user.posts.map { |p| p.title }
 end
 
 def list_users_posts_ids
@@ -125,29 +126,29 @@ end
 def set_users_posts
   user = User.all.sample
   puts '################Initial posts'
-  p user.posts
+  p user.post_ids
   puts '################ Setting new posts'
   user.posts = [Post.second, Post.fourth]
   user.save
   user.reload
   puts '################ New posts!'
-  p user.posts
+  p user.post_ids
 end
 
 def list_posts_users
-  p Post.all.sample.users
+  p Post.all.sample.users.map { |u| u.name }
 end
 
 def set_posts_users
-  post = Post.all.sample
+  post = Post.first
   puts '################Initial users'
-  p post.users
+  p post.users.map { |u| u.name }
   puts '################ Setting new users'
   post.users = [User.second, User.fourth]
   post.save
   post.reload
   puts '################ New users!'
-  p post.users
+  p post.users.map { |u| u.name }
 end
 
 def set_posts_users_with_ids
@@ -155,7 +156,9 @@ def set_posts_users_with_ids
   puts '################ Post\'s initial user ids'
   p post.user_ids
   puts '################ Setting ids to 1, 2, and 3'
-  post.user_ids = [1, 2, 3]
+  post.user_ids << 1
+  post.user_ids << 2
+  post.user_ids << 3
   post.save
   post.reload
   puts '################ Post\'s new user ids'
@@ -163,7 +166,7 @@ def set_posts_users_with_ids
 end
 
 def list_tags_posts
-  p Tag.all.sample.posts
+  p Tag.all.sample.posts.map { |p| p.title }
 end
 
 def add_post_to_tag_via_post_id
