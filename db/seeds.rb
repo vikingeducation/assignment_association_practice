@@ -34,7 +34,7 @@ def create_comments(num)
   $posts.each do |post|
     num.times do
       Comment.create( body: Faker::Lorem.sentence,
-                      user_id: users.sample,
+                      author_id: users.sample,
                       post_id: post.id)
     end
   end

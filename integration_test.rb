@@ -1,29 +1,47 @@
+require 'Hirb'
 
 # List all Users, Comments, Posts, Categories or Tags.
-`Hirb.enable`
+Hirb.enable
+
+def hirb_puts( table )
+  puts Hirb::Helpers::AutoTable.render table
+end
+
 puts "Users are:"
-p User.all
+hirb_puts User.all
 
 puts "Comments are:"
-p Comment.all
+hirb_puts Comment.all
 
 puts "Posts are:"
-p Post.all
+hirb_puts Post.all
 
 puts "Categories are:"
-p Category.all
+hirb_puts Category.all
 
 puts "Tags are:"
-p Tag.all
+hirb_puts Tag.all
 
 # List a given user's comments
 puts "First Users comments are:"
 user = User.first
-p user.posts.comments
-# Set a comment to belong to a different user
-# Set a post to be in a different category
-# Set a collection of comments to replace a user's current comments (e.g. User.first.comments = [Comment.first, Comment.second])
-# Return a given comment's author
+hirb_puts user.comments
+
+puts "Set a comment to belong to a different user"
+puts "Before:"
+hirb_puts Comment.first.author
+puts "After:"
+hirb_puts Comment.first.author = User.last
+
+puts "Set a post to be in a different category"
+hirb_puts Post.first.category = Category.first
+
+puts "Set a collection of comments to replace a user's current comments"
+hirb_puts User.first.comments = [Comment.first, Comment.second]
+
+puts "Return a given comment's author"
+hirb_puts Comment.last.author
+
 # List a given post's comments
 # Return a given comment's parent post
 # Remove one post from a category's collection of posts
