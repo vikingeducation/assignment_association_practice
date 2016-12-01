@@ -42,9 +42,18 @@ hirb_puts User.first.comments = [Comment.first, Comment.second]
 puts "Return a given comment's author"
 hirb_puts Comment.last.author
 
-# List a given post's comments
-# Return a given comment's parent post
-# Remove one post from a category's collection of posts
+puts  "List a given post's comments"
+hirb_puts Post.first.comments
+
+puts "Return a given comment's parent post"
+hirb_puts Comment.first.post
+
+puts "Remove one post from a category's collection of posts"
+puts "before"
+hirb_puts Category.first.posts
+puts "after"
+hirb_puts Category.first.posts.first.delete
+
 # List the posts authored by a given user
 # List the IDs of all posts authored by a given user (hint: there's an association method for this)
 # Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]

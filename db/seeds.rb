@@ -44,9 +44,34 @@ def create_tags(num)
   Tag.create(name: Faker::Lorem.word)
 end
 
+def popluate_post_tags(num)
+  posts = Post.pluck(:id)
+  tags = Tag.pluck(:id)
+  num.times do |n|
+    post_id = posts.sample
+    tag_id = tags.sample
+    pt = PostTags.new(post_id: post_id , tag_id: tag_id )
+    if PostTags.where(:post_id => post_id, :tag_id => tag_id).empty?
+      pt.save
+    end
+  end
+end
+
+def popluate_post_users(num)
+  posts = Post.pluck(:id)
+  users = User.pluck(:id)
+  num.times do |n|
+    post_id = posts.sample
+    author_id = users.sample
+    pt = PostUsers.new(post_id: post_id , author_id: author_id )
+    if PostUsers.where(:post_id => post_id, :author_id => author_id).empty?
+      pt.save
+    end
+  end
+end
 
 
-# def generate_tags(post_id)
+# def generate_users(post_id)
 #   (rand(10) + 1).times do
 #   pt = PostTags.new
 #   pt[:order_id] = post_id
