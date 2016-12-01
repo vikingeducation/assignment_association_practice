@@ -7,4 +7,6 @@ class Post < ApplicationRecord
 
     has_many :user_posts, foreign_key: :post_id
     has_many :authors, through: :user_posts, source: :user
+
+    belongs_to :category, optional: true
 end
