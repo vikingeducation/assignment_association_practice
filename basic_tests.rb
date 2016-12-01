@@ -53,3 +53,21 @@ Post.first.users
 
 # Set a collection of Users to replace a given Post's authors in a similar way
 Post.first.users = [User.first, User.second]
+
+
+#Accomplish the same thing by only using IDs (hint: there's an association method for this...)
+
+Tag.first.post_ids = Post.all.ids
+
+#List the posts under a given tag
+Tag.first.posts
+
+#Add a new post to a given tag by only using its ID
+Tag.last.posts << Post.find(3)
+
+#Add a new tag to a given post by only using its ID
+Post.last.tags << Tag.find(3)
+
+#List the tags on a given post
+Post.last.tags
+
