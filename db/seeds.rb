@@ -19,20 +19,20 @@ end
 
 puts "Creating posts"
 50.times do
-  Post.create!(title: Faker::Lorem.sentence, 
+  Post.create!(title: Faker::Lorem.sentence,
                body: Faker::Lorem.paragraph,
                category_id: Faker::Number.between(Category.first.id, Category.last.id))
 end
 
 puts "Creating comments"
 50.times do
-  Comment.create!(user_id: Faker::Number.between(User.first.id, User.last.id), 
-                  post_id: Faker::Number.between(Post.first.id, Post.last.id), 
+  Comment.create!(user_id: Faker::Number.between(User.first.id, User.last.id),
+                  post_id: Faker::Number.between(Post.first.id, Post.last.id),
                   body: Faker::Lorem.paragraph)
 end
 
 puts "Creating join table posttag"
-100.times do 
+100.times do
   Posttag.create!(
                 tag_id: Faker::Number.between(Tag.first.id, Tag.last.id),
                 post_id: Faker::Number.between(Post.first.id, Post.last.id)
@@ -41,7 +41,7 @@ puts "Creating join table posttag"
 end
 
 puts "Creating join table userposts"
-100.times do 
+100.times do
     Userpost.create!(
                   user_id: Faker::Number.between(User.first.id, User.last.id),
                   post_id: Faker::Number.between(Post.first.id, Post.last.id)
