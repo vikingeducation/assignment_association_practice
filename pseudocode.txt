@@ -1,0 +1,29 @@
+User
+  name
+Post
+  title
+  body
+Category
+  name
+Comment
+  body
+Tag
+  name
+
+
+rails g model User name:string
+rails g model Post title:string body:text category:references
+
+rails g model Category name:string
+rails g model Comment body:text user:references post:references
+rails g model Tag name:string
+
+rails g model PostUsers user:references post:references
+rails g model PostTags post:references tag:references
+
+  # Relationships
+User 1:X Comments   # (User can author many comments)
+Post 1:X Comments   # (Post can be commented on many times)
+Category 1:X Posts # (A category can have many posts, but one post is in only one category at a time)
+User X:X Posts      # (User can author many posts and a post can have many authors)
+Post X:X Tags       # (Posts can have many tags and a tag can be on many posts)
