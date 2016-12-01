@@ -1,7 +1,5 @@
 puts "Running association tests"
 
-
-
 prompts = ['List all Users, Comments, Posts, Categories or Tags.',
 'List a given user\'s comments',
 'Set a comment to belong to a different user',
@@ -22,87 +20,66 @@ prompts = ['List all Users, Comments, Posts, Categories or Tags.',
 'Add a new tag to a given post by only using tag\'s ID',
 'List the tags on a given post']
 
-outputs = [list_all,
-           list_users_comments,
-           set_comment_user,
-           set_post_category,
-           set_user_comments,
-           show_comment_user,
-           list_posts_comments,
-           show_comments_post,
-           remove_post_category,
-           list_users_posts,
-           list_users_posts_ids,
-           set_users_posts,
-           list_posts_users,
-           set_posts_users,
-           set_posts_users_with_ids,
-           list_tags_posts,
-           add_post_to_tag_via_post_id,
-           add_tag_to_post_via_tag_id,
-           list_posts_tags]
-
-prompts.each_with_index do |prompt, index|
-  puts prompt
-  output[index]
-  gets
-end
-
-
 def list_all
-  puts "### USERS"
-  User.all
+  puts "################ USERS"
+  p User.all.map { |u| u.name }
   gets
 
-  puts "### COMMENTS"
-  Comment.all
+  puts "################ COMMENTS"
+  p Comment.all.map { |c| c.body }
   gets
 
-  puts "### POSTS"
-  Post.all
+  puts "################ POSTS"
+  p Post.all.map { |p| p.title }
   gets
 
-  puts "### CATEGORIES"
-  Category.all
+  puts "################ CATEGORIES"
+  p Category.all.map { |c| c.name }
   gets
 
-  puts "### TAGS"
-  Tag.all
+  puts "################ TAGS"
+  p Tag.all.map { |t| t.name }
   gets
 end
 
 def list_users_comments
-  User.first.comments
+  p User.first.comments.map { |c| c.body }
 end
 
 def set_comment_user
-  comment = Comment.first
-  puts "### Initial User"
-  comment.user
-  puts '### Running comment.user = User.first'
-  comment.user = User.first
-  puts '### New User'
-  comment.user
+  comment = Comment.second
+  puts "################ Initial User"
+  p comment.user.name
+  puts '################ Running comment.user = random'
+  comment.user = User.all.sample
+  comment.save
+  comment.reload
+  puts '################ New User'
+  p comment.user.name
 end
 
 def set_post_category
   post = Post.first
-  puts "### Initial Category"
-  post.category
-  puts '### Running post.category = Category.first'
-  post.category = Category.first
-  puts '### New category'
-  post.category
+  puts "################ Initial Category"
+  p post.category.name
+  puts '################ Running post.category = random'
+  post.category = Category.all.sample
+  post.save
+  post.reload
+  puts '################ New category'
+  p post.category.name
 end
 
 def set_user_comments
   user = User.first
-  puts '### user\'s initial comments'
-  user.comments
-  puts '### Setting two comments for user'
-  user.comments = [Comment.first, Comment.second]
-  puts '### Displaying two comments'
-  user.comments
+  puts '################ user\'s initial comments'
+  p user.comments
+  puts '################ Setting two comments for user'
+  user.comments = [Comment.all.sample, Comment.all.sample]
+  user.save
+  user.reload
+  puts '################ Displaying two comments'
+  p user.comments
 end
 
 def show_comment_user
@@ -113,14 +90,134 @@ def list_posts_comments
   begin
     post = Post.all.sample
   end while post.comments.empty?
-  post.comments
+  p post.comments
 end
 
 def show_comments_post
-
+  p Comment.all.sample.post
 end
 
 
+def remove_post_category
+  category = Category.all.sample
+  post = category.posts.sample
+  puts '################ Category\'s posts'
+  p category.posts
+  puts '################ Removing a post'
+  p category.posts.delete(post)
+  category.save
+  category.reload
+  puts '################ Category\'s new posts'
+  p category.posts
+end
 
+def list_users_posts
+  begin
+    user = User.all.sample
+  end while user.posts.empty?
+  p user.posts
+end
 
+def list_users_posts_ids
+  p User.all.sample.post_ids
+end
 
+def set_users_posts
+  user = User.all.sample
+  puts '################Initial posts'
+  p user.posts
+  puts '################ Setting new posts'
+  user.posts = [Post.second, Post.fourth]
+  user.save
+  user.reload
+  puts '################ New posts!'
+  p user.posts
+end
+
+def list_posts_users
+  p Post.all.sample.users
+end
+
+def set_posts_users
+  post = Post.all.sample
+  puts '################Initial users'
+  p post.users
+  puts '################ Setting new users'
+  post.users = [User.second, User.fourth]
+  post.save
+  post.reload
+  puts '################ New users!'
+  p post.users
+end
+
+def set_posts_users_with_ids
+  post = Post.all.sample
+  puts '################ Post\'s initial user ids'
+  p post.user_ids
+  puts '################ Setting ids to 1, 2, and 3'
+  post.user_ids = [1, 2, 3]
+  post.save
+  post.reload
+  puts '################ Post\'s new user ids'
+  p post.user_ids
+end
+
+def list_tags_posts
+  p Tag.all.sample.posts
+end
+
+def add_post_to_tag_via_post_id
+  tag = Tag.all.sample
+  puts '################ Inital tag post ids'
+  p tag.post_ids
+  puts '################ Adding a new post id 50'
+  tag.post_ids << 50
+  tag.save
+  tag.reload
+  puts '################ New tag post ids'
+  p tag.post_ids
+end
+
+def add_tag_to_post_via_tag_id
+  post = Post.all.sample
+  puts '################ Inital post tag ids'
+  p post.tag_ids
+  puts '################ Adding a new tag id 1, 2, 3'
+  post.tag_ids << 1
+  post.tag_ids << 3
+  post.tag_ids << 2
+  post.save
+  post.reload
+  puts '################ New post tag ids'
+  p post.tag_ids
+end
+
+def list_posts_tags
+  p Post.all.sample.tags
+end
+
+outputs = [:list_all,
+           :list_users_comments,
+           :set_comment_user,
+           :set_post_category,
+           :set_user_comments,
+           :show_comment_user,
+           :list_posts_comments,
+           :show_comments_post,
+           :remove_post_category,
+           :list_users_posts,
+           :list_users_posts_ids,
+           :set_users_posts,
+           :list_posts_users,
+           :set_posts_users,
+           :set_posts_users_with_ids,
+           :list_tags_posts,
+           :add_post_to_tag_via_post_id,
+           :add_tag_to_post_via_tag_id,
+           :list_posts_tags]
+
+prompts.each_with_index do |prompt, index|
+  puts prompt
+  send(outputs[index])
+  gets
+end
