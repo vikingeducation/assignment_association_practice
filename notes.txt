@@ -13,4 +13,10 @@ end
 
 In migration file:
 
+BAD, for reasons unknown
 create_join_table :products, :categories, column_options: { null: true }
+
+create_table Instead
+
+COMMANDLINE: model and migration for join table
+rails g model first_seconds first:references second:references

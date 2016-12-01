@@ -1,6 +1,25 @@
 
 # List all Users, Comments, Posts, Categories or Tags.
+`Hirb.enable`
+puts "Users are:"
+p User.all
+
+puts "Comments are:"
+p Comment.all
+
+puts "Posts are:"
+p Post.all
+
+puts "Categories are:"
+p Category.all
+
+puts "Tags are:"
+p Tag.all
+
 # List a given user's comments
+puts "First Users comments are:"
+user = User.first
+p user.posts.comments
 # Set a comment to belong to a different user
 # Set a post to be in a different category
 # Set a collection of comments to replace a user's current comments (e.g. User.first.comments = [Comment.first, Comment.second])
