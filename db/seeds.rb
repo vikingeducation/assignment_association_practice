@@ -44,29 +44,24 @@ def create_tags(num)
   Tag.create(name: Faker::Lorem.word)
 end
 
-def popluate_post_tags(num)
+def populate_post_tags(num)
   posts = Post.pluck(:id)
   tags = Tag.pluck(:id)
   num.times do |n|
     post_id = posts.sample
     tag_id = tags.sample
-    pt = PostTags.new(post_id: post_id , tag_id: tag_id )
-    if PostTags.where(:post_id => post_id, :tag_id => tag_id).empty?
+    pt = PostTag.new(post_id: post_id , tag_id: tag_id )
+    if PostTag.where(:post_id => post_id, :tag_id => tag_id).empty?
       pt.save
     end
   end
 end
 
-def popluate_post_users(num)
-  posts = Post.pluck(:id)
-  users = User.pluck(:id)
-  num.times do |n|
-    post_id = posts.sample
-    author_id = users.sample
-    pt = PostUsers.new(post_id: post_id , author_id: author_id )
-    if PostUsers.where(:post_id => post_id, :author_id => author_id).empty?
-      pt.save
-    end
+def populate_post_users(num)
+
+  User.all.each do |user|
+    user.posts.create( body: Faker::Lorem.paragraph,
+                       category_id: Category.pluck(:id).sample )
   end
 end
 
@@ -117,3 +112,11 @@ create_categories NUM
 puts "Creating Tags"
 
 create_tags NUM
+
+puts "Creating POST TAGS"
+
+populate_post_tags NUM
+
+puts "Creating POST USERS"
+
+populate_post_users NUM
