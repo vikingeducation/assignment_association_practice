@@ -27,6 +27,3 @@ UserPosts Join Table
 
 PostTags Join Table
   post_id
-  tag_id
-
-Get rid of user_id in post
