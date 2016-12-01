@@ -1,4 +1,4 @@
-puts "List all Users, Comments, Posts, Categories or Tags"
+puts "Running association tests"
 
 
 
@@ -42,24 +42,85 @@ outputs = [list_all,
            add_tag_to_post_via_tag_id,
            list_posts_tags]
 
+prompts.each_with_index do |prompt, index|
+  puts prompt
+  output[index]
+  gets
+end
+
+
 def list_all
   puts "### USERS"
-  puts User.all
+  User.all
   gets
 
   puts "### COMMENTS"
-  puts Comment.all
+  Comment.all
   gets
 
   puts "### POSTS"
-  puts Post.all
+  Post.all
   gets
 
   puts "### CATEGORIES"
-  puts Category.all
+  Category.all
   gets
 
   puts "### TAGS"
-  puts Tag.all
+  Tag.all
   gets
 end
+
+def list_users_comments
+  User.first.comments
+end
+
+def set_comment_user
+  comment = Comment.first
+  puts "### Initial User"
+  comment.user
+  puts '### Running comment.user = User.first'
+  comment.user = User.first
+  puts '### New User'
+  comment.user
+end
+
+def set_post_category
+  post = Post.first
+  puts "### Initial Category"
+  post.category
+  puts '### Running post.category = Category.first'
+  post.category = Category.first
+  puts '### New category'
+  post.category
+end
+
+def set_user_comments
+  user = User.first
+  puts '### user\'s initial comments'
+  user.comments
+  puts '### Setting two comments for user'
+  user.comments = [Comment.first, Comment.second]
+  puts '### Displaying two comments'
+  user.comments
+end
+
+def show_comment_user
+  Comment.all.sample.user
+end
+
+def list_posts_comments
+  begin
+    post = Post.all.sample
+  end while post.comments.empty?
+  post.comments
+end
+
+def show_comments_post
+
+end
+
+
+
+
+
