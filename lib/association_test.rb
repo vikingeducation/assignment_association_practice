@@ -171,10 +171,11 @@ end
 
 def add_post_to_tag_via_post_id
   tag = Tag.all.sample
+  post = Post.all.sample
   puts '################ Inital tag post ids'
   p tag.post_ids
-  puts '################ Adding a new post id 50'
-  tag.post_ids << 50
+  puts '################ Adding a new post id '
+  tag.posts << Post.where(:id => post.id)
   tag.save
   tag.reload
   puts '################ New tag post ids'
@@ -183,12 +184,13 @@ end
 
 def add_tag_to_post_via_tag_id
   post = Post.all.sample
+  t1 = Tag.all.sample
+  t2 = Tag.all.sample
   puts '################ Inital post tag ids'
   p post.tag_ids
   puts '################ Adding a new tag id 1, 2, 3'
-  post.tag_ids << 1
-  post.tag_ids << 3
-  post.tag_ids << 2
+  post.tag_ids << Tag.where(:id => t1.id)
+  post.tag_ids << Tag.where(:id => t2.id)
   post.save
   post.reload
   puts '################ New post tag ids'
@@ -196,7 +198,7 @@ def add_tag_to_post_via_tag_id
 end
 
 def list_posts_tags
-  p Post.all.sample.tags
+  p Post.all.sample.tags.map { |t| t.id }
 end
 
 outputs = [:list_all,
