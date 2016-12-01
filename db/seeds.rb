@@ -8,11 +8,26 @@
 
 # TODO: Refactor to use .all instead of arrays
 
+
+
+# Clean the database
+
+PostTag.destroy_all
+PostUser.destroy_all
+Comment.destroy_all
+Tag.destroy_all
+Post.destroy_all
+Category.destroy_all
+User.destroy_all
+
+
 NUM_USERS = 20
 NUM_POSTS = 100
 NUM_CATEGORIES = 5
 NUM_TAGS = 3
 NUM_COMMENTS = 200
+NUM_POST_TAGS = 100
+NUM_POST_USERS = 140
 
 
 ## Create Users
@@ -43,9 +58,38 @@ NUM_COMMENTS.times do |i|
 end
 
 ## Create Tags
+tags = []
 NUM_TAGS.times do |i|
-  Tag.create(name: Faker::Music.instrument)
+  tags << Tag.create(name: Faker::Music.instrument)
 end
 
 
 ####### Many-to-Many
+
+NUM_POST_TAGS.times do |i|
+  PostTag.create({ post_id: posts.sample.id,
+                    tag_id: tags.sample.id })
+end
+
+
+NUM_POST_USERS.times do |i|
+  if i.even?
+    2.times do |j|
+      PostUser.create({ user_id: users.sample.id,
+                        post_id: posts[i/2].id })
+    end
+  elsif i % 5 == 0
+    2.times do |k|
+      PostUser.create({ user_id: users[i/7].id,
+                        post_id: posts.sample.id })    
+    end  
+  else
+      PostUser.create({ user_id: users.sample.id,
+                        post_id: posts[i/2].id })    
+  end
+end
+
+
+
+
+
