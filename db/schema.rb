@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201173822) do
+ActiveRecord::Schema.define(version: 20161201182737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,26 @@ ActiveRecord::Schema.define(version: 20161201173822) do
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
+  create_table "post_tags", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id", "tag_id"], name: "index_post_tags_on_post_id_and_tag_id", unique: true, using: :btree
+    t.index ["post_id"], name: "index_post_tags_on_post_id", using: :btree
+    t.index ["tag_id"], name: "index_post_tags_on_tag_id", using: :btree
+  end
+
+  create_table "post_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_users_on_post_id", using: :btree
+    t.index ["user_id", "post_id"], name: "index_post_users_on_user_id_and_post_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_post_users_on_user_id", using: :btree
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -38,26 +58,6 @@ ActiveRecord::Schema.define(version: 20161201173822) do
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
     t.index ["category_id"], name: "index_posts_on_category_id", using: :btree
-  end
-
-  create_table "posts_tags", force: :cascade do |t|
-    t.integer  "post_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id", "tag_id"], name: "index_posts_tags_on_post_id_and_tag_id", unique: true, using: :btree
-    t.index ["post_id"], name: "index_posts_tags_on_post_id", using: :btree
-    t.index ["tag_id"], name: "index_posts_tags_on_tag_id", using: :btree
-  end
-
-  create_table "posts_users", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_posts_users_on_post_id", using: :btree
-    t.index ["user_id", "post_id"], name: "index_posts_users_on_user_id_and_post_id", unique: true, using: :btree
-    t.index ["user_id"], name: "index_posts_users_on_user_id", using: :btree
   end
 
   create_table "tags", force: :cascade do |t|
@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 20161201173822) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "post_tags", "posts"
+  add_foreign_key "post_tags", "tags"
+  add_foreign_key "post_users", "posts"
+  add_foreign_key "post_users", "users"
   add_foreign_key "posts", "categories"
-  add_foreign_key "posts_tags", "posts"
-  add_foreign_key "posts_tags", "tags"
-  add_foreign_key "posts_users", "posts"
-  add_foreign_key "posts_users", "users"
 end
