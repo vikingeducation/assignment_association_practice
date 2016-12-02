@@ -1,0 +1,8 @@
+<%= @post.title %>
+<%= @post.body %>
+
+
+
+<% @post.tags.each do |tag| %>
+  <%= tag.name %>
+<% end %>
