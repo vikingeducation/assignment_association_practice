@@ -4,5 +4,5 @@ class Post < ApplicationRecord
   has_many   :comments, dependent: :destroy
   has_many   :tags,    through: :post_taggings
   has_many   :authors, through: :post_authorings, source: :user
-  belongs_to :category
+  belongs_to :category, optional: true
 end
