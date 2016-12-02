@@ -1,0 +1,10 @@
+<h1>Post <%= @post.title %></h1>
+
+<div><%= @post.body %></div>
+
+Tags:
+<ul>
+  <% @post.tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>

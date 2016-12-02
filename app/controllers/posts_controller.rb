@@ -6,7 +6,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      flash[:success] = "Nice, you created a post"
       redirect_to posts_path
     else
       flash.now[:error] = @post.errors.full_messages
@@ -23,8 +22,10 @@ class PostsController < ApplicationController
   end
 
   def update
+    p "post_params:"
+    p post_params
     if @post = Post.update(post_params)
-      # flash[:success] = "Nice, you updated a post"
+      flash[:success] = ["Nice, you updated a post"]
       redirect_to post_path
     else
       flash.now[:error] = @post.errors.full_messages
@@ -32,8 +33,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.find_by(params[:id])
+  end
+
   private
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :tag_ids => [])
   end
 end
