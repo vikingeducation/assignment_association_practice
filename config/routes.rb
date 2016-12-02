@@ -2,16 +2,18 @@ Rails.application.routes.draw do
 
   root 'posts#new'
 
-  get 'posts/index'
+  resources :posts
 
-  get 'posts/show'
+  # get 'posts/index'
 
-  get 'posts/new'
+  # get 'posts/show'
 
-  get 'posts/create'
+  # get 'posts/new'
 
-  get 'posts/edit'
+  # get 'posts/create'
 
-  get 'posts/update'
+  # get 'posts/edit'
+
+  # get 'posts/update'
 
 end

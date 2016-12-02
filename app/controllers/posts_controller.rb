@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
 
   def index
+    @posts = Post.all
   end
 
   def show
-    @post = Post.find_by_id(post_params)
+    @post = Post.find_by_id(params[:id])
   end
 
   def new
@@ -12,6 +13,14 @@ class PostsController < ApplicationController
   end
 
   def create
+    @post = Post.new(post_params)
+    if @post.save
+      flash[:success] = "Post successfully created!"
+      redirect_to post_path(@post)
+    else
+      flash.now[:error] = "Check your fields again"
+      render :new
+    end
   end
 
   def edit
@@ -19,6 +28,14 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find_by_id(params[:id])
+    if @post.update(post_params)
+      flash[:success] = "Post successfully updated!"
+      redirect_to post_path(@post)
+    else
+      flash.now[:error] = "Check your fields again"
+      render :edit
+    end
   end
 
   private

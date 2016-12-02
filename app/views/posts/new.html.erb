@@ -1,2 +1,15 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<h1>Create a New Post</h1>
+
+<%= form_for @post do |f| %>
+
+  <%= f.text_field :title %>
+  <%= f.text_area :body %>
+
+  <%= f.collection_check_boxes( :tag_ids, 
+                              Tag.all,
+                              :id,
+                              :name) %>
+
+  <%= f.submit "Create Post" %>
+
+<% end %>

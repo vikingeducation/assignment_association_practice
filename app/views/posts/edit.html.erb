@@ -1,2 +1,15 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<h1>Edit a Post</h1>
+
+<%= form_for @post do |f| %>
+
+  <%= f.text_field :title %>
+  <%= f.text_area :body %>
+
+  <%= f.collection_check_boxes( :tag_ids, 
+                              Tag.all,
+                              :id,
+                              :name) %>
+
+  <%= f.submit "Edit Post" %>
+
+<% end %>
