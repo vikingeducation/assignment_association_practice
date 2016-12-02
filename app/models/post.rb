@@ -11,6 +11,8 @@ class Post < ApplicationRecord
            :foreign_key => :post_id,
            :source => :author # Points to what join table belongs to
 
-  has_many :post_tags
-  has_many :tags, :through => :post_tags
+  has_many :post_taggings,
+           :class_name => 'PostTag'
+
+  has_many :tags, :through => :post_taggings
 end
