@@ -9,6 +9,13 @@
   </head>
 
   <body>
+    <% if flash.any? %>
+      <div id="flash">
+        <% flash.each do |name, message| %>
+          <%= content_tag :div, message, class: "alert alert-#{name}" %>
+        <% end %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
