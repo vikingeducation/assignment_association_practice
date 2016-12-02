@@ -5,4 +5,9 @@
     <li><%= tag.name%></li>
   <% end %>
 </ul>
+<ul>
+  <% @post.comments.each do |comment| %>
+    <li><%= comment.body %></li>
+  <% end %>
+</ul>
 

@@ -12,12 +12,9 @@
   <input id="blank" type="radio" value="blank" name="post[category_id]">
   <label for="blank">No Category</label>
   <br/>
-  <br/>
-  <%= post_fields.fields_for :comments do |comment_fields| %>
-    <%= comment_fields.label :body, 'Comment' %>
-    <br>
-    <%= comment_fields.text_area :body %>  
-  <% end %>
+  <%= post_fields.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, id: "select", class: "category") %>
+  <br />
+  <%= post_fields.collection_select(:tag_ids, Tag.all, :id, :name, {}, multiple: true) %>
   <br/>
   <%= post_fields.submit %>
 
