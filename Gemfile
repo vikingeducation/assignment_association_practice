@@ -38,7 +38,10 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'faker'
   gem 'jazz_fingers'
+  gem 'better_errors'
 end
+
+gem 'binding_of_caller'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.

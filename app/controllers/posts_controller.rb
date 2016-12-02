@@ -11,9 +11,12 @@ class PostsController < ApplicationController
   def new
     @category_options = Category.all.map { |c| [c.name, c.id] }
     @post = Post.new
+    @comment = @post.comments.build
   end
 
   def create
+    # create comment
+
     @post = Post.new(post_params)
     if @post.save
       flash[:success] = "Post successfully created!"
@@ -27,6 +30,7 @@ class PostsController < ApplicationController
   def edit
     @category_options = Category.all.map { |c| [c.name, c.id] }
     @post = Post.find_by_id(params[:id])
+    # @post.comments.build
   end
 
   def update
@@ -43,14 +47,13 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params
-      .require(:post)
-      .permit(:title,
+    params.
+      require(:post).
+      permit( :title,
               :body,
               :category_id,
               :tag_ids => [],
-              :comments_attributes => [ :body ]
-              )
+              :comments_attributes => [ :id, :body ] )
   end
 
 end
