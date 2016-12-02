@@ -1,0 +1,18 @@
+<h1>Create a Post</h1>
+
+<%= form_for @post do |post_fields| %>
+  <%= post_fields.label(:title) %>
+  <%= post_fields.text_field(:title) %>
+  <br>
+  <%= post_fields.label(:body) %>
+  <%= post_fields.text_field(:body) %>
+  <br>
+  <h2>Select tags for this post</h2>
+  <%= post_fields.collection_check_boxes(
+    :tag_ids,
+    Tag.all,
+    :id,
+    :name  
+  ) %>
+  <%= post_fields.submit %>
+<% end %>
