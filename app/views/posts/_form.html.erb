@@ -1,4 +1,16 @@
-<%= form_for(@post) do |post_fields|
-  
+<%= form_for @post do |post_fields| %>
+  <%= post_fields.label :title %>
+  <%= post_fields.text_field :title %>
 
+  <%= post_fields.label :body %>
+  <%= post_fields.text_area :body%>
+
+  <%= post_fields.fields_for :tags do |tag_fields| %>
+    <%= tag_fields.collection_check_boxes( :tag_ids,
+                                           Tag.all,
+                                           :id,
+                                           :name     ) %>
+  <% end %>
+
+  <%= post_fields.submit "Submit Post" %>
 <% end %>

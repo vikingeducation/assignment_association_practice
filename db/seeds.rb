@@ -41,7 +41,7 @@ def create_comments(num)
 end
 
 def create_tags(num)
-  Tag.create(name: Faker::Lorem.word)
+  (num *2 ).times { Tag.create(name: Faker::Hipster.word) }
 end
 
 def populate_post_tags(num)
