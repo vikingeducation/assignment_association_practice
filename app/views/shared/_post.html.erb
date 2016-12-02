@@ -5,16 +5,12 @@
   <%= f.text_area :body %>
   <br>
 
-<!--
-
   <%= f.collection_check_boxes( :tag_ids, 
                               Tag.all,
                               :id,
                               :name ) %>
 
-  -->
-
-
+<!--
   <%= f.collection_select( :tag_ids, 
                            Tag.all, 
                            :id, 
@@ -22,23 +18,24 @@
                            { include_blank: true },
                            multiple: true,
                            class: 'organ-modifications',
-                           id: 'collector-thing' ) %>
-
-
-  <br>
-
-<!--   <%= f.collection_radio_buttons( :category_id, Category.all, :id, :name ) %> 
+                           id: 'collector-thing' ) %>   -->
 
   <br>
 
+   <%= f.collection_radio_buttons( :category_id, Category.all, :id, :name ) %> 
+
+<!--
   <%= f.collection_select(:category_id, Category.all, :id, :name) %> 
 
+  <%= select_tag( "post[category_id]", 
+                  options_for_select(@category_options, @post.category_id) ) %> -->
+
   <br>
 
--->
-
-  <%= select_tag( "post[category_id]", 
-                  options_for_select(@category_options, @post.category_id) ) %>
+  <%= f.fields_for :comments do |comment_fields| %>
+    <%= comment_fields.label :body, "Add comment" %><br>
+    <%= comment_fields.text_area :body %>
+  <% end %>
 
   <br>
 
