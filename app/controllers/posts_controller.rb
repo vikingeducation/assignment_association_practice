@@ -17,7 +17,6 @@ class PostsController < ApplicationController
 
     @post = Post.new( post_params )
 
-    fail
     puts @post
 
     if @post.save
@@ -51,7 +50,7 @@ class PostsController < ApplicationController
       params.require(:post)
             .permit( :title,
                      :body,
-                     tag_ids: [],
-                     :category_id )
+                     :category_id,
+                     tag_ids: [] )
     end
 end

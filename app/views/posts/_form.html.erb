@@ -19,7 +19,24 @@
   <%= post_fields.collection_radio_buttons( :category_id,
                                             Category.all,
                                             :id,
-                                            :name ) 
+                                            :name ) %>
+<br>
+
+<%= post_fields.collection_select( :category_id,
+                                          Category.all,
+                                          :id,
+                                          :name,
+                                          :include_blank => true ) %>
+
+<br>
+<%= post_fields.collection_select( :tag_ids,
+                                        Tag.all,
+                                        :id,
+                                        :name,
+                                        { :include_blank => true },
+                                        multiple: true     ) %>
+
+
 
   <%= post_fields.submit "Submit Post" %>
 <% end %>

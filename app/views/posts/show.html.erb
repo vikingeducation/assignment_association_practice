@@ -8,3 +8,6 @@
 <% @post.tags.each do |tag| %>
   <h3><%= tag.name %></h3>
 <% end %>
+
+<h2>Category</h2>
+<%= @post.category ? @post.category.name : "none"%>
