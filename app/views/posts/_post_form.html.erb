@@ -43,5 +43,12 @@
     { }, # standard options
   ) %>
 
+  <h2>Add a comment</h2>
+
+  <%= post_fields.fields_for :comments do |comment_field| %>
+    <%= comment_field.label :body %>
+    <%= comment_field.text_area :body %>
+  <% end %>
+
   <%= post_fields.submit %>
 <% end %>
