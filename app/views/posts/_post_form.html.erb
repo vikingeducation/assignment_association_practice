@@ -6,11 +6,17 @@
   <%= post_fields.text_field(:body) %>
   <br>
   <h2>Select tags for this post</h2>
-  <%= post_fields.collection_check_boxes(
+  <%# post_fields.collection_check_boxes(
     :tag_ids,
     Tag.all,
     :id,
     :name
+  ) %>
+  <%= post_fields.select(
+    :tag_ids,
+    @tag_options,
+    { }, # standard options
+    { multiple: true, class: "some-class", id: "some-id" },
   ) %>
   <h2>Select categories for this post</h2>
 <!-- Radio Button Select -->
@@ -24,15 +30,18 @@
   <%# end %>
 
   <!-- Drop down -->
-  <%= fields_for :categories do |category_fields| %>
-    <%= category_fields.collection_select(
-      :category_id,
-      Category.all,
-      :id,
-      :name
-    ) %>
-  <% end %>
+  <%#post_fields.collection_select(
+   :category_id,
+   Category.all,
+   :id,
+   :name
+  ) %>
 
+  <%= post_fields.select(
+    :category_id,
+    @category_options,
+    { }, # standard options
+  ) %>
 
   <%= post_fields.submit %>
 <% end %>
