@@ -11,6 +11,7 @@ NAMES = ["Anthony", "Erik", "Alexa", "Catherine", "Dexter", "JP", "Kenny", "Jame
 CATEGORIES = ["fishing", "dancing", "coding"]
 TAGS = ["Tag 1", "Tag 2", "Tag 3"]
 POST_CONTENT = ["Post body 1", "Post body 2", "Post body 3"]
+COMMENT_CONTENT = ["Comment 1", "Comment 2", "Comment 3"]
 
 #populates categories table
 CATEGORIES.each do |cat|
@@ -33,5 +34,11 @@ NAMES.each do |name|
 
   PostTag.create(post: b, tag: Tag.find_by_name(TAGS.sample))
 
+end
 
+Post.all.each do |post|
+  user1 = User.all.sample
+  user2 = User.all.sample
+  c1 = user1.comments.create(body: COMMENT_CONTENT.sample, post: post)
+  c2 = user2.comments.create(body: COMMENT_CONTENT.sample, post: post)
 end
