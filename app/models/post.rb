@@ -8,6 +8,6 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
   accepts_nested_attributes_for :tags
 
-  has_many :comments, dependent: :destroy
+  has_many :comments, dependent: :destroy, :inverse_of => :post
   accepts_nested_attributes_for :comments
 end

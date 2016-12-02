@@ -11,3 +11,9 @@
 
 <h2>Category</h2>
 <%= @post.category ? @post.category.name : "none"%>
+
+<h2>Comments</h2>
+<% @post.comments.each do |comment| %>
+  <h4><%= comment.body %></h4>
+
+<% end %>

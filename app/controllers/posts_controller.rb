@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.comments.build()
   end
 
   def edit
@@ -51,6 +52,7 @@ class PostsController < ApplicationController
             .permit( :title,
                      :body,
                      :category_id,
-                     tag_ids: [] )
+                     { tag_ids: [] },
+                     { :comments_attributes => [:body, :author_id, :post_id] } )
     end
 end
