@@ -4,13 +4,47 @@
   <br>
   <%= f.text_area :body %>
   <br>
+
+<!--
+
   <%= f.collection_check_boxes( :tag_ids, 
                               Tag.all,
                               :id,
                               :name ) %>
+
+  -->
+
+
+  <%= f.collection_select( :tag_ids, 
+                           Tag.all, 
+                           :id, 
+                           :name,
+                           { include_blank: true },
+                           multiple: true,
+                           class: 'organ-modifications',
+                           id: 'collector-thing' ) %>
+
+
   <br>
-  <%= f.collection_radio_buttons( :category_id, Category.all, :id, :name ) %>
+
+<!--   <%= f.collection_radio_buttons( :category_id, Category.all, :id, :name ) %> 
+
   <br>
+
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %> 
+
+  <br>
+
+-->
+
+  <%= select_tag( "post[category_id]", 
+                  options_for_select(@category_options, @post.category_id) ) %>
+
+  <br>
+
   <%= f.submit "#{new_or_edit}" %>
 
 <% end %>
+
+
+

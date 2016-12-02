@@ -11,6 +11,8 @@
   <% end %>
 </ul>
 
-<p>I'm a <%= @post.category.name %>.</p>
+<% unless @post.category.nil? %>
+  <p>I'm a <%= @post.category.name %>.</p>
+<% end %>
 
 <%= link_to "Edit the Post", edit_post_path %>
