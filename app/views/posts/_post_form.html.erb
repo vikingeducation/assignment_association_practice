@@ -1,0 +1,24 @@
+<%= form_for @post do |post_fields| %>
+
+  <%= post_fields.label(:title) %>
+  <%= post_fields.text_field(:title) %>
+  <br/>
+  <%= post_fields.label(:body) %>
+  <%= post_fields.text_area(:body) %>
+  <br/>
+  <%= post_fields.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+  <br/>
+  <%= post_fields.collection_radio_buttons(:category_id, Category.all, :id, :name) %>
+  <input id="blank" type="radio" value="blank" name="post[category_id]">
+  <label for="blank">No Category</label>
+  <br/>
+  <br/>
+  <%= post_fields.fields_for :comments do |comment_fields| %>
+    <%= comment_fields.label :body, 'Comment' %>
+    <br>
+    <%= comment_fields.text_area :body %>  
+  <% end %>
+  <br/>
+  <%= post_fields.submit %>
+
+<% end %>

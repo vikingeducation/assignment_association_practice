@@ -1,0 +1,13 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.category.name if @post.category %></p>
+<ul>
+  <% @post.tags.each do |tag| %>
+    <li><%= tag.name%></li>
+  <% end %>
+</ul>
+<ul>
+  <% @post.comments.each do |comment| %>
+    <li><%= comment.body %></li>
+  <% end %>
+</ul>
+

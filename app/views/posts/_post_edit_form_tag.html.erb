@@ -1,0 +1,14 @@
+<%= form_tag post_path(@post), method: :patch, 
+                                    authenticity_token: form_authenticity_token do  %>
+  <%= label_tag 'post[title]' %>
+  <%= text_field_tag 'post[title]', @post.title %>
+  <br>
+  <%= label_tag 'post[body]' %>
+  <%= text_area_tag 'post[body]', @post.body %>
+  <br>
+  <%= collection_radio_buttons(:post, :category_id, Category.all, :id, :name) %>
+  <br>
+  <%= collection_check_boxes(:post, :tag_ids, Tag.all, :id, :name) %>
+  <br>
+  <%= submit_tag 'Update' %>
+<% end %>
