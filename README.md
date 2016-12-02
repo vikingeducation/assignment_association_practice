@@ -1,2 +1,3 @@
 # assignment_association_practice
 Just associates associatin'...
+Christian Carey and Catherine Kwak
