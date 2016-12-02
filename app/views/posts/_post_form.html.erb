@@ -12,5 +12,14 @@
     :id,
     :name
   ) %>
+  <h2>Select categories for this post</h2>
+  <%= fields_for :categories do |category_fields| %>
+    <%= post_fields.collection_radio_buttons(
+      :category_id,
+      Category.all,
+      :id,
+      :name
+    ) %>
+  <% end %>
   <%= post_fields.submit %>
 <% end %>

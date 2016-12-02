@@ -10,4 +10,5 @@ class Post < ApplicationRecord
     has_many :authors, through: :user_posts, source: :user
 
     belongs_to :category, optional: true
+    accepts_nested_attributes_for :category, :reject_if => :all_blank, :allow_destroy => :true
 end
