@@ -3,6 +3,17 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def create
+    @post = Post.new(post_params)
+    if @post.save
+      flash[:success] = "Nice, you created a post"
+      redirect_to posts_path
+    else
+      flash.now[:error] = @post.errors.full_messages
+      render :new
+    end
+  end
+
   def edit
     @post = Post.find_by(params[:id])
   end
@@ -12,11 +23,17 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.update(post_params)
+    if @post = Post.update(post_params)
+      # flash[:success] = "Nice, you updated a post"
+      redirect_to post_path
+    else
+      flash.now[:error] = @post.errors.full_messages
+      render :update
+    end
   end
 
   private
   def post_params
-    params.require(:post).allow(:title, :body)
+    params.require(:post).permit(:title, :body)
   end
 end
