@@ -15,7 +15,7 @@ def create_users(num)
 end
 
 def create_categories(num)
-  Category.create( name: Faker::Lorem.word)
+  Category.create( name: Faker::Hipster.word)
 end
 
 
@@ -23,8 +23,8 @@ end
 def create_posts(num)
   category_ids = Category.pluck(:id)
   num.times do
-    $posts << Post.create( title: Faker::Lorem.sentence,
-                  body:  Faker::Lorem.paragraph,
+    $posts << Post.create( title: Faker::Hipster.sentence,
+                  body:  Faker::Hipster.paragraph,
                   category_id: category_ids.sample)
   end
 end
@@ -33,7 +33,7 @@ def create_comments(num)
   users = User.pluck(:id)
   $posts.each do |post|
     num.times do
-      Comment.create( body: Faker::Lorem.sentence,
+      Comment.create( body: Faker::Hipster.sentence,
                       author_id: users.sample,
                       post_id: post.id)
     end
@@ -60,7 +60,7 @@ end
 def populate_post_users(num)
 
   User.all.each do |user|
-    user.posts.create( body: Faker::Lorem.paragraph,
+    user.posts.create( body: Faker::Hipster.paragraph,
                        category_id: Category.pluck(:id).sample )
   end
 end

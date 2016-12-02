@@ -11,14 +11,11 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @post.comments.build
   end
 
   def create
-    puts params
-
     @post = Post.new( post_params )
-
-    puts @post
 
     if @post.save
       flash[:success] = "Post Saved!"
@@ -53,6 +50,10 @@ class PostsController < ApplicationController
                      :body,
                      :category_id,
                      { tag_ids: [] },
-                     { :comments_attributes => [:body, :author_id, :post_id] } )
+                     { :comments_attributes => [:body,
+                                                :author_id,
+                                                :post_id,
+                                                :id,
+                                                :_destroy] } )
     end
 end

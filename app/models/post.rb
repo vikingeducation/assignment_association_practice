@@ -9,5 +9,7 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :tags
 
   has_many :comments, dependent: :destroy, :inverse_of => :post
-  accepts_nested_attributes_for :comments
+  accepts_nested_attributes_for :comments,
+                                :reject_if => :all_blank,
+                                allow_destroy: :true
 end

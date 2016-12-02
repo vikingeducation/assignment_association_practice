@@ -22,26 +22,33 @@
                                             :name ) %>
 <br>
 
-<%= post_fields.collection_select( :category_id,
-                                          Category.all,
-                                          :id,
-                                          :name,
-                                          :include_blank => true ) %>
+<%= post_fields.collection_select(  :category_id,
+                                    Category.all,
+                                    :id,
+                                    :name,
+                                    :include_blank => true ) %>
 
 <br>
-<%= post_fields.collection_select( :tag_ids,
-                                        Tag.all,
-                                        :id,
-                                        :name,
-                                        { :include_blank => true },
-                                        multiple: true     ) %>
+<%= post_fields.collection_select(  :tag_ids,
+                                    Tag.all,
+                                    :id,
+                                    :name,
+                                    { :include_blank => true },
+                                    multiple: true     ) %>
 
 <br>
 <h3>Comments</h3>
   <%= post_fields.fields_for :comments do |comment_fields| %>
     <%= comment_fields.label :body %>
     <%= comment_fields.text_field :body %>
+    <br>
+    <% if comment_fields.object.persisted? %>
+      <%= comment_fields.label :_destroy, "Delete This Comment" %>
+      <%= comment_fields.check_box :_destroy %>
     <% end %>
+    <br>
+    <br>
+  <% end %>
 
   <%= post_fields.submit "Submit Post" %>
 <% end %>
