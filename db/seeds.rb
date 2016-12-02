@@ -15,7 +15,7 @@
   end
 
   # tags
-  loop do 
+  loop do
     break if tags = Tag.create({
       name: Faker::StarWars.planet,
       })
@@ -30,7 +30,7 @@ end
 
   3.times do
     #posts
-    post = user.posts.create({
+    post = user.authored_posts.create({
       title: Faker::Hipster.sentence(3),
       body: Faker::Hipster.paragraph(3),
       category_id: Category.all.sample.id
