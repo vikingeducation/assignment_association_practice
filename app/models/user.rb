@@ -15,7 +15,8 @@ class User < ApplicationRecord
   has_many :authored_posts,
            :through => :post_authorings,
            :foreign_key => :user_id,
-           :source => :post
+           :source => :post,
+           :dependent => :nullify
 
   has_many :tags_on_authored_posts,
            :through => :authored_posts,
