@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find_by(params[:id])
     @category_options = Category.all.map{|c| [ c.name, c.id ] }
-    @tag_options = Tag.all.map{ |t| [ t.name, t.id ]}.push([ "No tag",nil])
+    @tag_options = Tag.all.map{ |t| [ t.name, t.id ]}.push([ "No tag", nil])
   end
 
   def index
