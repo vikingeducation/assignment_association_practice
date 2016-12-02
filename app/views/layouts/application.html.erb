@@ -10,10 +10,11 @@
 
   <body>
 
-    <%= link_to "Index", root_url %>
+    <%= link_to "Index", root_url %><br>
+    <%= link_to "New", new_post_url %>
 
 
-    <hr>
+    <br>
 
     <%= render "shared/flash" %>
     <%= yield %>

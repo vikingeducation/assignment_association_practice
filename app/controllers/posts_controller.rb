@@ -13,9 +13,26 @@ class PostsController < ApplicationController
   end
 
   def create
+    puts params
+
     @post = Post.new( post_params )
 
+    fail
+    puts @post
+
     if @post.save
+      flash[:success] = "Post Saved!"
+      redirect_to @post
+    else
+      flash.now[:error] = "Failed to save post!"
+      render :new
+    end
+  end
+
+  def update
+    @post = Post.find(params[:id])
+
+    if @post.update( post_params )
       flash[:success] = "Post Saved!"
       redirect_to @post
     else
@@ -34,6 +51,7 @@ class PostsController < ApplicationController
       params.require(:post)
             .permit( :title,
                      :body,
-                     tag_ids: [] )
+                     tag_ids: [],
+                     :category_id )
     end
 end
