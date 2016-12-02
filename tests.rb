@@ -26,7 +26,7 @@ random_user = User.all.sample
 puts "Comments of user #{random_user.name}:"
 puts Hirb::Helpers::AutoTable.render random_user.comments
 puts "New comments of user:"
-random_user.comments = [Comment.first, Comment.second]
+random_user.comments << [Comment.first, Comment.second]
 random_user.save
 
 puts Hirb::Helpers::AutoTable.render random_user.comments
