@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  before_destroy :destroy_callback
+  # before_destroy :destroy_callback
 
   has_many :authored_comments,
            :class_name => "Comment", 
@@ -9,7 +9,8 @@ class User < ApplicationRecord
 
   has_many :post_authorings,
            :class_name => "PostUser",
-           :foreign_key => :user_id
+           :foreign_key => :user_id,
+           :dependent => :destroy
   
   has_many :authored_posts,
            :through => :post_authorings,
@@ -22,10 +23,10 @@ class User < ApplicationRecord
 
   private
 
-  def destroy_callback
-      post_authorings.each do |p_authoring|
-        p_authoring.user_id = nil
-      end
-  end
+  # def destroy_callback
+  #   post_authorings.each do |p_authoring|
+  #     p_authoring.user_id = nil
+  #   end
+  # end
 
 end
