@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find_by_id(post_params)
+    @post = Post.find_by_id(params[:id])
   end
 
   def update
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
   end
 
 end

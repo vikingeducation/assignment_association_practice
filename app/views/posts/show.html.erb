@@ -4,10 +4,13 @@
 
 <p><%= @post.body %></p>
 
+<span>Please fuse my internal organs with a:</span>
 <ul>
   <% @post.tags.each do |tag| %>
     <li><%= tag.name %></li>
   <% end %>
 </ul>
+
+<p>I'm a <%= @post.category.name %>.</p>
 
 <%= link_to "Edit the Post", edit_post_path %>
