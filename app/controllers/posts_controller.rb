@@ -26,7 +26,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def udpate
+  def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
       flash[:success] = "#{ @post.title } Edited!"
