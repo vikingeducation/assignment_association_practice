@@ -1,0 +1,59 @@
+<%= form_for @post do |post_fields| %>
+  <%= post_fields.label(:title) %>
+  <%= post_fields.text_field(:title) %>
+  <br>
+  <%= post_fields.label(:body) %>
+  <%= post_fields.text_field(:body) %>
+  <br>
+  <h2>Select tags for this post</h2>
+  <%# post_fields.collection_check_boxes(
+    :tag_ids,
+    Tag.all,
+    :id,
+    :name
+  ) %>
+  <%= post_fields.select(
+    :tag_ids,
+    @tag_options,
+    { }, # standard options
+    { multiple: true, class: "some-class", id: "some-id" },
+  ) %>
+  <h2>Select categories for this post</h2>
+<!-- Radio Button Select -->
+  <%# fields_for :categories do |category_fields| %>
+    <%# post_fields.collection_radio_buttons(
+      :category_id,
+      Category.all,
+      :id,
+      :name
+    ) %>
+  <%# end %>
+
+  <!-- Drop down -->
+  <%#post_fields.collection_select(
+   :category_id,
+   Category.all,
+   :id,
+   :name
+  ) %>
+
+  <%= post_fields.select(
+    :category_id,
+    @category_options,
+    { }, # standard options
+  ) %>
+  <div>
+
+    <%= post_fields.fields_for :comments do |comment_field| %>
+      <h2>Add a comment</h2>
+      <%= comment_field.label :body %>
+      <%= comment_field.text_area :body %>
+      <% if comment_field.object.persisted? %>
+        <%= comment_field.label "delete?"%>
+        <%= comment_field.check_box :_destroy %>
+      <% end  %>
+    <% end %>
+  </div>
+
+  <%= post_fields.submit %>
+<% end %>

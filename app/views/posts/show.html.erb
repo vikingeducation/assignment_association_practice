@@ -1,0 +1,20 @@
+<h1>Post <%= @post.title %></h1>
+
+<div><%= @post.body %></div>
+
+Tags:
+<ul>
+  <% @post.tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
+
+<div>Category: <%= @post.category.name %></div>
+
+Comments:
+<% @post.comments.each do |comment| %>
+<div>
+  <%= comment.user.nil? ? "Anonymous" : comment.user.name %>:
+  <%= comment.body %>
+</div>
+<% end %>

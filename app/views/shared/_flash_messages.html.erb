@@ -1,0 +1,5 @@
+<% flash.each do |message_type, messages| %>
+  <% messages.each do |message| %>
+    <strong><%= message_type %>! <%= message %></strong>
+  <% end %>
+<% end %>
