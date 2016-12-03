@@ -16,3 +16,12 @@
 <% end %>
 
 <%= link_to "Edit the Post", edit_post_path %>
+<br>
+<h3>Comments</h3>
+<% unless @post.comments.empty? %>
+    <% @post.comments.each do |comment| %>
+      <%= comment.body %>
+    <% end %>
+<% else %>
+  <p><%= "Ain't no comments round here, cowpoke! ...I reckon!" %></p>
+<% end %>

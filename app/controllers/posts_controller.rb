@@ -30,7 +30,7 @@ class PostsController < ApplicationController
   def edit
     @category_options = Category.all.map { |c| [c.name, c.id] }
     @post = Post.find_by_id(params[:id])
-    # @post.comments.build
+    @post.comments.build
   end
 
   def update
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
               :body,
               :category_id,
               :tag_ids => [],
-              :comments_attributes => [ :id, :body ] )
+              :comments_attributes => [ :id, :body, :_destroy ] )
   end
 
 end

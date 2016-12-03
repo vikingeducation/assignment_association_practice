@@ -14,16 +14,17 @@
 
    <%= f.collection_radio_buttons( :category_id, Category.all, :id, :name ) %> 
 
-
-
   <br>
 
   <%= f.fields_for :comments do |comment_fields| %>
     <%= comment_fields.label :body, "Add comment" %><br>
     <%= comment_fields.text_area :body %>
+    <% if comment_fields.object.persisted? %>
+      <%= comment_fields.label :_destroy, "Delete" %>
+      <%= comment_fields.check_box :_destroy %>
+    <% end %>
+    <br>
   <% end %>
-
-  <br>
 
   <%= f.submit "#{new_or_edit}" %>
 
