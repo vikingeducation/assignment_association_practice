@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
   def new
     @post = Post.new
+    @comment = @post.comments.build
+    @category_options = Category.all.map{|c| [ c.name, c.id ] }
+    @tag_options = Tag.all.map{ |t| [ t.name, t.id ]}.push([ "No tag", nil])
   end
 
   def create
@@ -17,7 +20,7 @@ class PostsController < ApplicationController
     @post = Post.find_by_id(params[:id])
     @category_options = Category.all.map{|c| [ c.name, c.id ] }
     @tag_options = Tag.all.map{ |t| [ t.name, t.id ]}.push([ "No tag", nil])
-    @post.comments.build
+    @comment = @post.comments.build
   end
 
   def index
@@ -48,6 +51,6 @@ class PostsController < ApplicationController
       :body,
       :category_id,
       :tag_ids => [],
-      :comments_attributes => [ :body, :id ] )
+      :comments_attributes => [ :body, :id, :_destroy ] )
   end
 end

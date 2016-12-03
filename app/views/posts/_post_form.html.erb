@@ -43,12 +43,12 @@
     { }, # standard options
   ) %>
   <div>
-    <h2>Add a comment</h2>
 
     <%= post_fields.fields_for :comments do |comment_field| %>
+      <h2>Add a comment</h2>
       <%= comment_field.label :body %>
       <%= comment_field.text_area :body %>
-      <% if @post.persisted? %>
+      <% if comment_field.object.persisted? %>
         <%= comment_field.label "delete?"%>
         <%= comment_field.check_box :_destroy %>
       <% end  %>
