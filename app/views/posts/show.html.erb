@@ -1,0 +1,27 @@
+<h1>Check Out The Post!</h1>
+
+<h2><%= @post.title %></h2>
+
+<p><%= @post.body %></p>
+
+<span>Please fuse my internal organs with a:</span>
+<ul>
+  <% @post.tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
+
+<% unless @post.category.nil? %>
+  <p>I'm a <%= @post.category.name %>.</p>
+<% end %>
+
+<%= link_to "Edit the Post", edit_post_path %>
+<br>
+<h3>Comments</h3>
+<% unless @post.comments.empty? %>
+    <% @post.comments.each do |comment| %>
+      <%= comment.body %>
+    <% end %>
+<% else %>
+  <p><%= "Ain't no comments round here, cowpoke! ...I reckon!" %></p>
+<% end %>

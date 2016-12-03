@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AssignmentAssociationPractice</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <% if flash.any? %>
+      <ul>
+        <% flash.keys.each do |k| %>
+          <li><%= flash[k] %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>
