@@ -9,4 +9,12 @@ Tags:
   <% end %>
 </ul>
 
-Category: <%= @post.category.name %>
+<div>Category: <%= @post.category.name %></div>
+
+Comments:
+<% @post.comments.each do |comment| %>
+<div>
+  <%= comment.user.nil? ? "Anonymous" : comment.user.name %>:
+  <%= comment.body %>
+</div>
+<% end %>
