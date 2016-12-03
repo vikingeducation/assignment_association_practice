@@ -42,13 +42,18 @@
     @category_options,
     { }, # standard options
   ) %>
+  <div>
+    <h2>Add a comment</h2>
 
-  <h2>Add a comment</h2>
-
-  <%= post_fields.fields_for :comments do |comment_field| %>
-    <%= comment_field.label :body %>
-    <%= comment_field.text_area :body %>
-  <% end %>
+    <%= post_fields.fields_for :comments do |comment_field| %>
+      <%= comment_field.label :body %>
+      <%= comment_field.text_area :body %>
+      <% if @post.persisted? %>
+        <%= comment_field.label "delete?"%>
+        <%= comment_field.check_box :_destroy %>
+      <% end  %>
+    <% end %>
+  </div>
 
   <%= post_fields.submit %>
 <% end %>
