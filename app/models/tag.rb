@@ -1,7 +1,8 @@
 class Tag < ApplicationRecord
   has_many :post_taggings,
            :foreign_key => :post_id,
-           :class_name => 'PostTag'
+           :class_name => 'PostTag', 
+           :dependent => :nullify
 
   has_many :tagged_posts, 
            :through => :post_taggings, 
