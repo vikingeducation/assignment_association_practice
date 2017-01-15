@@ -7,18 +7,13 @@
   <%= p.text_area :body %><br>
 
 <!-- collection check_boxes -->
-  <%= p.label :tag_ids, 'Tags' %>
-  <%= p.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {:include_blank => true}) %><br>
+  <%= p.label :tag_ids, 'Tags' %><br>
+  <%= p.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
 
 <!-- radio buttons -->
-
-  <%= p.label :category_id, 'Category' %>
-  <%= %>
-
-<!-- dropdown -->
-
-
-<!-- dropdown with select tag -->
+<br>
+  <%= p.label :category_id, 'Category (Radio)' %>
+  <%= p.collection_radio_buttons(:category_id, Category.all, :id, :name )%>
 
 
   <%= p.submit %>
@@ -26,4 +21,6 @@
 <% end %>
 
 
-# doesn't deselect/disassociate tags
+<!-- doesn't deselect/disassociate tags -->
+<!-- for dropdown w select tag, specify 
+  @category_options = Category.all.map { |category| [category.name, category.id]} in PostsController new/edit actions -->

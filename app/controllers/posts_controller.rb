@@ -10,7 +10,7 @@ class PostsController < ApplicationController
       flash[:success] = "Success!"
       redirect_to post_path(@post)
     else
-      flash[:danger] = "Error!"
+      flash[:danger] = @post.errors.full_messages
       redirect_to(:back)
     end
   end
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
   end
 
 end
