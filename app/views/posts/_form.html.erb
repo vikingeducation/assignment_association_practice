@@ -1,0 +1,29 @@
+<%= form_for @post do |p| %>
+
+  <%= p.label :title, "Title" %>
+  <%= p.text_field :title %><br>
+
+  <%= p.label :body, "Body" %>
+  <%= p.text_area :body %><br>
+
+<!-- collection check_boxes -->
+  <%= p.label :tag_ids, 'Tags' %>
+  <%= p.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {:include_blank => true}) %><br>
+
+<!-- radio buttons -->
+
+  <%= p.label :category_id, 'Category' %>
+  <%= %>
+
+<!-- dropdown -->
+
+
+<!-- dropdown with select tag -->
+
+
+  <%= p.submit %>
+
+<% end %>
+
+
+# doesn't deselect/disassociate tags

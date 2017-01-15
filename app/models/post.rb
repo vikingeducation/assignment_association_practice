@@ -5,5 +5,5 @@ class Post < ApplicationRecord
   has_many :authors, through: :post_authorings, source: :user
 
   has_many :post_taggings, class_name: 'PostTag', dependent: :destroy
-  has_many :tags, through: :post_taggings, class_name: 'PostTag', source: :tag
+  has_many :tags, through: :post_taggings
 end
