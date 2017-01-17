@@ -1,0 +1,19 @@
+<%= form_tag @post %>
+
+<%= label_tag(:title, 'Title') %>
+<%= text_field_tag('post[title]', @post.title, class: 'form-control') %>
+
+<%= label_tag(:body, 'Body') %>
+<%= text_area_tag('post[body]', @post.body, class: 'form-control') %>
+
+<%= label_tag(:tag_ids, 'Tags') %>
+<%= collection_check_boxes(:post, :tag_ids, Tag.all, :id, :name) %>
+
+
+<%= label_tag('post_category_id', 'Category') %>
+<%= select_tag('post[category_id]', options_for_select(@category_options, @post.category_id), :class => 'form-control') %>
+
+<%= submit_tag %>
+
+
+<!-- add @category_options = Category.all.map { |c| [c.name, c.id] } to new/edit actions in postscontroller -->

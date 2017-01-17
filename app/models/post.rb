@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :category
-  
+
   has_many :comments, dependent: :destroy
 
   has_many :post_authorings, class_name: 'UserPost', dependent: :destroy

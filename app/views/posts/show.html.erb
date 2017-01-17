@@ -1,16 +1,38 @@
-<h1>SHOW POST</h1>
+<h1>SHOW POST: <%= @post.title %></h1>
 
-<%= @post.id %>
 
-<h2><%= @post.title %></h2>
+<div>
+  <h3>TITLE</h3>
+  <p>
+    <%= @post.title %>
+  </p>
+</div>
 
-<p><%= @post.body %></p>
+<div>
+  <h3>BODY</h3>
+  <p>
+    <%= @post.body %>
+  </p>
+</div>
 
-TAGS
-<ul>
-<% @post.tags.each do |tag| %>
-  <li><%= tag.name %></li>
-<% end %>
-</ul>
+<div>
+  <h3>CATEGORY</h3>
+  <p>
+    <%= @post.category.name if @post.category_id %>
+  </p>
+</div>
 
-<p>Category: <%= @post.category.name %></p>
+<div>
+  <h3>TAGS</h3>
+  <ul>
+    <% @post.tags.all.each do |tag| %>
+      <li><%= tag.name %></li>
+    <% end %>
+  </ul>
+</div>
+
+
+
+<%= link_to 'EDIT', edit_post_path %><br>
+<%= link_to 'NEW', new_post_path %>
+

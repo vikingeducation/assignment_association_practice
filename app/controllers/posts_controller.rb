@@ -1,17 +1,21 @@
 class PostsController < ApplicationController
 
+  def index
+    @posts = Post.all
+  end
+
   def new
     @post = Post.new
   end
-  
-  def create
+
+  def create 
     @post = Post.new(post_params)
     if @post.save
-      flash[:success] = "Success!"
+      flash[:success] = 'Success!'
       redirect_to post_path(@post)
     else
-      flash[:danger] = @post.errors.full_messages
-      redirect_to(:back)
+      flash.now[:warning] = @post.errors.full_messages
+      render :new
     end
   end
 
@@ -21,17 +25,20 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post.save(post_params)
+    if @post.update(post_params)
       flash[:success] = "Success!"
-      redirect_to post_path(@post)
+      redirect_to @post
     else
-      flash[:danger] = "Error!"
-      redirect_to(:back)
+      flash.now[:warning] = @post.errors.full_messages
+      render :edit
     end
   end
 
   def show
     @post = Post.find(params[:id])
+  end
+
+  def destroy
   end
 
   private

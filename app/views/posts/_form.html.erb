@@ -1,26 +1,15 @@
 <%= form_for @post do |p| %>
 
-  <%= p.label :title, "Title" %>
-  <%= p.text_field :title %><br>
-
-  <%= p.label :body, "Body" %>
-  <%= p.text_area :body %><br>
-
-<!-- collection check_boxes -->
-  <%= p.label :tag_ids, 'Tags' %><br>
-  <%= p.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
-
-<!-- radio buttons -->
+  <%= p.label :title %>
+  <%= p.text_field :title, class: 'form-control' %>
 <br>
-  <%= p.label :category_id, 'Category (Radio)' %>
-  <%= p.collection_radio_buttons(:category_id, Category.all, :id, :name )%>
+  <%= p.label :body %>
+  <%= p.text_area :body, class: 'form-control' %>
+<br>
+  <%= p.label :tag_ids, 'Tags' %>
+  <%= p.collection_check_boxes(:tag_ids, Tag.all, :id, :name, class: 'form-control') %>
+<br><br>
+  <%= p.submit class: 'form-control' %>
 
-
-  <%= p.submit %>
 
 <% end %>
-
-
-<!-- doesn't deselect/disassociate tags -->
-<!-- for dropdown w select tag, specify 
-  @category_options = Category.all.map { |category| [category.name, category.id]} in PostsController new/edit actions -->
