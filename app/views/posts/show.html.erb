@@ -31,6 +31,17 @@
   </ul>
 </div>
 
+<div>
+  <h3>COMMENTS</h3>
+  <% if @post.comments.present? %>
+  <ul>
+    <% @post.comments.each do |comment| %>
+      <li><%= comment.body %></li>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
+
 
 
 <%= link_to 'EDIT', edit_post_path %><br>

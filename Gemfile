@@ -10,6 +10,12 @@ gem 'faker'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '>= 3.2'
 
+group :development do
+  gem "better_errors"
+end
+
+gem "binding_of_caller"
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'
