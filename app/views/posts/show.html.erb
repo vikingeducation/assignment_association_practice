@@ -1,0 +1,49 @@
+<h1>SHOW POST: <%= @post.title %></h1>
+
+
+<div>
+  <h3>TITLE</h3>
+  <p>
+    <%= @post.title %>
+  </p>
+</div>
+
+<div>
+  <h3>BODY</h3>
+  <p>
+    <%= @post.body %>
+  </p>
+</div>
+
+<div>
+  <h3>CATEGORY</h3>
+  <p>
+    <%= @post.category.name if @post.category_id %>
+  </p>
+</div>
+
+<div>
+  <h3>TAGS</h3>
+  <ul>
+    <% @post.tags.all.each do |tag| %>
+      <li><%= tag.name %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div>
+  <h3>COMMENTS</h3>
+  <% if @post.comments.present? %>
+  <ul>
+    <% @post.comments.each do |comment| %>
+      <li><%= comment.body %></li>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
+
+
+
+<%= link_to 'EDIT', edit_post_path %><br>
+<%= link_to 'NEW', new_post_path %>
+

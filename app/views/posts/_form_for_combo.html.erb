@@ -1,0 +1,39 @@
+<%= form_for @post do |post_fields| %>
+
+<%= post_fields.label :title %>
+<%= post_fields.text_field :title, class: 'form-control' %>
+<br>
+<%= post_fields.label :body %>
+<%= post_fields.text_area :body, class: 'form-control' %>
+<br>
+<%= post_fields.label :tag_ids, 'Tags' %>
+<%= post_fields.collection_select(:tag_ids, Tag.all, :id, :name, {include_blank: true}, {:multiple => true, class: 'form-control'}) %>
+<br><br>
+<%= post_fields.label :category_id, 'Category' %>
+<%= post_fields.collection_select(:category_id, Category.all, :id, :name, class: 'form-control') %>
+<br><br>
+
+<h3>COMMENTS</h3>
+<%= post_fields.fields_for :comments do |comments_fields| %>
+
+  <h5>Comment ID: <%= comments_fields.object.persisted? ? comments_fields.object.id : 'n/a' %></h5>
+  
+  <%= comments_fields.label :user_id, "Author" %>
+  <%= comments_fields.collection_select(:user_id, User.all, :id, :name, {include_blank: true}, class: 'form-control') %>
+  <br>
+  <%= comments_fields.label :body %>
+  <%= comments_fields.text_area :body, class: 'form-control' %>
+
+  <% if comments_fields.object.persisted? %>
+    <%= comments_fields.label :_destroy, "Delete Comment" %>
+    <%= comments_fields.check_box :_destroy %>
+  <% end %>
+  <br>
+
+<% end %>
+
+
+<br><br>
+<%= post_fields.submit class: 'form-control' %>
+
+<% end %>
