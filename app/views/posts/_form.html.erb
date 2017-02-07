@@ -1,0 +1,31 @@
+<%= form_for @post do |f| %>
+    <div class="form-group">
+        <%= f.label :title %><br>
+        <%= f.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :body %>
+        <%= f.text_area :body, class: "form-control", rows: "3" %>
+    </div>
+
+    <% Tag.all.each do |tag| %>
+
+        <%= label_tag "post_tag_ids_#{tag.id}", tag.name  %>
+        <%= check_box_tag  "post[tag_ids][]", 
+                        tag.id, 
+                        @post.tags.include?(tag), 
+                        id: "post_tag_ids_#{tag.id}" %>
+
+    <% end %>
+
+    <div class="form-group">
+        <%= f.label :category_id %>
+        <%= f.collection_select :category_id, Category.all, :id, :name %>
+    </div>
+
+    <div class="form-group">
+        <%= f.submit %><br />
+    </div>
+    
+<% end %>
