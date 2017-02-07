@@ -1,3 +1,4 @@
+<h3>Title and Body: </h3>
 <%= form_for @post do |f| %>
     <div class="form-group">
         <%= f.label :title %><br>
@@ -18,14 +19,78 @@
                         id: "post_tag_ids_#{tag.id}" %>
 
     <% end %>
-
-    <div class="form-group">
-        <%= f.label :category_id %>
-        <%= f.collection_select :category_id, Category.all, :id, :name %>
-    </div>
+    <input name="post[tag_ids][]" type="hidden" value="">
 
     <div class="form-group">
         <%= f.submit %><br />
     </div>
     
 <% end %>
+
+<h3>Category Using Dropdown: </h3>
+
+<%= form_for @post do |f| %>
+    <div class="form-group">
+        <%= f.label :category_id %><br>
+        <%= f.collection_select :category_id, Category.all, :id, :name, { }, class: "dropdown-category-class", id: "dropdown-category-id" %>
+    </div>
+    <div class="form-group">
+        <%= f.submit %><br />
+    </div>
+
+<% end %>
+
+<h3>Category Using Radio Buttons: </h3>
+
+<%= form_for @post do |f| %>
+
+    <div class="form-group">
+        <%= f.label :category_id %><br>
+        <%= f.collection_radio_buttons(:category_id, 
+                                        Category.all, 
+                                        :id, 
+                                        :name) do |b|
+                                            b.label(class: "col-md-12") { b.radio_button + " " + b.text }
+                                        end %>
+    </div>
+
+    <div class="form-group">
+        <%= f.submit %><br />
+    </div>
+
+<% end %>
+
+<h3>Category Using Form Tag: </h3>
+
+<% if @in_edit %>
+    <%= form_tag(post_path(@post), method: :put) %>
+<% else %>
+    <%= form_tag(posts_path, method: :post) %>
+<% end %>
+
+    <div class="form-group">
+        <%=  select_tag( "post[category_id]", options_for_select( @category_options, @post.category_id )) %>
+    </div>
+
+    <div class="form-group">
+        <%= submit_tag 'Update' %>
+    </div>
+
+<h3>Combo box for tags: </h3>
+
+<%= form_for @post do |f| %>
+    
+    <div class="form-group">
+        <%= f.collection_select :tag_ids, Tag.all, :id, :name, { }, multiple: true %><br>
+    </div>
+
+    <div class="form-group">
+        <%= f.submit %><br><br><br><br><br>
+    </div>
+<% end %>
+
+
+
+
+
+

@@ -8,16 +8,12 @@ class PostsController < ApplicationController
 
 	def new
 		@post = Post.new
+		@in_edit = false
+		@category_options = Category.all.map{|c| [ c.name, c.id ] }
 	end
 
 	def create
 		@post = Post.new(posts_params)
-		params[:post][:tag_ids].each do |tag_id|
-			tagging = Tagging.new
-			tagging.post_id = @post.id
-			tagging.tag_id = tag_id
-			tagging.save!
-		end
 		if @post.save!
 			flash[:success] = "Post created successfully"
 			redirect_to posts_path
@@ -29,6 +25,8 @@ class PostsController < ApplicationController
 
 	def edit
 		@post = Post.find(params[:id])
+		@in_edit = true
+		@category_options = Category.all.map{|c| [ c.name, c.id ] }
 	end
 
 	def update
