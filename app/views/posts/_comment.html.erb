@@ -1,0 +1,20 @@
+<h2> Add a Comment </h2>
+  <%= post_fields.fields_for :comments do |cf| %>
+
+    <div class="form-group">
+      <%= cf.label :body %><br>
+      <%= cf.text_area :body %>
+    </div>
+    <br>
+
+    <div class="form-group">
+        <%= cf.label :author_id %>
+        <%= cf.collection_select :author_id, User.all, :id, :name %>
+    </div>
+
+    <% if cf.object.persisted? %>
+      <%= cf.label :_destroy, "Delete this comment?" %>
+      <%= cf.check_box :_destroy %>
+    <% end %>
+
+<% end %>
