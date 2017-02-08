@@ -57,7 +57,7 @@ users = User.all
 	comment = Comment.new
 	comment.body = Faker::Lorem.paragraph
 	comment.post_id = posts.sample.id
-	comment.author_id = users.sample.id
+	comment.user_id = users.sample.id
 	comment.save!
 end
 
@@ -76,14 +76,14 @@ end
 Post.all.each do |apost|
 	blogging = Blogging.new
 	blogging.post_id = apost.id
-	blogging.author_id = users.sample.id
+	blogging.user_id = users.sample.id
 	blogging.save!
 end
 
 20.times do |index|
 	blogging = Blogging.new
 	blogging.post_id = posts.sample.id
-	blogging.author_id = users.sample.id
+	blogging.user_id = users.sample.id
 	blogging.save!
 end
 
