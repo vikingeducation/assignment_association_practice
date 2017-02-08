@@ -11,7 +11,7 @@
     </div>
 
     <div class="form-group">
-        <%= f.collection_select :author_ids, User.all, :id, :name, { }, multiple: true %><br>
+        <%= f.collection_select :user_ids, User.all, :id, :name, { }, multiple: true %><br>
     </div>
 
     <% Tag.all.each do |tag| %>
@@ -38,8 +38,8 @@
             </div>
 
             <div class="form-group">
-                <%= cf.label :author_id %>
-                <%= cf.collection_select :author_id, User.all, :id, :name %>
+                <%= cf.label :user_id %>
+                <%= cf.collection_select :user_id, User.all, :id, :name %>
             </div>
 
             <% if cf.object.persisted? %>

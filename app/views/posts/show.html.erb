@@ -5,9 +5,9 @@
 <% end %>
 <h3>Post Body :</h3>
 <p><%= @post.body %></p>
-<h3>Written By :  <%= @post.authors.first.name %>, et al</h3>
+<h3>Written By :  <%= @post.users.first.name %>, et al</h3>
 <h3>In Category : <%= @post.category.name %></h3>
 <% @post.comments.each do |comment| %>
-	<h4><%= comment.author.name %> Commented : </h4>
+	<h4><%= comment.user.name %> Commented : </h4>
 	<p><%= comment.body %></p>
 <% end %>

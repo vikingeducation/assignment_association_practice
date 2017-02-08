@@ -4,13 +4,13 @@
         <%= f.text_field :title %><br>
         <%= f.label :body %><br>
         <%= f.text_area :body, rows: "3" %><br>
-        <%= f.label "Authors" %><br>
+        <%= f.label "Users" %><br>
         <% User.all.each do |user| %>
-            <%= label_tag "post_author_ids_#{user.id}", user.name  %>
-            <%= check_box_tag  "post[author_ids][]", 
+            <%= label_tag "post_user_ids_#{user.id}", user.name  %>
+            <%= check_box_tag  "post[user_ids][]", 
                         user.id, 
-                        @post.authors.include?(user), 
-                        id: "post_author_ids_#{user.id}" %>
+                        @post.users.include?(user), 
+                        id: "post_user_ids_#{user.id}" %>
         <% end %>
         <br>
         <% Tag.all.each do |tag| %>
@@ -25,13 +25,63 @@
         <%= f.fields_for :comments do |cf| %>
             <%= cf.label :body %><br>
             <%= cf.text_area :body %><br>
-            <%= cf.label :author_id %><br>
-            <%= cf.collection_select :author_id, User.all, :id, :name %><br>
+            <%= cf.label :user_id %><br>
+            <%= cf.collection_select :user_id, User.all, :id, :name %><br>
             <% if cf.object.persisted? %>
                 <%= cf.label :_destroy, "Delete this comment?" %>
-                <%= cf.check_box :_destroy %>
+                <%= cf.check_box :_destroy %><br>
             <% end %>
         <% end %>
         <%= f.submit %>
     </div>
 <% end %>
+
+<h3>Category Using Radio Buttons: </h3>
+
+<%= form_for @post do |f| %>
+
+    <div class="form-group">
+        <%= f.label :category_id %><br>
+        <%= f.collection_radio_buttons(:category_id, 
+                                        Category.all, 
+                                        :id, 
+                                        :name) do |b|
+                                            b.label(class: "col-md-12") { b.radio_button + " " + b.text }
+                                        end %>
+    </div>
+
+    <div class="form-group">
+        <%= f.submit %><br />
+    </div>
+
+<% end %>
+
+<h3>Category Using Form Tag: </h3>
+
+<% if @in_edit %>
+    <%= form_tag(post_path(@post), method: :put) %>
+<% else %>
+    <%= form_tag(posts_path, method: :post) %>
+<% end %>
+
+    <div class="form-group">
+        <%=  select_tag( "post[category_id]", options_for_select( @category_options, @post.category_id )) %>
+    </div>
+
+    <div class="form-group">
+        <%= submit_tag 'Update' %>
+    </div>
+
+<h3>Combo box for tags: </h3>
+
+<%= form_for @post do |f| %>
+    
+    <div class="form-group">
+        <%= f.collection_select :tag_ids, Tag.all, :id, :name, { }, multiple: true %><br>
+    </div>
+
+    <div class="form-group">
+        <%= f.submit %><br><br><br><br><br>
+    </div>
+<% end %>
+
