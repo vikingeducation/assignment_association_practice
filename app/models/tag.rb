@@ -1,3 +1,4 @@
 class Tag < ApplicationRecord
-  has_and_belongs_to_many :posts, join_table: :post_taggings
+  has_many :post_taggings
+  has_many :posts, :through => :post_taggings
 end
