@@ -1,7 +1,9 @@
 class Post < ApplicationRecord
-  has_many :comments
-  has_and_belongs_to_many :users, :join_table => :user_postings
-  has_and_belongs_to_many :tags, :join_table => :post_taggings
+  has_many :comments, dependent: :destroy
+  has_many :post_authorings, class_name: 'UserPosting'
+  has_many :authors, :through => :post_authorings, source: :user
+  has_many :tags, :through => :post_taggings
+  has_many :post_taggings
   belongs_to :category
 
 end

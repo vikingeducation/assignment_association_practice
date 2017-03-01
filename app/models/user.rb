@@ -1,4 +1,7 @@
 class User < ApplicationRecord
-  has_many :comments
-  has_and_belongs_to_many :posts, :join_table => :user_postings
+  has_many :authored_comments, class_name: 'Comment', :dependent => :destroy
+  has_many :post_authorings, class_name: 'UserPosting'
+  has_many :authored_posts, through: :post_authorings, source: :post, :dependent => :destroy
+  has_many :post_taggings, through: :authored_posts
+  has_many :tags_on_authored_posts, through: :post_taggings, source: :tag
 end
