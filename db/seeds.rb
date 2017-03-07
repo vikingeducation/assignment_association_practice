@@ -11,34 +11,32 @@ Comment.destroy_all
   User.create(name: Faker::Superhero.name)
 end
 
+# all user id's
+users = User.pluck(:id)
+
 # create categories
 5.times do 
   Category.create(name: Faker::Superhero.power)
 end
 
-# 
-users = User.pluck(:id)
-categories = Category.pluck(:id)
-
 # create posts
+categories = Category.pluck(:id)
 30.times do 
   Post.create(title: Faker::HarryPotter.location, body: Faker::HarryPotter.quote, 
     category_id: categories.sample
   )
 end
 
-#
-posts = Post.pluck(:id)
-
 # create tags
 15.times do
   Tag.create(name: Faker::Lorem.word)
 end
 
-# 
+# all tag id's 
 tags = Tag.pluck(:id)
 
 # create comments 
+posts = Post.pluck(:id)
 50.times do 
   Comment.create(body: Faker::Lorem.sentence,
       user_id: users.sample, post_id: posts.sample
@@ -46,11 +44,9 @@ tags = Tag.pluck(:id)
 end
 
 # create postings
-20.times do
-  Posting.create(post_id: posts.sample, user_id: users.sample) 
-end 
-
-# creating taggings
-40.times do
-  Tagging.create(post_id: posts.sample, tag_id: tags.sample) 
+Post.all.each do |post|
+  rand(1..5).times do 
+    Posting.create(post_id: post.id, user_id: users.sample)
+    Tagging.create(post_id: post.id, tag_id: tags.sample)
+  end
 end
