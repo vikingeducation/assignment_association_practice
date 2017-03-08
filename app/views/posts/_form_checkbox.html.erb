@@ -1,0 +1,25 @@
+<!-- 
+collection_select(method, collection, value_method, text_method, options = {}, html_options = {}) 
+collection_check_boxes(method, collection, value_method, text_method, options = {}, html_options = {}, &block)
+collection_radio_buttons(object, method, collection, value_method, text_method, options = {}, html_options = {}, &block) 
+# radio buttons single choice, check boxes multiple choice...
+-->
+
+<%= form_for @post do |f| %>
+  <%= f.label :category_id %>
+  <%= f.collection_select :category_id, @categories, :id, :name, {}, { class: "hihi" } %>
+  <br>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br>
+  <%= f.label :body %>
+  <%= f.text_area :body, rows: 4 %>
+  <br>
+  <%= f.label "Tags" %>
+  <%= f.collection_check_boxes :tag_ids, @tags, :id, :name, {}, { class: 'hihi'} %>
+  <br>
+  <%= f.label "Authors" %>
+  <%= f.collection_radio_buttons :user_ids, @users, :id, :name, {}, { class: 'hihi'} %>
+  <br>
+  <%= f.submit %>
+<% end %>

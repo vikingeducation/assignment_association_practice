@@ -9,6 +9,7 @@ tags = Tag.all
 users.sample.comments
 
 # Set a comment to belong to a different user
+# comments.sample.update(user: users.sample)
 # 
 
 # Set a post to be in a different category
@@ -51,7 +52,7 @@ posts.sample.user_ids = [users.sample.id, users.sample.id]
 tags.sample.posts
 
 # Add a new post to a given tag by only using its ID
-tag.sample.posts << posts.sample
+tags.sample.posts << posts.sample
 
 # Add a new tag to a given post by only using its ID
 posts.sample.tags << tags.sample
