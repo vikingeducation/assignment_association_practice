@@ -1,0 +1,5 @@
+<% unless flash.empty? %>
+  <% flash.each do |k, v| %>
+    <%= "<b>#{k}</b>: #{v}".html_safe %>
+  <% end %>
+<% end %>

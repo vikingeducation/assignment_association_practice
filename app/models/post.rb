@@ -4,6 +4,6 @@ class Post < ApplicationRecord
   has_many :authors, :through => :post_authorings, source: :user
   has_many :tags, :through => :post_taggings, :dependent => :destroy
   has_many :post_taggings
-  belongs_to :category
+  belongs_to :category, optional: true
 
 end
