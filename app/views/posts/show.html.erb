@@ -1,0 +1,17 @@
+<h2><%= @post.title %></h2>
+<div>
+  <%= @post.body %>
+</div>
+<ul>
+  <p>Tags:</p>
+  <% @post.tags.each do |t| %>
+    <li><%= t.name %> </li>
+  <% end %>
+</ul>
+<p>Category</p>
+<p><%= @post.category.name %></p>
+<p>Comment</p>
+<% @post.comments.each do |c| %>
+  <%= c.body %>
+<% end %>
+<%= link_to "Edit", edit_post_path(@post) %>

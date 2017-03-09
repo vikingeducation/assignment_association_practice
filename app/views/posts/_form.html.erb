@@ -1,0 +1,37 @@
+<h2>Form for (either use this or the form tag below)</h2>
+<%= form_for @post do |f| %>
+  <%= f.label :title, class: 'strong block', id: 'fake-id' %>
+  <%= f.text_field :title, class: 'form-control field' %>
+  <%= f.label :body, class: 'strong block' %>
+  <%= f.text_area :body, class: 'form-control' %>
+  <h4>Tags (either use this or the combo box below)</h4>
+  <%= f.label :tag_ids, class: 'strong block' %>  <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+  <%= f.collection_select :tag_ids, Tag.all, :id, :name, {include_blank: true}, multiple: true, class: 'form-control' %>
+  <h4>Categories (either use this or the dropdown below)</h4>
+  <%= f.collection_radio_buttons :category_id, Category.all, :id, :name, include_blank: true %>
+  <br>
+  <%= f.fields_for :comments do |ff| %>
+    <%= ff.label :body %>
+    <%= ff.text_field :body %>
+    <%= ff.label :user_id %>
+    <%= ff.text_field :user_id, value: User.all.pluck(:id).sample %>
+    <%= ff.label :_destroy, "Delete?" %>
+    <%= ff.check_box :_destroy %>
+    <br>
+  <% end %>
+  <%= f.submit %>
+<% end %>
+<h2>Form Tag</h2>
+<%= form_tag '/posts' do %>
+  <%= label_tag "post[title]", "Title", class: 'strong block' %>
+  <%= text_field_tag "post[title]" %>
+  <br>
+  <%= label_tag "post[body]", "Body", class: 'strong block' %>
+  <%= text_area_tag "post[body]" %>
+  <br>
+  <%= label_tag "post[category_id]", "Category", class: 'strong block' %>
+  <%= collection_radio_buttons :post, :category_id, Category.all, :id, :name %>
+  <br>
+  <%= collection_select :post, :category_id, Category.all, :id, :name, include_blank: true %>
+  <%= submit_tag %>
+<% end %>
