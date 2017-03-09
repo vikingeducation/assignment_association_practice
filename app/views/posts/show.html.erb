@@ -10,4 +10,8 @@
 </ul>
 <p>Category</p>
 <p><%= @post.category.name %></p>
+<p>Comment</p>
+<% @post.comments.each do |c| %>
+  <%= c.body %>
+<% end %>
 <%= link_to "Edit", edit_post_path(@post) %>

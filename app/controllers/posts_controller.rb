@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @comments = @post.comments.build
   end
 
   def create
@@ -30,7 +31,8 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post.update(whitelisted_post_params)
+
+    if @post.update!(whitelisted_post_params)
       flash[:success] = "Post updated"
       redirect_to @post
     else
@@ -44,6 +46,6 @@ class PostsController < ApplicationController
   private
 
   def whitelisted_post_params
-    params.require(:post).permit(:title, :body, {:tag_ids => []}, :category_id)
+    params.require(:post).permit(:title, :body, :category_id, {:tag_ids => []},  {:comments_attributes => [:id, :body, :user_id, :_destroy]} )
   end
 end

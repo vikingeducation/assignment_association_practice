@@ -10,9 +10,15 @@
   <h4>Categories (either use this or the dropdown below)</h4>
   <%= f.collection_radio_buttons :category_id, Category.all, :id, :name, include_blank: true %>
   <br>
-  <%= f.label :category_id, class: 'block' %>
-  <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: true %>
-  <br>
+  <%= f.fields_for :comments do |ff| %>
+    <%= ff.label :body %>
+    <%= ff.text_field :body %>
+    <%= ff.label :user_id %>
+    <%= ff.text_field :user_id, value: User.all.pluck(:id).sample %>
+    <%= ff.label :_destroy, "Delete?" %>
+    <%= ff.check_box :_destroy %>
+    <br>
+  <% end %>
   <%= f.submit %>
 <% end %>
 <h2>Form Tag</h2>
