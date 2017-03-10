@@ -1,6 +1,16 @@
 <%= @post.inspect %>
-<%= @post.tags.inspect %>
-<%= @post.users.inspect %>
+<hr>
+<% @post.tags.each do |t| %>
+  <%= "#{t.name}," %>
+<% end %>
+<hr>
+<% @post.users.each do |u| %>
+  <%= "#{u.name}," %>
+<% end %>
+<hr>
+<% @post.comments.each do |c| %>
+ <%= c.inspect %>
+<% end %>
 
 <hr>
 
