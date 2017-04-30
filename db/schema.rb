@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170429165134) do
+ActiveRecord::Schema.define(version: 20170429190800) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -20,15 +20,28 @@ ActiveRecord::Schema.define(version: 20170429165134) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "comment"
+    t.integer  "post_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_posts_on_category_id"
+  end
+
+  create_table "posts_tags", id: false, force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+    t.index ["post_id"], name: "index_posts_tags_on_post_id"
+    t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -41,6 +54,20 @@ ActiveRecord::Schema.define(version: 20170429165134) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users_comments", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "comment_id"
+    t.index ["comment_id"], name: "index_users_comments_on_comment_id"
+    t.index ["user_id"], name: "index_users_comments_on_user_id"
+  end
+
+  create_table "users_posts", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.index ["post_id"], name: "index_users_posts_on_post_id"
+    t.index ["user_id"], name: "index_users_posts_on_user_id"
   end
 
 end

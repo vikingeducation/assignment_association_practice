@@ -5,3 +5,67 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "Clearing all the models data ..."
+User.destroy_all
+Tag.destroy_all
+Post.destroy_all
+Comment.destroy_all
+Category.destroy_all
+
+puts "... DONE"
+
+multiplier = 10
+
+puts "creating users"
+(multiplier*4).times do |t|
+  User.create(
+    name: Faker::Name.first_name
+    # users_posts_id: UsersPost.all.sample.post_id
+    )
+end
+
+puts "Creating categories"
+multiplier.times do |t|
+  Category.create(name: Faker::Book.genre)
+end
+
+puts "Creating posts"
+multiplier.times do |t|
+  Post.create(
+    title: Faker::Lorem.sentence(rand(2..8)), 
+      body: Faker::Lorem.sentence(rand(20..160)),
+      category_id: Category.all.sample.id
+      # users_posts_id: UsersPost.all.sample.user_id,  
+      # posts_tags: PostsTag.all.sample.tag_id
+      )
+end
+
+# User.all.each do |msg|
+#   rand(4).times { Post.create([content: FFaker::CheesyLingo.sentence, message_id: msg.id]) }
+#   tags = 2.times { msg.tags.create([title: FFaker::HipsterIpsum.word.gsub(' ','-').downcase]) }
+#   msg.tags = tags
+# end
+
+
+puts "Creating comments"
+(multiplier * 2).times do |t|
+  Comment.create(
+    comment: Faker::Lorem.sentence(rand(6..60)), 
+    user_id: User.all.sample.id, 
+    post_id: Post.all.sample.id
+    )
+end
+
+
+puts "creating tags"
+(multiplier*4).times do |t|
+  Tag.create(
+    name: Faker::Lorem.sentence(rand(1))
+    # posts_tags_id: PostsTag.all.sample.post_id
+    )
+end
+
+
+puts "All data is created now."
+
