@@ -21,7 +21,6 @@ puts "creating users"
 (multiplier*4).times do |t|
   User.create(
     name: Faker::Name.first_name
-    # users_posts_id: UsersPost.all.sample.post_id
     )
 end
 
@@ -36,17 +35,8 @@ multiplier.times do |t|
     title: Faker::Lorem.sentence(rand(2..8)), 
       body: Faker::Lorem.sentence(rand(20..160)),
       category_id: Category.all.sample.id
-      # users_posts_id: UsersPost.all.sample.user_id,  
-      # posts_tags: PostsTag.all.sample.tag_id
       )
 end
-
-# User.all.each do |msg|
-#   rand(4).times { Post.create([content: FFaker::CheesyLingo.sentence, message_id: msg.id]) }
-#   tags = 2.times { msg.tags.create([title: FFaker::HipsterIpsum.word.gsub(' ','-').downcase]) }
-#   msg.tags = tags
-# end
-
 
 puts "Creating comments"
 (multiplier * 2).times do |t|
@@ -62,10 +52,17 @@ puts "creating tags"
 (multiplier*4).times do |t|
   Tag.create(
     name: Faker::Lorem.sentence(rand(1))
-    # posts_tags_id: PostsTag.all.sample.post_id
     )
 end
 
+
+  User.all.each {|u| u.posts << Post.all.sample }
+
+  Post.all.each do |p|
+    rand(1..3).times do
+      p.tags << Tag.all.sample
+    end
+  end
 
 puts "All data is created now."
 

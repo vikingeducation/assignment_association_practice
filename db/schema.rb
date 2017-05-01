@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(version: 20170429190800) do
     t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
   end
 
+  create_table "posts_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.index ["post_id"], name: "index_posts_users_on_post_id"
+    t.index ["user_id"], name: "index_posts_users_on_user_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -61,13 +68,6 @@ ActiveRecord::Schema.define(version: 20170429190800) do
     t.integer "comment_id"
     t.index ["comment_id"], name: "index_users_comments_on_comment_id"
     t.index ["user_id"], name: "index_users_comments_on_user_id"
-  end
-
-  create_table "users_posts", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "post_id"
-    t.index ["post_id"], name: "index_users_posts_on_post_id"
-    t.index ["user_id"], name: "index_users_posts_on_user_id"
   end
 
 end
