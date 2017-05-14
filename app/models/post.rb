@@ -11,6 +11,6 @@ class Post < ApplicationRecord
   has_many :post_taggings,
            :class_name => "PostTag"
   has_many :tags,
-           :through => :post_tags,
+           :through => :post_taggings,
            :dependent => :destroy
 end

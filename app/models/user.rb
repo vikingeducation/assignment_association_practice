@@ -6,8 +6,7 @@ class User < ApplicationRecord
            :class_name => "UserPost"
   has_many :authored_posts,
            :through => :post_authorings,
-           :source => :post,
-           :dependent => :destroy
+           :source => :post
   has_many :tags_on_authored_posts,
            :through => :authored_posts,
            :source => :post_taggings
