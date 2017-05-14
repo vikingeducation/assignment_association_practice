@@ -8,6 +8,8 @@ class Post < ApplicationRecord
            :dependent => :destroy
   has_many :post_authorings,
            :class_name => "UserPost"
+  has_many :post_taggings,
+           :class_name => "PostTag"
   has_many :tags,
            :through => :post_tags,
            :dependent => :destroy
