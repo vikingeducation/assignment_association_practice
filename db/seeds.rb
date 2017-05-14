@@ -48,13 +48,15 @@ end
 
 # create posts
 20.times do
-  # create users posts
-  u = User.all.sample
-  u.posts.build({
+  # create posts
+  Post.create(
     :title => unique(Faker::Lorem.sentence),
     :body => unique(Faker::Lorem.paragraphs.join("\n")),
     :category_id => Category.pluck(:id).sample
-  }).save
+  )
+  # create users posts
+  u, p = User.all.sample, Post.all.sample
+  u.posts << p unless u.posts.include?(p)
   # create posts tags
   p, t = Post.all.sample, Tag.all.sample
   p.tags << t unless p.tags.include?(t)
