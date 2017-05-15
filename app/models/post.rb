@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :users
 
   has_many :posts_users, :dependent => :destroy
-  has_many :post_authorings, :through => :posts_users, :source => :user
+  has_many :post_authorings, :class_name => "PostsUser", :dependent => :destroy
 
   has_many :post_taggings, :class_name => "PostsTag", :dependent => :destroy
 
