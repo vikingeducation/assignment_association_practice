@@ -9,6 +9,8 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @categories = Category.all.map {|obj| [obj.name, obj.id]}
+    @tag_options = Tag.all.map {|obj| [obj.name, obj.id]}
   end
 
   def create
