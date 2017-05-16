@@ -1,6 +1,8 @@
 <H2>Create new post</H2>
 
-<%= @post.errors.full_messages %>
+<% if @post.errors.any? %>
+  <%= @post.errors.full_messages %>
+<% end %>
 
 
 <%= form_for @post do |f| %>
@@ -12,8 +14,11 @@
                                :id,
                                :name)  %><br>
   <p>Chose category for the post</p>
-  <% Category.all.each do |cat| %>
-    <%= f.radio_button(:category, cat.name)  %><br>
-  <% end %>
+  <%= f.collection_radio_buttons(:category_id,
+                               Category.all,
+                               :id,
+                               :name)  do |b| %>
+    <%= b.label(:class => "col-md-4"){b.radio_button + "  " + b.text}  %><br>
+  <% end %><br>
   <%= f.submit "Create Post" %>
 <% end %>

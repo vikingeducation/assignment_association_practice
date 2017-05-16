@@ -7,6 +7,35 @@
   <%= f.collection_check_boxes(:tag_ids,
                                Tag.all,
                                :id,
-                               :name)  %><br>
+                               :name)  do |b| %>
+    <%= b.label(:class => "col-md-4"){b.check_box + "  " + b.text}  %>
+  <% end %><br>
+  <%= f.collection_radio_buttons(:category_id,
+                               Category.all,
+                               :id,
+                               :name)  do |b| %>
+    <%= b.label(:class => "col-md-4"){b.radio_button + "  " + b.text}  %><br>
+  <% end %><br>
+  <%= f.select(:category_id, @categories) %><br><br>
+  <%= f.submit "Update Post" %>
+<% end %>
+
+
+
+
+
+<H2>Edit new post SELECT</H2>
+
+<%= form_for @post do |f| %>
+  <%= f.text_field :title %><br>
+  <%= f.text_area :body, size: "40x40"  %><br>
+  <p>Chose tags for the post</p>
+  <%= f.collection_check_boxes(:tag_ids,
+                               Tag.all,
+                               :id,
+                               :name)  do |b| %>
+    <%= b.label(:class => "col-md-4"){b.check_box + "  " + b.text}  %>
+  <% end %><br>
+  <%= f.select(:category_id, @categories) %><br><br>
   <%= f.submit "Update Post" %>
 <% end %>

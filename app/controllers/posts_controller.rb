@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     @post = Post.new(whitelisted_post_params)
     if @post.save
       flash[:success] = "Post created"
-      redirect_to post_path
+      redirect_to @post
     else
       flash.now[:danger] = "ERROR!! Post hasn't been created."
       render 'new'
@@ -24,12 +24,13 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @categories = Category.all.map {|obj| [obj.id, obj.name]}
   end
 
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes(whitelisted_post_params)
-      flash[:success] = "Post created"
+      flash[:success] = "Post updated"
       redirect_to post_path
     else
       flash.now[:danger] = "ERROR!! Post hasn't been created."
@@ -39,7 +40,7 @@ class PostsController < ApplicationController
 
   private
   def whitelisted_post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
   end
 
 end

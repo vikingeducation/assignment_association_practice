@@ -5,3 +5,16 @@
 <p>
   <%= @post.body %>
 </p>
+<br>
+<br><br><br>
+<h4>Post Tags</h4>
+<p>
+  <% @post.tags.each do |t| %>
+    <%= t.name %><br>
+  <% end %>
+</p>
+<br><br><br>
+<h4>Category</h4>
+<p>
+    <%= @post.category.name %>
+</p>
