@@ -24,7 +24,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @categories = Category.all.map {|obj| [obj.id, obj.name]}
+    @categories = Category.all.map {|obj| [obj.name, obj.id]}
   end
 
   def update
