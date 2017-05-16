@@ -25,6 +25,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @categories = Category.all.map {|obj| [obj.name, obj.id]}
+    @tag_options = Tag.all.map {|obj| [obj.name, obj.id]}
   end
 
   def update

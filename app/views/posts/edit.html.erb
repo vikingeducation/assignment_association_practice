@@ -37,6 +37,13 @@
                           :id,
                           :name) %><br>
 
+  <h5>select for combo box</h5>
+  <code>f.select(:category_id,....)</code><br>
+  <%= f.select(:tag_ids,
+                @tag_options,
+                {},
+                multiple: true, :style => "height:280px") %><br>
+
   <%= f.submit "Update Post" %>
 <% end %>
 
