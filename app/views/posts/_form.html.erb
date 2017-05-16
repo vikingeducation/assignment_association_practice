@@ -21,7 +21,9 @@
   <%= f.collection_radio_buttons(:category_id,
                                Category.all,
                                :id,
-                               :name)  do |b| %>
+                               :name,
+                               {:include_blank => true},
+                               {:class => "beautify-radio", :id => "marker"})  do |b| %>
     <%= b.label(:class => "col-md-4"){b.radio_button + "  " + b.text}  %><br>
   <% end %><br>
 
@@ -40,8 +42,8 @@
   <code>f.select(:category_id,....)</code><br>
   <%= f.select(:tag_ids,
                 @tag_options,
-                {},
-                multiple: true, :style => "height:280px") %><br>
+                {:include_blank => true},
+                multiple: true, :style => "height:280px", class: "format-setter" ) %><br>
 
   <%= f.submit(@post.persisted? ? "Update Post" : "Create Post")  %>
 <% end %>
