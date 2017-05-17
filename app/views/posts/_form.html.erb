@@ -50,6 +50,16 @@
   <%= post_fields.fields_for :comments do |comment_field| %>
     <%= comment_field.label "comment"  %><br>
     <%= comment_field.text_area "comment", size: "60x10" %><br>
+    <%= comment_field.label "user"  %>
+    <%= comment_field.collection_select(:user_id,
+                          User.all,
+                          :id,
+                          :name,
+                          {:include_blank => true}) %><br>
+    <% if comment_field.object.persisted? %>
+      <%= comment_field.label :_destroy, "Delete this comment?" %>
+      <%= comment_field.check_box :_destroy %>
+    <% end %><br><br>
   <% end %>
 
   <%= post_fields.submit(@post.persisted? ? "Update Post" : "Create Post")  %>

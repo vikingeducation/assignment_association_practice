@@ -20,7 +20,7 @@ class PostsController < ApplicationController
       flash[:success] = "Post created"
       redirect_to @post
     else
-      flash.now[:danger] = "ERROR!! Post hasn't been created."
+      flash.now[:danger] = "ERROR!! Post hasn't been created." + @post.errors.full_messages.join(', ')
       render 'new'
     end
   end
@@ -38,7 +38,7 @@ class PostsController < ApplicationController
       flash[:success] = "Post updated"
       redirect_to @post
     else
-      flash.now[:danger] = "ERROR!! Post hasn't been created."
+      flash.now[:danger] = "ERROR!! Post hasn't been created." + @post.errors.full_messages.join(', ')
       render 'edit'
     end
   end
