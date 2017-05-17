@@ -45,11 +45,13 @@
                 @tag_options,
                 {:include_blank => true},
                 multiple: true, :style => "height:280px", class: "format-setter" ) %><br>
+
   <h4>COMMENTS:</h4>
   <%= post_fields.fields_for :comments do |comment_field| %>
-    <%= comment_field.label :comment  %><br>
-    <%= comment_field.text_area :comment, size: "60x10" %><br>
+    <%= comment_field.label "comment"  %><br>
+    <%= comment_field.text_area "comment", size: "60x10" %><br>
   <% end %>
+
   <%= post_fields.submit(@post.persisted? ? "Update Post" : "Create Post")  %>
 <% end %>
 <br><br><br><br>

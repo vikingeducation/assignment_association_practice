@@ -9,9 +9,9 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @post.comments.build
     @categories = Category.all.map {|obj| [obj.name, obj.id]}
     @tag_options = Tag.all.map {|obj| [obj.name, obj.id]}
+    @comment = @post.comments.build
   end
 
   def create
@@ -27,9 +27,9 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @post.comments.build
     @categories = Category.all.map {|obj| [obj.name, obj.id]}
     @tag_options = Tag.all.map {|obj| [obj.name, obj.id]}
+    @post.comments.build
   end
 
   def update
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
   private
   def whitelisted_post_params
     params.require(:post).permit(:title, :body, :category_id, {:tag_ids => []},
-                                {:comments_attributes => [:id, :comment, :post_id, :user_id] })
+                                {:comments_attributes => [:comment, :id, :_destroy] })
   end
 
 end
