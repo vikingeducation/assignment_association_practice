@@ -1,7 +1,7 @@
 
 ## RAW HTML
 ```
-<form action="/posts/1" method="patch" accept-charset="utf-8">
+<form action="/posts/1" method="post" accept-charset="utf-8">
   <input type="text" name="title">
   <textarea name="body"></textarea>
 

@@ -3,13 +3,13 @@
 
 <H2><%= @post.persisted? ? "Edit" : "Create" %>  new post <code>form_for</code></H2>
 
-<%= form_for @post do |f| %>
-  <%= f.text_field :title %><br>
-  <%= f.text_area :body, size: "40x40"  %><br>
+<%= form_for @post do |post_fields| %>
+  <%= post_fields.text_field :title %><br>
+  <%= post_fields.text_area :body, size: "40x40"  %><br>
 
   <h5>check boxes</h5>
-  <code>f.collection_radio_buttons</code><br>
-  <%= f.collection_check_boxes(:tag_ids,
+  <code>post_fields.collection_radio_buttons</code><br>
+  <%= post_fields.collection_check_boxes(:tag_ids,
                                Tag.all,
                                :id,
                                :name)  do |b| %>
@@ -17,8 +17,8 @@
   <% end %><br>
 
   <h5>radio buttons</h5>
-  <code>f.collection_radio_buttons</code><br>
-  <%= f.collection_radio_buttons(:category_id,
+  <code>post_fields.collection_radio_buttons</code><br>
+  <%= post_fields.collection_radio_buttons(:category_id,
                                Category.all,
                                :id,
                                :name,
@@ -28,25 +28,36 @@
   <% end %><br>
 
   <h5>select for dropdown menu</h5>
-  <code>f.select(:category_id, @categories)</code><br>
-  <%= f.select(:category_id, @categories) %><br><br>
+  <code>post_fields.select(:category_id, @categories)</code><br>
+  <%= post_fields.select(:category_id, @categories) %><br><br>
 
   <h5>collection_select for dropdown menu</h5>
-  <code>f.collection_select(:category_id,....)</code><br>
-  <%= f.collection_select(:category_id,
+  <code>post_fields.collection_select(:category_id,....)</code><br>
+  <%= post_fields.collection_select(:category_id,
                           Category.all,
                           :id,
-                          :name) %><br>
+                          :name,
+                          {:include_blank => true, :selected => '3'}) %><br>
 
   <h5>select for combo box</h5>
-  <code>f.select(:category_id,....)</code><br>
-  <%= f.select(:tag_ids,
+  <code>post_fields.select(:category_id,....)</code><br>
+  <%= post_fields.select(:tag_ids,
                 @tag_options,
                 {:include_blank => true},
                 multiple: true, :style => "height:280px", class: "format-setter" ) %><br>
-
-  <%= f.submit(@post.persisted? ? "Update Post" : "Create Post")  %>
+  <h4>COMMENTS:</h4>
+  <%= post_fields.fields_for :comments do |comment_field| %>
+    <%= comment_field.label :comment  %><br>
+    <%= comment_field.text_area :comment, size: "60x10" %><br>
+  <% end %>
+  <%= post_fields.submit(@post.persisted? ? "Update Post" : "Create Post")  %>
 <% end %>
+<br><br><br><br>
+
+
+
+
+
 
 
 <!-- =================FORM_TAG=================== -->
@@ -93,3 +104,11 @@
 
   <%= submit_tag(@post.persisted? ? "Update Post" : "Create Post") %>
 <% end %>
+
+
+
+
+<!-- =================FORM FOR A COMMENT=================== -->
+
+
+
