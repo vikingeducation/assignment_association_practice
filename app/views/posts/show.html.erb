@@ -4,9 +4,16 @@
 
 <p>
   <%= @post.body %>
+</p><br><br>
+<h4>COMMENTS</h4>
+<p>
+  <% @post.comments.each do |t| %>
+    <%= t.id %><br>
+    <%= t.comment %><br><br>
+  <% end %>
 </p>
 <br>
-<br><br><br>
+<br><br>
 <h4>Post Tags</h4>
 <p>
   <% @post.tags.each do |t| %>

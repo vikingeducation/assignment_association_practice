@@ -36,7 +36,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.update_attributes(whitelisted_post_params)
       flash[:success] = "Post updated"
-      redirect_to post_path
+      redirect_to @post
     else
       flash.now[:danger] = "ERROR!! Post hasn't been created."
       render 'edit'
@@ -45,8 +45,7 @@ class PostsController < ApplicationController
 
   private
   def whitelisted_post_params
-    params.require(:post).permit(:title, :body, :category_id, {:tag_ids => []},
-                                {:comments_attributes => [:comment, :id, :_destroy] })
+    params.require(:post).permit(:title, :body, :category_id, {:tag_ids => []}, {:comments_attributes => [:comment, :post_id, :user_id, :id, :_destroy] })
   end
 
 end

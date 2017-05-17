@@ -29,8 +29,8 @@
 
   <h5>select for dropdown menu</h5>
   <code>post_fields.select(:category_id, @categories)</code><br>
-  <%= post_fields.select(:category_id, @categories) %><br><br>
 
+<%= post_fields.select :category_id, Category.all.collect {|f| [ "#{f.name}", f.id ] }  %>
   <h5>collection_select for dropdown menu</h5>
   <code>post_fields.collection_select(:category_id,....)</code><br>
   <%= post_fields.collection_select(:category_id,
@@ -42,7 +42,7 @@
   <h5>select for combo box</h5>
   <code>post_fields.select(:category_id,....)</code><br>
   <%= post_fields.select(:tag_ids,
-                @tag_options,
+                Tag.all.collect {|f| [ "#{f.name}", f.id ] },
                 {:include_blank => true},
                 multiple: true, :style => "height:280px", class: "format-setter" ) %><br>
 
@@ -94,7 +94,7 @@
 
   <h5>select_tag for dropdown menu</h5>
   <code>select_tag</code><br>
-  <%= select_tag(:category_id, options_for_select(@categories, @post.category_id)) %>
+  <%= select_tag(:category_id, options_for_select(Category.all.collect {|f| [ "#{f.name}", f.id ] }, @post.category_id)) %>
 
   <h5>collection_select for dropdown menu</h5>
   <code>collection_select(:category_id,...)</code><br>
@@ -106,11 +106,6 @@
 
   <%= submit_tag(@post.persisted? ? "Update Post" : "Create Post") %>
 <% end %>
-
-
-
-
-<!-- =================FORM FOR A COMMENT=================== -->
 
 
 
