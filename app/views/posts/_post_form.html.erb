@@ -1,0 +1,102 @@
+<% # params => :post, :method %>
+
+<h3>form_for with radio Category</h3>
+<%= form_for post, :method => method do |f| %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+  </p>
+
+  <p>
+    Category: <br>
+    <%= f.collection_radio_buttons :category_id, Category.all, :id, :name %>
+  </p>
+
+  <p>
+    Tags: <br>
+    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+  </p>
+
+  <%= f.fields_for :comments do |cf| %>
+    <p>Comments: <br>
+      <% if cf.object.persisted? %>
+        <%= cf.label :_destroy, "Delete this comment?" %>
+        <%= cf.check_box :_destroy %> <br>
+      <% end %>
+      <%= cf.label :user_id, "Author" %>
+      <%= cf.collection_select :user_id, User.all, :id, :name, {:prompt=>true} %> <br>
+
+      <%= cf.label :body %>
+      <%= cf.text_area :body %>
+
+    </p>
+  <% end %>
+
+  <%= f.button "Submit" %>
+<% end %>
+
+<hr>
+<h3>form_for with select Category</h3>
+<%= form_for post, :method => method do |f| %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+  </p>
+
+  <p>
+    Category: <br>
+    <%= f.select :category_id, Category.all.map{|c| [c.name, c.id] }, {:prompt=>true}, {} %>
+  </p>
+
+  <p>
+    Tags: <br>
+    <%= f.collection_select :tag_ids, Tag.all, :id, :name,
+                            {},
+                            {:class => "form-control",
+                             :id => "an-id",
+                             :multiple => true}
+    %>
+
+  </p>
+
+  <%= f.button "Submit" %>
+<% end %>
+
+<hr>
+<h3>form_tag with select Category</h3>
+<%= form_tag (method == :post ? posts_path : post_path(post.id)),
+             {:method => method} do %>
+  <p>
+    <%= label_tag "post[title]", "Title" %>
+    <%= text_field_tag "post[title]", post.title %>
+  </p>
+
+  <p>
+    <%= label_tag "post[body]", "Body" %>
+    <%= text_field_tag "post[body]", post.body %>
+  </p>
+
+  <p>
+    Category: <br>
+    <%= collection_select(:post, :category_id, Category.all, :id, :name) %>
+
+  </p>
+
+  <p>
+    Tags: <br>
+    <%= collection_check_boxes :post, :tag_ids, Tag.all, :id, :name %>
+  </p>
+
+  <%= button_tag "Submit" %>
+
+<% end %>

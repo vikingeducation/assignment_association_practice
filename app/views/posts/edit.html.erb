@@ -1,0 +1,5 @@
+<h1>Edit Post</h1>
+
+<%= render :partial => "shared/form_errors", :locals => {:obj => @post} %>
+
+<%= render :partial => "post_form", :locals => {:post => @post, :method => :put} %>
