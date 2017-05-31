@@ -6,10 +6,12 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post.comments.build
   end
 
   def new
     @post = Post.new
+    @comment = @post.comments.build
   end
 
   def create
@@ -23,6 +25,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @post.comments.build
   end
 
   def update
@@ -35,7 +38,10 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, {:tag_ids => []}, :category_id)
+    params.require(:post).permit(
+      :title, :body, {:tag_ids => []}, :category_id,
+      {:comments_attributes => [:id, :body, :user_id, :_destroy]}
+    )
   end
 
 

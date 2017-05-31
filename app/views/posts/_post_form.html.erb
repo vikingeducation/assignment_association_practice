@@ -22,10 +22,25 @@
     <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
   </p>
 
+  <%= f.fields_for :comments do |cf| %>
+    <p>Comments: <br>
+      <% if cf.object.persisted? %>
+        <%= cf.label :_destroy, "Delete this comment?" %>
+        <%= cf.check_box :_destroy %> <br>
+      <% end %>
+      <%= cf.label :user_id, "Author" %>
+      <%= cf.collection_select :user_id, User.all, :id, :name, {:prompt=>true} %> <br>
+
+      <%= cf.label :body %>
+      <%= cf.text_area :body %>
+
+    </p>
+  <% end %>
+
   <%= f.button "Submit" %>
 <% end %>
 
-
+<hr>
 <h3>form_for with select Category</h3>
 <%= form_for post, :method => method do |f| %>
   <p>
@@ -57,7 +72,7 @@
   <%= f.button "Submit" %>
 <% end %>
 
-
+<hr>
 <h3>form_tag with select Category</h3>
 <%= form_tag (method == :post ? posts_path : post_path(post.id)),
              {:method => method} do %>

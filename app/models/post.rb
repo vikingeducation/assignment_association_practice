@@ -1,6 +1,11 @@
 class Post < ApplicationRecord
-  has_many :comments
-  #belongs_to :category
+  has_many :comments, :inverse_of => :parent_post
+  accepts_nested_attributes_for :comments,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true;
+
+
+  belongs_to :category
   has_many :user_posts
   has_many :authors,
            :through => :user_posts,
