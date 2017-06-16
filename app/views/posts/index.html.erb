@@ -1,0 +1,8 @@
+<h1>All Posts</h1>
+<% @posts.each do |post| %>
+  <%= post.title %>
+  <%= post.body %>
+  <%= post.user_id %>
+  <%= post.category_id %>
+  <br />
+<% end %>
