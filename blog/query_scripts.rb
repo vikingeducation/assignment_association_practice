@@ -158,21 +158,29 @@ def remove_duplicate_records
   UserPost.where.not(id: ids).destroy_all  
 end
 
-  # 21. Delete a user and its user_post connections. If a post for that user has no other author, then delete the post as well. (Extra self-made question.)
+  # 21. Delete a user and its user_post connections. If a post for that user has no other author, then delete the post as well. (Extra self-made question.) Note: dependencies are deleted in callback first.
 
-def delete_user # not tested
+def delete_user
+  User.first.destroy
+end
+
+# Insert in user.rb (models) callback:
+  before_destroy :delete_user_dependencies
+
+private
+
+def delete_user_dependencies 
+  # activated before deleting user ... not tested
   # destroy associated user_posts 
   # but if a user post has no other author, destroy the post as well
   posts = User.first.posts
   posts.each do |post|
-    unless post.users.count = 1 # ie, post has other authors
+    unless post.users.count == 1 # ie, post has other authors
       User.first.user_posts.where("user_id =? and post_id = ?", User.id, post.id).destroy
     else # ie, post has only this author
       post.destroy # will destroy dependent user_post at same time
     end
   end
-  User.first.destroy
+  
 end
-
-
 

@@ -1,0 +1,48 @@
+<% unless params.as_json.empty? %>
+  <pre><%= JSON.pretty_generate(params.as_json) %></pre>
+<% end %>
+
+<form action="/static_pages/1" method="post">
+  <input type="hidden" name="utf8" value="&#10003;"/>
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="+8liMahjMiyA0WFF8ef8wzXu72+xXIKxlYzuI5UcTC4="
+    />
+  <input type="hidden" name="_method" value="PATCH"/>
+  <input type="hidden" name="id" value="1"/>
+  <input type="hidden" name="commit" value="Update Post"/>
+
+  <fieldset>
+    <legend>Post</legend>
+
+    <div>
+      <label for="post_title">Title</label>
+      <input type="text" id="post_title" name="post[title]" value="My Super Title"/>
+    </div>
+
+    <div>
+      <label for="post_tag_ids">Tags</label>
+      <select id="post_tag_ids" name="post[tag_ids][]" multiple="true">
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+      </select>
+      <input type="hidden" name="post[tag_ids][]" value=""/>
+    </div>
+
+    <div>
+      <label for="post_body">Body</label>
+      <br/>
+      <textarea id="post_body" name="post[body]">
+        Some body of a post
+      </textarea>
+    </div>
+
+    <button type="submit">Submit</button>
+  </fieldset>
+</form>
+
+

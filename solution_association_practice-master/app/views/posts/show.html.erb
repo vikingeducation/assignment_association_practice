@@ -1,0 +1,46 @@
+<h1>
+  <%= link_to('Post', posts_path) %>
+</h1>
+
+<p>
+  Category: <%= @post.category ? @post.category.name : '-' %>
+</p>
+<p>
+  Tags: <%= @post.tags.present? ? @post.tags.map {|tag| tag.name}.join(', ') : '-' %>
+</p>
+
+<h2>
+  Title: <%= link_to(@post.title, post_path(@post)) %>
+</h2>
+
+<p>
+  Body: <%= @post.body %>
+</p>
+
+<p>
+  <%= link_to('Edit', edit_post_path(@post), :class => 'btn btn-primary') %>
+  <%= link_to('Delete', post_path(@post), :method => :delete, :class => 'btn btn-danger') %>
+</p>
+
+<h2>Comments</h2>
+<% if @post.comments.present? %>
+  <ul class="list-group">
+    <% @post.comments.each do |comment| %>
+      <li class="list-group-item">
+        <div>
+          <p>
+            ID: <%= comment.id %>     
+          </p>
+          <p>
+            User: <%= comment.author.name %>
+          </p>
+          <p>
+            Comment: <%= comment.body %>
+          </p>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No comments</p>
+<% end %>

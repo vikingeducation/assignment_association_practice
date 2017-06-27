@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   
+  before_destroy :delete_user_dependencies
+
   has_many :comments, 
            foreign_key: :author_id,
            dependent: :destroy
