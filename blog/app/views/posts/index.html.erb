@@ -7,31 +7,35 @@
   <h2>Index of Posts<h2><br>
 
 
-<div class="row">
-  <div class="col-md-12">
-    <%= link_to "Create a New User", new_post_path,
-        class: "btn btn-primary btn-lg btn-block btn-create text-center"%><br>
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to "Create a New User", new_post_path,
+          class: "btn btn-primary btn-lg btn-block btn-create text-center"%><br>
+    </div>
   </div>
-</div>
 
 
   <div class="row">
     <div class="col-md-12 well">
-      <table class="table table-striped table-bordered"
-
+      <table class="table table-striped table-bordered small">
         <thead>
           <tr>
             <th>Title</th>
             <th>Body</th>
+            <th>Category</th>
+            <th>Tag(s)</th>
           </tr>
         </thead>
 
         <tbody>
-          <% @posts.each do |post| %>
+          <% @posts.all.each do |post| %>
             <tr>
               <td><%= post.title %></td>
               <td><%= post.body %></td>
-
+              <td><%= post.category.name %></td>
+              <td><% post.tags.each do |tag| %>
+                <%= tag.name %><br>
+              <% end %></td>
             </tr>
           <% end %>
         </tbody>

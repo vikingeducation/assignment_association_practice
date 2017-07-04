@@ -1,0 +1,56 @@
+
+<!-- show post -->
+
+
+<div class="container">
+  <h1>Practice With Collection Forms<h1>
+  <h2>Show Post<h2><br>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>ID</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @post.id %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Title</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @post.title %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Body</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @post.body %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Category</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @post.category.name %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Tags</strong>
+    </div>
+    <div class = "col-md-9">
+      <% @post.tags.each do |tag| %>
+        <span><%= tag.name %><br></span>
+      <% end %>
+    </div>
+  </div>
+
+</div> <!--Container -->

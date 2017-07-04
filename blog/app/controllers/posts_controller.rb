@@ -10,10 +10,12 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(whitelisted_post_params)
-    if post.save
+    if @post.save
+      puts "saved"
       flash[:success] = "Success! Post created"
       redirect_to @post
     else
+      puts @post.errors.full_messages
       flash.now[:error] = "Error! Post not created"
       render :new
     end
@@ -46,7 +48,8 @@ class PostsController < ApplicationController
   private
 
   def whitelisted_post_params
-    params.require(:post).permit(:title, :body, tag_ids: [])
+    puts params
+    params.require(:post).permit(:title, :body, :tag_ids => [])
   end
 
 end

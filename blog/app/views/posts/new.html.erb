@@ -1,43 +1,48 @@
 
 
 <!-- new post -->
+<div class="container">
+  <h1>Practice With Collection Forms<h1>
+  <h2>Add New Post</h2><br>
 
-<h1>Practice With Collection Forms<h1><br>
+  <%= form_for @post do |f| %>
 
-<h2>Add New Post</h2><br>
+    <div class="row">
+      <div class="col-md-12">
 
-<%= form_for @post do |f| %>
-
-  <div class = "row form-control">
-    <div class = "col-md-12">
-
-      <%= f.label :title %>
-      <%= form_field_error_message(post, :title) %>
-      <%= f.text_field :title,
-          placeholder: "Enter title here" %><br>
+        <%= f.label :title %><br>
+        <%= f.text_field :title, size: 60,
+            placeholder: "Enter title here" %><br><br>
 
 
-      <%= f.label :body %>
-      <%= form_field_error_message(post, :body) %>
-      <%= f.text_area :body, size: "60x10",
-          placeholder: "Enter body contents here" %>
+        <%= f.label :body %><br>
+        <%= f.text_area :body, size: "60x5",
+            placeholder: "Enter body contents here" %><br><br>
 
+      </div>
     </div>
-  </div>
 
-  <div class= "row form-control">
-    <div class = "col-md-12">
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {})   do |b| %>
-      <%= b.lable(class: "col-md-4"){b.check_box + " " + b.text } %>
-    <% end %>
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label "Check/uncheck post tags" %><br>
+        <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {})   do |b| %>
+          <%= b.label(class: "col-md-4"){b.check_box + " " + b.text } %>
+        <% end %><br><br>
+
+      </div>
     </div>
-  </div>
 
-  <div class= "row form-control">
-    <div class = "col-md-12">
-      <%= f.submit "#{post.persisted? ? 'Edit Post' : 'Create Post'}", class: "btn btn-large btn-primary btn-wide" %>
+    <div class= "row">
+      <div class = "col-md-12">
+        <%= f.submit @post.persisted? ? "Update Post" : "Create New Post", class: "btn btn-large btn-primary btn-wide" %>
+      </div>
     </div>
-  </div>
 
-<% end %>
+  <% end %>
+
+</div>
+
+
+  
+
 
