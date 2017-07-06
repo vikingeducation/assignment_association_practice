@@ -8,7 +8,7 @@
 
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6 col-md-offset-3">
       <%= link_to "Create a New User", new_post_path,
           class: "btn btn-primary btn-lg btn-block btn-create text-center"%><br>
     </div>
@@ -24,18 +24,20 @@
             <th>Body</th>
             <th>Category</th>
             <th>Tag(s)</th>
+            <th></th>
           </tr>
         </thead>
 
         <tbody>
-          <% @posts.all.each do |post| %>
+          <% @posts.last(10).each do |post| %>
             <tr>
               <td><%= post.title %></td>
               <td><%= post.body %></td>
-              <td><%= post.category.name %></td>
+              <td><%= post.category.name if post.category %></td>
               <td><% post.tags.each do |tag| %>
                 <%= tag.name %><br>
               <% end %></td>
+              <td><%=link_to "Edit Post", edit_post_path(post)%></td>
             </tr>
           <% end %>
         </tbody>

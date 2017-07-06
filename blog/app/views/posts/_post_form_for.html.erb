@@ -1,0 +1,73 @@
+
+<!-- new/edit  post -->
+
+<h4>Note: This form is produced with "form_for"</h4><br>
+
+
+
+  <%= form_for @post do |f| %>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <%= f.label :title %><br>
+        <%= f.text_field :title, size: 60,
+            placeholder: "Enter title here" %><br><br>
+
+
+        <%= f.label :body %><br>
+        <%= f.text_area :body, size: "60x5",
+            placeholder: "Enter body contents here" %><br><br>
+
+<!--    # ad-hoc tag input 
+        <%= f.label :category_id %><br>
+        <%= f.number_field :category_id, size: 60,
+            placeholder: "Enter body contents here: 238" %><br><br>
+ -->
+      </div>
+    </div>
+
+<!--    # radio buttons category input-->
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label "Select a category" %><br>
+        <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name, {})   do |b| %>
+          <%= b.label(class: "col-md-4"){b.radio_button + " " + b.text } %> 
+            <!-- Note: "radio_button(checked: false)" will render all buttons unchecked -->
+        <% end %><br><br><br><br>
+      </div>
+    </div> 
+
+<!--    # dropdown collection category input-->
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label "Select a category" %><br>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: true}, class: "col-md-2") %><br><br>
+      </div>
+    </div>
+
+<!--  # collection check boxes tag input -->
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label "Check/uncheck post tags" %><br>
+        <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {})   do |b| %>
+          <%= b.label(class: "col-md-4"){b.check_box + " " + b.text } %>
+        <% end %><br><br>
+      </div>
+    </div>
+
+    <div class= "row">
+      <div class = "col-md-12">
+        <br>
+        <%= f.submit @post.persisted? ? "Update Post" : "Create New Post", class: "btn btn-large btn-primary btn-wide" %>
+      </div>
+    </div>
+
+  <% end %>
+
+</div>
+
+
+  
+
+

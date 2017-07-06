@@ -32,9 +32,11 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(whitelisted_post_params)
+      puts "updated"
       flash[:success] = "Success! Post updated"
       redirect_to @post
     else
+      puts @post.errors.full_messages
       flash.now[:error] = "Failure! Post not updated"
       render :edit
     end
@@ -49,7 +51,7 @@ class PostsController < ApplicationController
 
   def whitelisted_post_params
     puts params
-    params.require(:post).permit(:title, :body, :tag_ids => [])
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
   end
 
 end

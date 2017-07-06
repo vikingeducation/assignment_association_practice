@@ -13,7 +13,7 @@ class Post < ApplicationRecord
            dependent: :destroy
   has_many :tags, through: :post_tags
 
-  belongs_to :category
+  belongs_to :category, optional: true
 
 end
 
