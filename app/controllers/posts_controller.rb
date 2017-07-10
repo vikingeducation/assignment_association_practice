@@ -20,7 +20,7 @@ class PostsController < ApplicationController
       redirect_to posts_path
     else
       flash[:error] = "Post creation failed"
-      render 'new'
+      render :new
     end
   end
 
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
       redirect_to 'show'
     else
       flash[:error] = "Post update failed"
-      render 'edit'
+      render :edit
     end
   end
 
