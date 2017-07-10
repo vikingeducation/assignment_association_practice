@@ -32,7 +32,8 @@ end
   Post.create(
     title: Faker::StarWars.planet,
     body: Faker::StarWars.quote,
-    category_id: Faker::Number.between(1, 5)
+    category_id: Faker::Number.between(1, 5),
+    tag_id: Faker::Number.between(1,5)
   )
 end
 100.times do

@@ -38,4 +38,9 @@ class PostsController < ApplicationController
     end
   end
 
+  private
+  def safe_post_params
+    params.require(:post).permit(:title, :body, :category_id, :tags_id)
+  end
+
 end
