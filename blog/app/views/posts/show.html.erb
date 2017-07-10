@@ -1,0 +1,86 @@
+
+<!-- show post -->
+
+
+<div class="container">
+  <h1>Practice With Collection Forms<h1>
+  <h2>Show Post<h2><br>
+
+  <div class = "row small">
+    <div class = "col-md-3">
+      <strong>ID</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @post.id %></span>
+    </div>
+  </div><br>
+
+  <div class = "row small">
+    <div class = "col-md-3">
+      <strong>Title</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @post.title %></span>
+    </div>
+  </div><br>
+
+  <div class = "row small">
+    <div class = "col-md-3">
+      <strong>Body</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @post.body %></span>
+    </div>
+  </div><br>
+
+  <div class = "row small">
+    <div class = "col-md-3">
+      <strong>Category</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @post.category.name if @post.category %></span> 
+    </div>
+  </div><br>
+
+  <div class = "row small">
+    <div class = "col-md-3">
+      <strong>Tags</strong>
+    </div>
+    <div class = "col-md-9">
+      <% @post.tags.each do |tag| %>
+        <span><%= tag.name %><br></span>
+      <% end %>
+    </div>
+  </div><br>
+
+  <div class = "row small">
+    <div class = "col-md-3">
+      <strong>Comments</strong>
+    </div>
+    <div class = "col-md-9"> 
+      <% @post.comments.each do |comment| %>
+        <div class = "row">
+          <div class = "col-md-4">  
+            <strong>Author: </strong>
+            <span><%= comment.author.name %></span>
+          </div>
+          <div class = "col-md-8">  
+            <strong>Body: </strong>
+            <span><%= comment.body %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div><br>
+
+  <div class= "row small">
+    <div class = "col-md-3">
+      <%= link_to "Edit Post", edit_post_path(@post) %>
+    </div><br><br>
+    <div class = "col-md-3">
+      <%= link_to "Index of Posts", posts_path %>
+    </div>
+  </div>
+
+
+</div> <!--Container -->

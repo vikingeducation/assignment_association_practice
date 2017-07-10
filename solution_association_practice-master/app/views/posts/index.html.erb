@@ -1,0 +1,29 @@
+<header class="page-header">
+  <h1>Posts</h1>
+  <%= link_to('+ New Post', new_post_path, :class => 'btn btn-primary btn-lg') %>
+</header>
+
+<ul class="list-group">
+  <% @posts.each do |post| %>
+    <li class="list-group-item">
+      <div class="post">
+        <p>
+          Category: <%= post.category ? post.category.name : '-' %>
+        </p>
+        <p>
+          Tags: <%= post.tags.present? ? post.tags.map {|tag| tag.name}.join(', ') : '-' %>
+        </p>
+        <h2>
+          <%= link_to(post.title, post_path(post)) %>
+        </h2>
+        <p>
+          <%= post.body[0..100] if post.body %>...<%= link_to('[Read more]', post_path(post)) %>
+        </p>
+        <p>
+          <%= link_to('Edit', edit_post_path(post), :class => 'btn btn-primary') %>
+          <%= link_to('Delete', post_path(post), :method => :delete, :class => 'btn btn-danger') %>
+        </p>
+      </div>
+    </li>
+  <% end %>
+</ul>

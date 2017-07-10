@@ -1,0 +1,58 @@
+
+<!-- new/edit  post -->
+
+<h4>Note: This form is produced with "form_tag"</h4><br>
+
+<div class="container">
+  <div class="row">
+
+    <%= form_tag(posts_path) do %>
+
+      <div class="col-md-12">
+        <%= label_tag(:title) %><br>
+        <%= text_field_tag("post[title]", nil, size: 60,
+                  placeholder: "Enter title here") %><br><br>
+
+      </div>
+
+      <div class="col-md-12">
+          <%= label_tag(:body) %><br>
+          <%= text_area_tag("post[body]", nil, size: "60x5",
+                  placeholder: "Enter body contents here") %><br><br>
+      </div>
+
+<!--    # dropdown collection category input-->
+      <div class="col-md-12">
+        <%= label_tag "Select a category" %><br>
+        <%= collection_select(:post, :category_id, Category.all, :id, :name, {include_blank: true}, {multiple: true, class: "col-md-2 dropdown-format"}) %><br><br> 
+          <!-- Note: 1. "dropdown-format" is attempt to increase (in CSS) depth of dropdown from standard 4 lines to show all elements to choose from ... however, it does not work as overwritten by Bootstrap ... (Javascript or Bootstrap equivalent helps here to make more user friendly (Vlad explained)) 2. One scrolls through dropdown although scroll bar does not appear which is confusing -->
+      </div><br>
+
+<!--    # radio buttons category input-->
+      <div class="col-md-12">
+        <%= label_tag "Select a category" %><br>
+        <%= collection_radio_buttons(:post, :category_id, Category.all, :id, :name, {})   do |b| %>
+          <%= b.label(class: "col-md-4"){b.radio_button + " " + b.text } %>
+        <% end %><br><br><br>
+      </div>
+
+<!--  # collection check boxes tag input -->
+
+      <div class="col-md-12">
+        <%= label_tag "Check/uncheck post tags" %><br>
+        <%= collection_check_boxes(:post, :tag_ids, Tag.all, :id, :name, {})   do |b| %>
+          <%= b.label(class: "col-md-4"){b.check_box + " " + b.text } %>
+        <% end %>
+        <br><br>
+      </div>
+
+      <div class = "col-md-12">
+        <br>
+        <%= submit_tag @post.persisted? ? "Update Post" : "Create New Post", class: "btn btn-large btn-primary btn-wide" %>
+      </div>
+
+
+    <% end %>
+
+  </div>
+</div>

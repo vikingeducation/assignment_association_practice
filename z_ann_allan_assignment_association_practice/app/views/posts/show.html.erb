@@ -1,0 +1,12 @@
+<h3>Post : <%= @post.title %></h3>
+<h4>by: <%= @post.authors %></h4>
+<h4>Message:</h4>
+<p>
+  <%= @post.body %>
+</p>
+<% @post.comments.each do |comment| %>
+  <p>
+    <%= comment %>
+    <br/>
+  </p>
+<% end %>
