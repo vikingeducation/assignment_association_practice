@@ -15,37 +15,48 @@ Tag.destroy_all
 User.destroy_all
 puts "Old records destroyed."
 
+# -----create objects-----
 
-20.times do
+5.times do
   User.create(
     name: Faker::Name.name
   )
 end
-5.times do
+3.times do
   Category.create(
     name: Faker::HarryPotter.character
   )
 end
-5.times do
+3.times do
   Tag.create(
     name: Faker::LordOfTheRings.character
   )
 end
-50.times do
+20.times do
   Post.create(
     title: Faker::StarWars.planet,
     body: Faker::StarWars.quote,
     category_id: Faker::Number.between(1, 5),
-    tag_id: Faker::Number.between(1,5)
   )
 end
-100.times do
+20.times do
   Comment.create(
     body: Faker::StarWars.wookie_sentence,
-    user_id: Faker::Number.between(1, 20),
-    post_id: Faker::Number.between(1, 50)
   )
 end
+
+# -----associate objects-----
+      #associate user with comments
+20.times do |user_id|
+  3.times do
+    UserComments.create(
+      user_id: user_id,
+      comment_id: Faker::Number.between(1, 100)
+    )
+  end
+
+      #associate post with comments
+50.times do
 20.times do |user_id|
   3.times do
     PostsUser.create(
