@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for :post do |f| %>
+
+      <div class="form-group" id="title">
+        <%=f.label :title, :class=> "col-md-9" %>
+        <div class="col-md-9">
+          <%= f.text_field(:title, placeholder: "Title", :class => 'form_control') %>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="form-group" id="body">
+        <%=f.label :body, :class=> "col-md-9" %>
+        <div class="col-md-12">
+          <%= f.text_field(:body, placeholder: "Message", :class => 'form_control')  %>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="form-group" id="tags-checkbox">
+        <%=f.label :tags, :class=> "col-md-12" %>
+        <div class="col-md-12">
+          <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {:include_blank => true}, {:class => 'form_control'}) %>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="form-group" id="categories-radio">
+        <%= f.label :categories, :class=> "col-md-12" %>
+        <div class="col-md-12">
+          <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name, {:include_blank => true}, {:class => 'form_control'}) %>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="form-group" id="categories-drop-down-form-for">
+        <%=f.label :categories, :class=> "col-md-12" %>
+        <div class="col-md-9">
+          <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="form-group" id="tags-combo-box">
+        <%=f.label :tags, :class=> "col-md-9" %>
+        <div class="col-md-9">
+          <%= f.select(:tag_id, Tag.all, {}, multiple: true)%>
+        </div>
+      </div>
+      <%= f.submit(:class => 'btn') %>
+    <% end %>
+  </div>
+</div>
+<br/>
+<br/>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_tag post_path(:id) do %>
+      <%= select_tag(:category_id, options_for_select(@category_options, @post.category_id)) %>
+    <% end %>
+  </div>
+</div>
