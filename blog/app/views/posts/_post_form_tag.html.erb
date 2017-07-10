@@ -13,9 +13,6 @@
         <%= text_field_tag("post[title]", nil, size: 60,
                   placeholder: "Enter title here") %><br><br>
 
- <!--        <%= text_field_tag(:title, nil, size: 60,
-                  placeholder: "Enter title here") %><br><br> -->
-
       </div>
 
       <div class="col-md-12">
@@ -35,7 +32,7 @@
       <div class="col-md-12">
         <%= label_tag "Select a category" %><br>
         <%= collection_radio_buttons(:post, :category_id, Category.all, :id, :name, {})   do |b| %>
-          <%= b.label(class: "col-md-4"){b.radio_button(checked: true) + " " + b.text } %>
+          <%= b.label(class: "col-md-4"){b.radio_button + " " + b.text } %>
         <% end %><br><br><br>
       </div>
 

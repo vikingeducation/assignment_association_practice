@@ -16,7 +16,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    if @post.update(post_params)
+    if @post.save
+#     if @post.update(post_params) ... originally this, looks wrong
       redirect_to(post_path(@post), :flash => {:success => 'Post created'})
     else
       flash.now[:error] = 'Post not created'

@@ -53,14 +53,34 @@
     </div>
   </div><br>
 
-    <div class= "row small">
-      <div class = "col-md-3">
-        <%= link_to "Edit Post", edit_post_path(@post) %>
-      </div><br><br>
-      <div class = "col-md-3">
-        <%= link_to "Index of Posts", posts_path %>
-      </div>
+  <div class = "row small">
+    <div class = "col-md-3">
+      <strong>Comments</strong>
     </div>
+    <div class = "col-md-9"> 
+      <% @post.comments.each do |comment| %>
+        <div class = "row">
+          <div class = "col-md-4">  
+            <strong>Author: </strong>
+            <span><%= comment.author.name %></span>
+          </div>
+          <div class = "col-md-8">  
+            <strong>Body: </strong>
+            <span><%= comment.body %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div><br>
+
+  <div class= "row small">
+    <div class = "col-md-3">
+      <%= link_to "Edit Post", edit_post_path(@post) %>
+    </div><br><br>
+    <div class = "col-md-3">
+      <%= link_to "Index of Posts", posts_path %>
+    </div>
+  </div>
 
 
 </div> <!--Container -->
