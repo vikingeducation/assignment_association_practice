@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
   def index
     @posts = Post.all
   end
@@ -8,8 +9,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @tag_options = Tag.all.map{|u| [u.name, u.id]}
-    @category_options = Category.all.map{|u| [u.name, u.id]}
+    @category_options = Category.all.map{|cat| [cat.name, cat.id]}
     @post = Post.new
   end
 
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     @post = Post.new(safe_post_params)
     if @post.save
       flash[:success] = "New post created"
-      redirect_to 'show'
+      redirect_to posts_path
     else
       flash[:error] = "Post creation failed"
       render 'new'

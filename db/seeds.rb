@@ -15,17 +15,17 @@ Tag.destroy_all
 
 20.times do
   User.create(
-    name: Faker::StarWars.character
+    name: Faker::Name.name
   )
 end
 5.times do
   Category.create(
-    name: Faker::StarWars.droid
+    name: Faker::HarryPotter.character
   )
 end
 5.times do
   Tag.create(
-    name: Faker::StarWars.specie
+    name: Faker::LordOfTheRings.character
   )
 end
 50.times do
