@@ -47,27 +47,30 @@ end
 
 # -----associate objects-----
       #associate user with comments
-20.times do |user_id|
+5.times do |user_id|
   3.times do
     UserComments.create(
       user_id: user_id,
-      comment_id: Faker::Number.between(1, 100)
+      comment_id: Faker::Number.between(1, 20)
     )
   end
 
-      #associate post with comments
-50.times do
-20.times do |user_id|
+      #associate user with posts
+5.times do |user_id|
   3.times do
-    PostsUser.create(
+    PostsUsers.create(
       user_id: user_id,
-      post_id: Faker::Number.between(1, 50)
+      post_id: Faker::Number.between(1, 20)
     )
   end
 end
-50.times do |post_id|
-  PostsTag.create(
-    post_id: post_id,
-    tag_id: Faker::Number.between(1, 5)
-  )
+
+    #assciate post with tags
+20.times do |post_id|
+  2.times do
+    PostTags.create(
+      post_id: post_id,
+      tag_id: Faker::Number.between(1, 3)
+    )
+  end
 end
