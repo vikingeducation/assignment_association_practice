@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826170255) do
+ActiveRecord::Schema.define(version: 20170826203236) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -27,12 +27,29 @@ ActiveRecord::Schema.define(version: 20170826170255) do
     t.integer  "post_id"
   end
 
+  create_table "post_taggings", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id", "post_id"], name: "index_post_taggings_on_tag_id_and_post_id"
+  end
+
+  create_table "post_users", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id", "user_id"], name: "index_post_users_on_post_id_and_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "tag_id"
   end
 
   create_table "tags", force: :cascade do |t|

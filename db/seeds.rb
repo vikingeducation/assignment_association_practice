@@ -11,6 +11,7 @@ User.destroy_all
 Post.destroy_all
 Category.destroy_all
 Comment.destroy_all
+Tag.destroy_all
 
 puts "data destroyed"
 
@@ -23,12 +24,21 @@ def generate_name
 	u.save!
 end
 
+def generate_tag
+	t = Tag.new
+	t[:name] = Faker::Lorem.word
+	t.save!
+end
+
 def generate_post
 	#user = User.all.sample
+	t = Tag.all
 	p = Post.new
 	p[:title] = Faker::Lorem.word.capitalize
 	p[:body] = Faker::Lorem.sentence
 	p[:user_id] = User.pluck(:id).sample
+	p[:tag_id] = t.pluck(:id).sample
+	#binding.pry
 	p.save!
 end
 
@@ -50,8 +60,14 @@ def generate_comments
 end
 
 
+
+
 MULTIPLIER.times { generate_name }
 puts "created name"
+
+MULTIPLIER.times { generate_tag }
+puts "created tag"
+
 
 MULTIPLIER.times { generate_post }
 puts "created post"
@@ -61,3 +77,4 @@ puts "created category"
 
 MULTIPLIER.times { generate_comments }
 puts "created comments"
+

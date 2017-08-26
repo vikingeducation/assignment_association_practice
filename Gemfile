@@ -37,6 +37,8 @@ gem 'better_errors'
 
 gem 'faker'
 
+gem 'pry'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
