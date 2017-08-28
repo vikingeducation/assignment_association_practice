@@ -42,6 +42,7 @@ group :development, :test do
   gem 'hirb'
   gem 'jazz_fingers'
   gem 'pry-rails'
+  gem 'faker'
 end
 
 group :development do
