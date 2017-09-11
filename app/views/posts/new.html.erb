@@ -1,28 +1,63 @@
 <h1>New Post<h1>
 
-<h2>Form 1 (using form_for, collection_check_boxes, collection_radio_buttons)</h2>
+<h2>Form 1 (using form_for, collection_check_boxes for Tags, collection_radio_buttons for Category)</h2>
+<%= form_for @post do |f| %>
+  <h4><%= f.label :title %></h4>
+  <%= f.text_field :title %>
+
+  <h4><%= f.label :body %></h4>
+  <%= f.text_area :body %>
+
+  <h4>Tags (with form_for and collection_check_boxes)</h4>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+
+  <h4>Category (with form_for and collection_radio_buttons)</h4>
+  <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %>
+
+  <p><%= f.submit %></p>
+<% end %>
+
+<hr>
+
+<h2>Form 2 (using form_for, collection_check_boxes for Tags, collection_select for Category)</h2>
 <%= form_for @post do |f| %>
   <h4>
     <%= f.label :title %>
-    <%= f.text_field :title %>
-  <h4>
+  </h4>
+  <p><%= f.text_field :title %></p>
 
   <h4>
     <%= f.label :body %>
-    <%= f.text_area :body %>
-  <h4>
-
-  <h4>
-    Tags (with form_for and collection_check_boxes)
   </h4>
+  <p><%= f.text_area :body %></p>
+
+  <h4>Tags (with form_for and collection_check_boxes)</h4>
   <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
 
-  <h4>
-    Category (with form_for and collection_radio_buttons)
-  </h4>
-  <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %>
+  <h4>Category (with form_for and collection_select)</h4>
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
 
-  <p>
-    <%= f.submit %>
-  </p>
+  <p><%= f.submit %></p>
 <% end %>
+
+<hr>
+
+<h2>Form 3 (using form_tag, collection_check_boxes for Tags, select_tag for Category)</h2>
+<%= form_tag posts_path %>
+<h4>
+  <%= label_tag :title %>
+</h4>
+<p><%= text_field_tag :title %></p>
+
+<h4>
+  <%= label_tag :body %>
+</h4>
+<p><%= text_area_tag :body %></p>
+
+<h4>Tags (with form_tag and collection_check_boxes)</h4>
+<%= collection_check_boxes(:post, :tag_ids, Tag.all, :id, :name) %>
+
+<h4>Category (with form_tag, select_tag, and options_for_select)</h4>
+<%= select_tag :category_id, options_for_select(@category_options, @post.category_id) %>
+
+<p><%= submit_tag "Create Post" %></p>
