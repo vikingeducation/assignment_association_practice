@@ -65,8 +65,8 @@
 
 <hr>
 
-<h2>Form 4 (using form_for, "combo_box" for Tags, collection_select for Category)</h2>
-<%= form_for @post do |f| %>
+<h2>Form 4 (using form_for, "combo_box" for Tags, collection_select for Category, blank Tags allowed)</h2>
+<%= form_for @post, html: { class: "my_special_form_class", id: "my_special_form_id" } do |f| %>
   <h4>
     <%= f.label :title %>
   </h4>
@@ -78,7 +78,7 @@
   <p><%= f.text_area :body %></p>
 
   <h4>Tags (with form_for and collection_select with multiple: true)</h4>
-  <%= f.collection_select(:tag_ids, Tag.all, :id, :name, {}, { multiple: true }) %>
+  <%= f.collection_select(:tag_ids, Tag.all, :id, :name, { include_blank: true }, { multiple: true }) %>
 
   <h4>Category (with form_for and collection_select)</h4>
   <%= f.collection_select(:category_id, Category.all, :id, :name) %>
