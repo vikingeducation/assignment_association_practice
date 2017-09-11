@@ -1,0 +1,28 @@
+<h1>Edit Post <%= @post.id %><h1>
+
+<h2>Form 1 (using form_for, collection_check_boxes, collection_radio_buttons)</h2>
+<%= form_for @post do |f| %>
+  <h4>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  <h4>
+
+  <h4>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  <h4>
+
+  <h4>
+    Tags (with form_for and collection_check_boxes)
+  </h4>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+
+  <h4>
+    Category (with form_for and collection_radio_buttons)
+  </h4>
+  <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

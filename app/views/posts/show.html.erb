@@ -1,0 +1,25 @@
+<h1>Show Post</h1>
+
+<h4>Title:</h4>
+<p><%= @post.title %></p>
+
+<h4>Body:</h4>
+<p><%= @post.body %></p>
+
+<h4>Tags:</h4>
+<ul>
+  <% @tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
+
+<h4>Category:</h4>
+<p><%= @category.name %></p>
+
+<p>
+  <%= link_to "Edit Post", edit_post_path(@post) %>
+</p>
+
+<p>
+  <%= link_to "All Posts", posts_path %>
+</p>
