@@ -17,7 +17,7 @@
   <h4>Add a Comment</h4>
   <%= f.fields_for :comments do |comment_fields| %>
     <h4><%= comment_fields.label :user_id, "User" %></h4>
-    <%= comment_fields.collection_select(:user_id, User.all, :id, :name) %>
+    <%= comment_fields.collection_select(:user_id, User.all, :id, :name, { prompt: "Please select a User"}) %>
 
     <h4><%= comment_fields.label :body %></h4>
     <%= comment_fields.text_field :body %>

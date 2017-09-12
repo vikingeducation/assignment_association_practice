@@ -14,6 +14,25 @@
   <h4>Category (with form_for and collection_radio_buttons)</h4>
   <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %>
 
+  <%= f.fields_for :comments do |comment_fields| %>
+    <% if comment_fields.object.persisted? %>
+      <h4>Edit Comment</h4>
+    <% else %>
+      <h4>Add a Comment</h4>
+    <% end %>
+
+    <h4><%= comment_fields.label :user_id, "User" %></h4>
+    <%= comment_fields.collection_select(:user_id, User.all, :id, :name, { prompt: "Please select a User"}) %>
+
+    <h4><%= comment_fields.label :body %></h4>
+    <%= comment_fields.text_field :body %>
+
+    <% if comment_fields.object.persisted? %>
+      <h4><%= comment_fields.label :_destroy, "Delete this Comment?" %></h4>
+      <%= comment_fields.check_box :_destroy %>
+    <% end %>
+  <% end %>
+
   <p><%= f.submit %></p>
 <% end %>
 
