@@ -1,0 +1,73 @@
+<h1>New Post<h1>
+
+<h2>Form 1 (using form_for, collection_check_boxes for Tags, collection_radio_buttons for Category, and fields_for for Comments)</h2>
+<%= form_for @post do |f| %>
+  <h4><%= f.label :title %></h4>
+  <%= f.text_field :title %>
+
+  <h4><%= f.label :body %></h4>
+  <%= f.text_area :body %>
+
+  <h4>Tags (with form_for and collection_check_boxes)</h4>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+
+  <h4>Category (with form_for and collection_radio_buttons)</h4>
+  <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name) %>
+
+  <h4>Add a Comment</h4>
+  <%= f.fields_for :comments do |comment_fields| %>
+    <h4><%= comment_fields.label :user_id, "User" %></h4>
+    <%= comment_fields.collection_select(:user_id, User.all, :id, :name, { prompt: "Please select a User"}) %>
+
+    <h4><%= comment_fields.label :body %></h4>
+    <%= comment_fields.text_field :body %>
+  <% end %>
+
+  <p><%= f.submit %></p>
+<% end %>
+
+<hr>
+
+<h2>Form 2 (using form_for, collection_check_boxes for Tags, collection_select for Category)</h2>
+<%= form_for @post do |f| %>
+  <h4>
+    <%= f.label :title %>
+  </h4>
+  <p><%= f.text_field :title %></p>
+
+  <h4>
+    <%= f.label :body %>
+  </h4>
+  <p><%= f.text_area :body %></p>
+
+  <h4>Tags (with form_for and collection_check_boxes)</h4>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %>
+
+  <h4>Category (with form_for and collection_select)</h4>
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+
+  <p><%= f.submit %></p>
+<% end %>
+
+<hr>
+
+<h2>Form 3 (using form_for, "combo_box" for Tags, collection_select for Category, blank Tags allowed)</h2>
+<%= form_for @post, html: { class: "my_special_form_class", id: "my_special_form_id" } do |f| %>
+  <h4>
+    <%= f.label :title %>
+  </h4>
+  <p><%= f.text_field :title %></p>
+
+  <h4>
+    <%= f.label :body %>
+  </h4>
+  <p><%= f.text_area :body %></p>
+
+  <h4>Tags (with form_for and collection_select with multiple: true)</h4>
+  <%= f.collection_select(:tag_ids, Tag.all, :id, :name, { include_blank: true }, { multiple: true }) %>
+
+  <h4>Category (with form_for and collection_select)</h4>
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+
+  <p><%= f.submit %></p>
+<% end %>
