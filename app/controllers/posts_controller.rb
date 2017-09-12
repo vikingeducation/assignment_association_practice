@@ -1,17 +1,18 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = Post.all.order("created_at DESC")
   end
 
   def show
     @post = Post.find(params[:id])
     @tags = @post.tags
     @category = @post.category
+    @comments = @post.comments
   end
 
   def new
     @post = Post.new
-    @category_options = Category.all.map { |category| [category.name, category.id] }
+    @comment = @post.comments.build
   end
 
   def create
@@ -28,7 +29,6 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @category_options = Category.all.map { |category| [category.name, category.id] }
   end
 
   def update
@@ -46,6 +46,10 @@ class PostsController < ApplicationController
   private
 
   def whitelisted_post_params
-    params.require(:post).permit(:title, :body, :category_id, tag_ids: [])
+    params.require(:post).permit(:title,
+                                 :body,
+                                 :category_id,
+                                 { comments_attributes: [:user_id, :body, :id]},
+                                 tag_ids: [])
   end
 end

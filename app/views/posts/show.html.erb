@@ -16,6 +16,12 @@
 <h4>Category:</h4>
 <p><%= @category.name %></p>
 
+<h4>Comments:</h4>
+<% @comments.each do |comment| %>
+  <p><%= comment.body %></p>
+  <p>By <%= comment.author.name %> on <%= comment.created_at %></p>
+<% end %>
+
 <p>
   <%= link_to "Edit Post", edit_post_path(@post) %>
 </p>

@@ -42,30 +42,7 @@
 
 <hr>
 
-<h2>Form 3 (using form_tag, collection_check_boxes for Tags, select_tag for Category)</h2>
-<%= form_tag posts_path do %>
-  <h4>
-    <%= label_tag :title %>
-  </h4>
-  <p><%= text_field_tag :title, @post.title %></p>
-
-  <h4>
-    <%= label_tag :body %>
-  </h4>
-  <p><%= text_area_tag :body, @post.body %></p>
-
-  <h4>Tags (with form_tag and collection_check_boxes)</h4>
-  <%= collection_check_boxes(:post, :tag_ids, Tag.all, :id, :name) %>
-
-  <h4>Category (with form_tag, select_tag, and options_for_select)</h4>
-  <%= select_tag :category_id, options_for_select(@category_options, @post.category_id) %>
-
-  <p><%= submit_tag "Update Post" %></p>
-<% end %>
-
-<hr>
-
-<h2>Form 4 (using form_for, "combo_box" for Tags, collection_select for Category, blank Tags allowed)</h2>
+<h2>Form 3 (using form_for, "combo_box" for Tags, collection_select for Category, blank Tags allowed)</h2>
 <%= form_for @post, html: { class: "my_special_form_class", id: "my_special_form_id" } do |f| %>
   <h4>
     <%= f.label :title %>
