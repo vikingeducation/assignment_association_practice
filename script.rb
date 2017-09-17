@@ -49,17 +49,16 @@ User.first.authored_posts
 u = User.first.authored_posts.ids
 
 # Set a collection of Posts to replace that user's currently authored posts, e.g. User.first.posts = [Post.first, Post.second]
-user_c = User.first.posts
-user_c = [Post.all.sample, Post.all.sample]
+User.first.authored_posts = [Post.all.first, Post.all.second]
 
 # List the authors of a given post
-Post.first.users
+Post.first.authors
 
 # Set a collection of Users to replace a given Post's authors in a similar way
-Post.first.users = [User.first, User.second]
+Post.first.authors = [User.first, User.second]
 
 # Accomplish the same thing by only using IDs (hint: there's an association method for this...)
-Post.first.user_ids = [1,2]
+Post.first.authors.ids = [1,2]
 
 # List the posts under a given tag
 Post.first.tags
