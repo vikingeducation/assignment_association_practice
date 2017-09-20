@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   
   has_many :post_tag
   has_many :tags, :through => :post_tags,
-                  :source => :post
+                  # :source => :post
                   :dependent => :nullify
 
   has_many :user_posts
