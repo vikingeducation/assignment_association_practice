@@ -2,9 +2,9 @@ class Post < ApplicationRecord
   has_many :comments , :dependent => :destroy
   belongs_to :category, :foreign_key => :category_id
   
-  has_many :post_tag
+  has_many :post_tags
   has_many :tags, :through => :post_tags,
-                  # :source => :post
+                  # :source => :post,
                   :dependent => :nullify
 
   has_many :user_posts

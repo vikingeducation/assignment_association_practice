@@ -1,0 +1,26 @@
+<h1 class="text-center">New Post</h1>
+<%= form_for(@post) do |t| %>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td>Title</td>
+        <td><%= t.text_field :title %></td>
+      </tr>
+      <tr>
+        <td>Body</td>
+        <td><%= t.text_area :body %></td>
+      </tr>
+      <tr>
+        <td>Category ID</td>
+        <td><%= t.select :category_id,
+        @categories.map {|c| [c.name, c.id]}%></td>
+      </tr>
+      <tr>
+        <td>Tags</td>
+        <td> <%= t.collection_check_boxes(:tag_ids, Tag.all, :id, :name)%></td>
+      </tr>
+    </tbody>
+  <table>
+   <%= t.submit "Create Post", class: "btn btn-primary btn-lg btn-block" %>
+  
+<% end %>
