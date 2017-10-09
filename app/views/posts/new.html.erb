@@ -1,26 +1,60 @@
 <h1 class="text-center">New Post</h1>
-<%= form_for(@post) do |t| %>
+<%= form_for(@post) do |post_fields| %>
   <table class="table table-bordered">
     <tbody>
       <tr>
         <td>Title</td>
-        <td><%= t.text_field :title %></td>
+        <td><%= post_fields.text_field :title %></td>
       </tr>
       <tr>
         <td>Body</td>
-        <td><%= t.text_area :body %></td>
+        <td><%= post_fields.text_area :body %></td>
       </tr>
       <tr>
         <td>Category ID</td>
-        <td><%= t.select :category_id,
+        <td><%= post_fields.select :category_id,
         @categories.map {|c| [c.name, c.id]}%></td>
       </tr>
       <tr>
         <td>Tags</td>
-        <td> <%= t.collection_check_boxes(:tag_ids, Tag.all, :id, :name)%></td>
+        <td> <%= post_fields.collection_check_boxes(:tag_ids, Tag.all, :id, :name)%></td>
       </tr>
+      <tr>
+        <td>Tags with a combo box</td>
+        <td> <%= post_fields.select(
+          :tag_ids, 
+          Tag.all.map{|tg| [ tg.name, tg.id ]},
+          { },
+          multiple: true)
+          %>
+        </td>
+      </tr>
+
+      <!-- Practice with Nested forms -->
+      <%= post_fields.fields_for :comments do |comment_fields| %>
+        <tr>
+          <td>Body</td>
+          <td><%= comment_fields.text_area :body %></td>
+        </tr>
+        <tr>
+          <td>Author ID</td>
+          <td><%= comment_fields.text_field :author_id %></td>
+        </tr>
+        <tr>
+          <td>Post ID</td>
+          <td><%= comment_fields.text_field :post_id %></td>
+        </tr>
+      <% end %>
     </tbody>
   <table>
-   <%= t.submit "Create Post", class: "btn btn-primary btn-lg btn-block" %>
-  
+   <%= post_fields.submit "Create Post", class: "btn btn-primary btn-lg btn-block" %>
+<% end %>
+
+<!-- Practice with collection forms -->
+<% form_tag new_post_path do %>
+  <%= select_tag(
+      :category_id, 
+      options_for_select( 
+       Category.all.map{|c| [ c.name, c.id ] }, @post.category_id)
+      ) %>
 <% end %>

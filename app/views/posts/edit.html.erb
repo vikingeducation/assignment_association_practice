@@ -1,24 +1,78 @@
 <h1 class="text-center">Edit Post</h1>
-<%= form_for(@post) do |t| %>
+<%= form_for(@post) do |post_fields| %>
   <table class="table table-bordered">
     <tbody>
       <tr>
         <td>Title</td>
-        <td><%= t.text_field :title %></td>
+        <td><%= post_fields.text_field :title %></td>
       </tr>
       <tr>
         <td>Body</td>
-        <td><%= t.text_area :body %></td>
+        <td><%= post_fields.text_area :body %></td>
       </tr>
       <tr>
-        <td>Category ID</td>
-        <td><%= t.select :category_id, @categories.map {|c| [c.name, c.id]} %></td>
+        <td>Category ID Radio buttons</td>
+        <td><%= post_fields.collection_radio_buttons(
+            :category_id,
+            Category.all,
+            :id,
+            :name) %></td>
       </tr>
+      <tr>
+      <td>Category ID Dropdown</td>
+        <td><%= post_fields.collection_select(
+            :category_id, 
+            Category.all,
+            :id,
+            :name,
+            { include_blank: true },
+            class: "dropdown") %></td>
+      </tr>
+      <tr>
       <tr>
         <td>Tags</td>
-        <td> <%= t.collection_check_boxes(:tag_ids, Tag.all, :id, :name)%></td>
+        <td> <%= post_fields.collection_check_boxes(:tag_ids, Tag.all, :id, :name)%></td>
       </tr>
+      <tr>
+        <td>Tags with a combo box</td>
+        <td> <%= post_fields.select(
+          :tag_ids, 
+          Tag.all.map{|tg| [ tg.name, tg.id ]},
+          { },
+          multiple: true)
+          %>
+        </td>
+      </tr>
+      </ br>
+      <!-- Practice with Nested Forms -->
+
+      <%= post_fields.fields_for :comments do |comment_fields| %>
+        <tr>
+          <td>Body</td>
+          <td><%= comment_fields.text_area :body %></td>
+        </tr>
+        <tr>
+          <td>Author ID</td>
+          <td><%= comment_fields.text_field :author_id %></td>
+        </tr>
+        <tr>
+          <td>Post ID</td>
+          <td><%= comment_fields.text_field :post_id %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <% if comment_fields.object.persisted? %>
+              <%= comment_fields.label :_destroy, "Delete Comment?" %>
+              <%= comment_fields.check_box :_destroy %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     </tbody>
   <table>
-  <%= t.submit "Update Post", class: "btn btn-primary btn-lg btn-block" %>
+  <%= post_fields.submit "Update Post", class: "btn btn-primary btn-lg btn-block" %>
 <% end %>
+
+
+

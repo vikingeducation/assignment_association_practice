@@ -18,5 +18,6 @@ class Post < ApplicationRecord
   # allows you to do this Post.first.post_taggings - renaming the join table and just saying what class it is
   has_many :post_taggings, :class_name => "PostTag"
 
-
+  accepts_nested_attributes_for :comments,
+                                :reject_if => :all_blank
 end
