@@ -23,10 +23,12 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @categories = Category.all
+    @post.comments.build
   end
 
   def update
     @post = Post.find(params[:id])
+    # binding.pry
     if @post.update_attributes(post_params)
       redirect_to @post
       flash[:success] = "Post updated sucessfully"
@@ -39,6 +41,8 @@ class PostsController < ApplicationController
 
 private
   def post_params
+
+    # need to be able to whitelist the :id attribute as well (otherwise you'll create a new record every time).
     params.require(:post).permit(
       :title, 
       :body, 
@@ -47,9 +51,9 @@ private
       { :comments_attributes => [
                    :body,
                    :author_id,
-                   :post_id,
+                   # :post_id,
                    :id,
-                   :destroy ] } )
+                   :_destroy ] } )
   end
 
 

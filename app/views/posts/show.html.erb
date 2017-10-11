@@ -20,6 +20,13 @@
             <% end %>
         </td>
       </tr>
+      <tr>
+        <td>Comments</td>
+        <td> <% @post.comments.each do |comment| %>
+                <%="#{comment.id}: #{comment.body}"%></br>
+            <% end %>
+        </td>
+      </tr>
     </tbody>
   <table>
   
