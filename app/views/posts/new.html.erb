@@ -1,0 +1,57 @@
+<h1 class="text-center">New Post</h1>
+<%= form_for(@post) do |post_fields| %>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td>Title</td>
+        <td><%= post_fields.text_field :title %></td>
+      </tr>
+      <tr>
+        <td>Body</td>
+        <td><%= post_fields.text_area :body %></td>
+      </tr>
+      <tr>
+        <td>Category ID</td>
+        <td><%= post_fields.select :category_id,
+        @categories.map {|c| [c.name, c.id]}%></td>
+      </tr>
+      <tr>
+        <td>Tags</td>
+        <td> <%= post_fields.collection_check_boxes(:tag_ids, Tag.all, :id, :name)%></td>
+      </tr>
+      <tr>
+        <td>Tags with a combo box</td>
+        <td> <%= post_fields.select(
+          :tag_ids, 
+          Tag.all.map{|tg| [ tg.name, tg.id ]},
+          { },
+          multiple: true)
+          %>
+        </td>
+      </tr>
+      <tr>
+        <!-- Practice with collection forms -->
+        <%= form_tag new_post_path do %>
+          <%= select_tag(
+              :category_id, 
+              options_for_select( 
+               Category.all.map{|c| [ c.name, c.id ] }, @post.category_id)
+              ) %>
+        <% end %>
+      </tr>
+
+      <!-- Practice with Nested forms -->
+      <%= post_fields.fields_for :comments, Comment.new do |comment_fields| %>
+        <tr>
+          <td>Body</td>
+          <td><%= comment_fields.text_area :body %></td>
+        </tr>
+        <tr>
+          <td>Author ID</td>
+          <td><%= comment_fields.text_field :author_id %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+   <%= post_fields.submit "Create Post", class: "btn btn-primary btn-lg btn-block" %>
+<% end %>

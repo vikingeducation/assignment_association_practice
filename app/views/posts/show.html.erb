@@ -1,0 +1,32 @@
+<h1 class="text-center">Post ID <%= @post.id %>: <%=@post.title %></h1>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td>Title</td>
+        <td><%= @post.title %></td>
+      </tr>
+      <tr>
+        <td>Body</td>
+        <td><%= @post.body %></td>
+      </tr>
+      <tr>
+        <td>Category ID</td>
+        <td><%= @post.category.id %></td>
+      </tr>
+      <tr>
+        <td>Tags</td>
+        <td> <% @post.tags.each do |tag| %>
+                <%="#{tag.id}: #{tag.name}"%></br>
+            <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>Comments</td>
+        <td> <% @post.comments.each do |comment| %>
+                <%="#{comment.id}: #{comment.body}"%></br>
+            <% end %>
+        </td>
+      </tr>
+    </tbody>
+  <table>
+  
