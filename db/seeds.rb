@@ -23,9 +23,11 @@ end
 # Posts
 @users.each do |u|
   5.times do |i|
-    Post.create title: "foouser#{u.id} post #{i}",
-                body:  "Some words for foouser#{u.id}'s post number #{i}.",
-                category_id: @categories.sample.id
+    p = Post.create title: "foouser#{u.id} post #{i}",
+                    body: "Some words for foouser#{u.id}'s post number #{i}.",
+                    category_id: @categories.sample.id
+
+    UserPost.create user_id: u.id, post_id: p.id
   end
 end
 
@@ -44,6 +46,21 @@ end
   )
 end
 
+# Tags
+
 18.times do |i|
   Tag.create name: "Tag #{i}"
+end
+
+@tags = Tag.all
+
+# Tag posts
+
+50.times do
+  begin
+    PostTag.create post_id: @posts.sample.id,
+                   tag_id: @tags.sample.id
+  rescue
+    retry
+  end
 end
