@@ -7,14 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Users
-10.times do |i|
+1.upto(10) do |i|
   User.create name: "foouser#{i}"
 end
 
 @users = User.all
 
 # Categories
-9.times do |i|
+1.upto(9) do |i|
   Category.create name: "Category #{i}"
 end
 
@@ -22,7 +22,7 @@ end
 
 # Posts
 @users.each do |u|
-  5.times do |i|
+  1.upto(5) do |i|
     p = Post.create title: "foouser#{u.id} post #{i}",
                     body: "Some words for foouser#{u.id}'s post number #{i}.",
                     category_id: @categories.sample.id
@@ -48,7 +48,7 @@ end
 
 # Tags
 
-18.times do |i|
+1.upto(18) do |i|
   Tag.create name: "Tag #{i}"
 end
 
