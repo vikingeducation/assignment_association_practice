@@ -2,7 +2,7 @@
 
 def users_with_comments
   User
-    .joins(:comments)
+    .joins(:authored_comments)
     .group('users.id')
     .having('count(comments.id) > 0')
 end
@@ -24,12 +24,12 @@ def all_the_things
 end
 
 def change_comment(original_user, new_user)
-  new_user.comments << original_user.comments.first
+  new_user.authored_comments << original_user.authored_comments.first
   [original_user.reload, new_user.reload]
 end
 
 def change_all_comments(user)
-  user.comments = [Comment.first, Comment.second, Comment.last]
+  user.authored_comments = [Comment.first, Comment.second, Comment.last]
   user.reload
 end
 
@@ -46,7 +46,7 @@ def remove_post(category)
 end
 
 def replace_posts_for(user)
-  user.posts = [Post.second, Post.last]
+  user.authored_posts = [Post.second, Post.last]
   user.reload
 end
 
@@ -61,7 +61,7 @@ def replace_authors_for(post, opts = {})
 end
 
 def add_post_by_id(tag, post_id)
-  tag.posts << Post.find(post_id)
+  tag.tagged_posts << Post.find(post_id)
   tag.reload
 end
 

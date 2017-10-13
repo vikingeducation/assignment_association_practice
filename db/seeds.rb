@@ -58,8 +58,8 @@ end
 
 50.times do
   begin
-    PostTag.create post_id: @posts.sample.id,
-                   tag_id: @tags.sample.id
+    PostTagging.create post_id: @posts.sample.id,
+                       tag_id: @tags.sample.id
   rescue
     retry
   end
