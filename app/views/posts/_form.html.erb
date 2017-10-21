@@ -39,7 +39,23 @@
       multiple: true) %>
   <br>
 
+  <h1>Commments</h1>
+
+  <%= f.fields_for(:comment) do |comment_fields| %>
+    <%= comment_fields.label :body %>
+    <%= comment_fields.text_area :body %>
+
+    <%= comment_fields.label :author %>
+    <%= comment_fields.collection_select(
+        :user_id,
+        User.all,
+        :id,
+        :name,
+        {:include_blank => true}
+    )%>
+
   <%= f.submit "Submit" %>
+  <% end %>
 <% end %>
 </div>
 

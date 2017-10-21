@@ -46,6 +46,11 @@ class PostsController < ApplicationController
 			:body,
 			:category_id,
 			:user_id,
-			:tag_ids => [])
+			:tag_ids => [],
+			:comments_attributes =>[
+				:id,
+				:body,
+				:user_id,
+				:post_id])
     end
 end

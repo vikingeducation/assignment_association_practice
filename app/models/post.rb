@@ -12,4 +12,6 @@ class Post < ApplicationRecord
     has_many :post_taggings, dependent: :destroy
 	belongs_to :category
 
+	accepts_nested_attributes_for :comments
+
 end
