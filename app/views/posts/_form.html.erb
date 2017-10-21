@@ -1,0 +1,46 @@
+<div class="container" >
+  <div class="row">
+    <div class="col-xs-6">
+<%= form_for post, html: {class: 'form-horizontal'} do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br>
+
+  <%= f.label :body, class: "form-group" %>
+  <%= f.text_area :body %>
+  <br>
+</div>
+
+
+
+  <%= collection_check_boxes(
+  		:post,
+  		:tag_ids,
+  		Tag.all,
+  		:id,
+  		:name
+  )%>
+  <br>
+
+  <%= f.collection_radio_buttons(
+  		:category_id,
+  		Category.all,
+  		:id,
+  		:name
+  ) %>
+  <br>
+
+  <%= f.collection_select(
+  		:category_id, 
+  		Category.all, 
+  		:id, 
+  		:name,
+      {},
+      multiple: true) %>
+  <br>
+
+  <%= f.submit "Submit" %>
+<% end %>
+</div>
+
+</div>
