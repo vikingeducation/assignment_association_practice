@@ -1,0 +1,27 @@
+<H2>Here is the post</H2>
+
+<H3><%= @post.title %> <i>(post no <%= @post.id %>)</i></H3>
+
+<p>
+  <%= @post.body %>
+</p><br><br>
+<h4>COMMENTS</h4>
+<p>
+  <% @post.comments.each do |t| %>
+    <%= t.id %><br>
+    <%= t.comment %><br><br>
+  <% end %>
+</p>
+<br>
+<br><br>
+<h4>Post Tags</h4>
+<p>
+  <% @post.tags.each do |t| %>
+    <%= t.name %><br>
+  <% end %>
+</p>
+<br><br><br>
+<h4>Category</h4>
+<p>
+    <%= @post.category.name %>
+</p>

@@ -1,0 +1,121 @@
+
+<!-- =================FORM_FOR=================== -->
+
+<H2><%= @post.persisted? ? "Edit" : "Create" %>  new post <code>form_for</code></H2>
+
+<%= form_for @post do |post_fields| %>
+  <%= post_fields.text_field :title %><br>
+  <%= post_fields.text_area :body, size: "40x40"  %><br>
+
+  <h5>check boxes</h5>
+  <code>post_fields.collection_radio_buttons</code><br>
+  <%= post_fields.collection_check_boxes(:tag_ids,
+                               Tag.all,
+                               :id,
+                               :name)  do |b| %>
+    <%= b.label(:class => "col-md-4"){b.check_box + "  " + b.text}  %>
+  <% end %><br>
+
+  <h5>radio buttons</h5>
+  <code>post_fields.collection_radio_buttons</code><br>
+  <%= post_fields.collection_radio_buttons(:category_id,
+                               Category.all,
+                               :id,
+                               :name,
+                               {:include_blank => true},
+                               {:class => "beautify-radio", :id => "marker"})  do |b| %>
+    <%= b.label(:class => "col-md-4"){b.radio_button + "  " + b.text}  %><br>
+  <% end %><br>
+
+  <h5>select for dropdown menu</h5>
+  <code>post_fields.select(:category_id, @categories)</code><br>
+
+<%= post_fields.select :category_id, Category.all.collect {|f| [ "#{f.name}", f.id ] }  %>
+  <h5>collection_select for dropdown menu</h5>
+  <code>post_fields.collection_select(:category_id,....)</code><br>
+  <%= post_fields.collection_select(:category_id,
+                          Category.all,
+                          :id,
+                          :name,
+                          {:include_blank => true, :selected => '3'}) %><br>
+
+  <h5>select for combo box</h5>
+  <code>post_fields.select(:category_id,....)</code><br>
+  <%= post_fields.select(:tag_ids,
+                Tag.all.collect {|f| [ "#{f.name}", f.id ] },
+                {:include_blank => true},
+                multiple: true, :style => "height:280px", class: "format-setter" ) %><br>
+
+  <h4>COMMENTS:</h4>
+  <%= post_fields.fields_for :comments do |comment_field| %>
+    <%= comment_field.label "comment"  %><br>
+    <%= comment_field.text_area "comment", size: "60x10" %><br>
+    <%= comment_field.label "user"  %>
+    <%= comment_field.collection_select(:user_id,
+                          User.all,
+                          :id,
+                          :name,
+                          {:include_blank => true}) %><br>
+    <% if comment_field.object.persisted? %>
+      <%= comment_field.label :_destroy, "Delete this comment?" %>
+      <%= comment_field.check_box :_destroy %>
+    <% end %><br><br>
+  <% end %>
+
+  <%= post_fields.submit(@post.persisted? ? "Update Post" : "Create Post")  %>
+<% end %>
+<br><br><br><br>
+
+
+
+
+
+
+
+<!-- =================FORM_TAG=================== -->
+
+
+<H2><%= @post.persisted? ? "Edit" : "Create" %> new post <code>form_tag</code></H2>
+
+<%= form_tag '/posts' do %>
+  <%= text_field_tag :title, @post.title %><br>
+  <%= text_area_tag :body, @post.body, size: "40x40"  %><br>
+
+  <h5>check boxes</h5>
+  <code>collection_radio_buttons</code><br>
+  <%= collection_check_boxes(:post,
+                              :tag_ids,
+                               Tag.all,
+                               :id,
+                               :name)  do |b| %>
+    <%= b.label(:class => "col-md-4"){b.check_box + "  " + b.text}  %>
+  <% end %><br>
+
+  <h5>radio buttons</h5>
+  <code>collection_radio_buttons</code><br>
+  <%= collection_radio_buttons(:post,
+                              :category_id,
+                               Category.all,
+                               :id,
+                               :name)  do |b| %>
+    <%= b.label(:class => "col-md-4"){b.radio_button + "  " + b.text}  %><br>
+  <% end %><br>
+
+
+  <h5>select_tag for dropdown menu</h5>
+  <code>select_tag</code><br>
+  <%= select_tag(:category_id, options_for_select(Category.all.collect {|f| [ "#{f.name}", f.id ] }, @post.category_id)) %>
+
+  <h5>collection_select for dropdown menu</h5>
+  <code>collection_select(:category_id,...)</code><br>
+  <%= collection_select(:post,
+                          :category_id,
+                          Category.all,
+                          :id,
+                          :name) %><br>
+
+  <%= submit_tag(@post.persisted? ? "Update Post" : "Create Post") %>
+<% end %>
+
+
+
