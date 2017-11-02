@@ -27,7 +27,7 @@ end
                     body: "Some words for foouser#{u.id}'s post number #{i}.",
                     category_id: @categories.sample.id
 
-    UserPost.create user_id: u.id, post_id: p.id
+    PostAuthoring.create user_id: u.id, post_id: p.id
   end
 end
 
