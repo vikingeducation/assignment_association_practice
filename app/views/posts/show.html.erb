@@ -1,0 +1,15 @@
+<div class="post-title">
+  <h1>Post <%= post.id %>: <%= post.title %></h1>
+</div>
+
+<div class="post-body">
+  <p><%= post.body %></p>
+</div>
+
+<div class="post-tags">
+  <ul class="tag-list">
+    <% post.tags.each do |tag| %>
+        <li><%= tag.name %></li>
+    <% end %>
+  </ul>
+</div>

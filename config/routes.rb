@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :post, only: [:new, :edit]
+  resources :posts, except: [:destroy]
 end

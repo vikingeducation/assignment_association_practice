@@ -21,3 +21,6 @@ alert-success {
 alert-error {
     color: red;
 }
+
+.post-form textarea, input[type=text] {
+    width: 50%;

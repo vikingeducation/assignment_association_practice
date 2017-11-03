@@ -1,5 +1,5 @@
 ```html
-<form action="/posts/1" method="post">
+<form action="/posts" method="post">
   <input name="utf8" type="hidden" value="&#x2713;" />
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
   <input type="hidden" name="id" value="1">

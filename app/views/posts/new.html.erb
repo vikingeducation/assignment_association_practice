@@ -1,2 +1,41 @@
 <h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<div class="new-post">
+  <div class="errors">
+    <% if @post.errors.any? %>
+        <ul class="list-group">
+          <% @post.errors.full_messages.each do |msg| %>
+              <li class="list-group-item list-group-item-danger"><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
+  </div>
+
+  <div class="post-form">
+    <%= form_for @post do |f| %>
+        <fieldset>
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </fieldset>
+
+        <fieldset>
+          <%= f.label :body %>
+          <%= f.text_area :body %>
+        </fieldset>
+        <fieldset>
+          <%= f.label :category %>
+          <%= f.collection_select :category_id, Category.all, :id, :name %>
+        </fieldset>
+        <fieldset>
+          <legend>Add tags</legend>
+          <%= f.collection_check_boxes :tag_ids,
+                                       Tag.all,
+                                       :id,
+                                       :name
+          %>
+        </fieldset>
+        <div class="button">
+          <%= f.submit %>
+        </div>
+    <% end %>
+  </div>
+</div>
