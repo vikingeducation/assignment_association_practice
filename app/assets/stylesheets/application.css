@@ -14,13 +14,23 @@
  *= require_self
  */
 
-alert-success {
+.alert-success {
     color: green;
 }
 
-alert-error {
+.alert-error {
     color: red;
 }
 
 .post-form textarea, input[type=text] {
     width: 50%;
+}
+
+.post-form legend { color: #B00100; }
+
+.top-buffer { margin-top: 2em; }
+
+.bordered {
+    border: thin #3a58b5 solid;
+    padding: 1em;
+}
