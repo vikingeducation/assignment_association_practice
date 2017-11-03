@@ -3,10 +3,16 @@
 </div>
 
 <div class="post-body">
+  <h2>Post body:</h2>
   <p><%= post.body %></p>
 </div>
 
+<div class="post-category">
+  <h2>Category:</h2>
+  <p><%= post.category.name %></p>
+</div>
 <div class="post-tags">
+  <h2>Tags:</h2>
   <ul class="tag-list">
     <% post.tags.each do |tag| %>
         <li><%= tag.name %></li>
