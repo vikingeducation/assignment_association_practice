@@ -1,2 +1,16 @@
 <h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+
+<div class="edit-post">
+  <div class="errors">
+    <% if @post.errors.any? %>
+        <ul class="list-group">
+          <% @post.errors.full_messages.each do |msg| %>
+              <li class="list-group-item list-group-item-danger"><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
+  </div>
+
+  <%= render 'form' %>
+</div>
+

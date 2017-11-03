@@ -1,0 +1,28 @@
+<div class="post-form">
+  <%= form_for @post do |f| %>
+      <fieldset>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </fieldset>
+
+      <fieldset>
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+      </fieldset>
+      <fieldset>
+        <%= f.label :category %>
+        <%= f.collection_select :category_id, Category.all, :id, :name %>
+      </fieldset>
+      <fieldset>
+        <legend>Add tags</legend>
+        <%= f.collection_check_boxes :tag_ids,
+                                     Tag.all,
+                                     :id,
+                                     :name
+        %>
+      </fieldset>
+      <div class="button">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>
