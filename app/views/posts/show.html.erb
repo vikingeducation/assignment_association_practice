@@ -19,3 +19,14 @@
     <% end %>
   </ul>
 </div>
+<div class="comment-list">
+  <h2>Comments:</h2>
+  <ul>
+    <% post.comments.each do |c| %>
+    <li>
+      <p><%= "#{c.user.name} says:" %></p>
+      <p><%= c.body %></p>
+    </li>
+    <% end %>
+  </ul>
+</div>

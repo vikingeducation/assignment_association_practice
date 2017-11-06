@@ -21,6 +21,25 @@
                                      :name, {}, class: 'form-control'
         %>
       </fieldset>
+      <fieldset>
+        <legend>Comment</legend>
+        <%= f.fields_for :comments do |com_builder| %>
+            <fieldset>
+              <%= com_builder.label :user_id, 'User' %>
+              <%= com_builder.collection_select :user_id,
+                                                User.all, :id,
+                                                :name, { include_blank: true } %>
+            </fieldset>
+            <fieldset>
+              <%= com_builder.label :body, 'Your comment' %>
+              <%= com_builder.text_area :body %>
+            </fieldset>
+            <% if com_builder.object.persisted? %>
+                <%= com_builder.label :_destroy, 'Delete comment?' %>
+                <%= com_builder.check_box :_destroy %>
+            <% end %>
+        <% end %>
+      </fieldset>
       <div class="button">
         <%= f.submit %>
       </div>
