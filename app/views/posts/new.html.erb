@@ -1,0 +1,42 @@
+<h1>Posts#new</h1>
+<div class="new-post">
+  <div class="errors">
+    <% if @post.errors.any? %>
+        <ul>
+          <% @post.errors.full_messages.each do |msg| %>
+              <li class="alert-error"><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
+  </div>
+
+  <%= render 'form' %>
+</div>
+
+<div class="post-form top-buffer bordered">
+  <%= form_tag posts_path do %>
+      <fieldset>
+        <%= label_tag 'post[title]', 'Title' %>
+        <%= text_field_tag 'post[title]', @post.title %>
+      </fieldset>
+      <fieldset>
+        <%= label_tag 'post[body]', 'Body' %>
+        <%= text_area_tag 'post[body]', @post.body %>
+      </fieldset>
+      <fieldset>
+        <legend>Category by select using form_tag</legend>
+        <%= collection_select 'post', :category_id, Category.all, :id, :name %>
+      </fieldset>
+      <fieldset>
+        <legend>Add tags</legend>
+        <%= collection_check_boxes 'post', :tag_ids,
+                                   Tag.all,
+                                   :id,
+                                   :name
+        %>
+      </fieldset>
+      <div class="button">
+        <%= submit_tag 'Create post' %>
+      </div>
+  <% end %>
+</div>

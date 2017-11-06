@@ -1,0 +1,107 @@
+<div class="post-form bordered">
+  <%= form_for @post do |f| %>
+      <fieldset>
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </fieldset>
+
+      <fieldset>
+        <%= f.label :body %>
+        <%= f.text_area :body, class: 'form-control' %>
+      </fieldset>
+      <fieldset>
+        <legend>Category by select using form_for</legend>
+        <%= f.collection_select :category_id, Category.all, :id, :name, {}, class: 'form-control' %>
+      </fieldset>
+      <fieldset>
+        <legend>Add tags</legend>
+        <%= f.collection_check_boxes :tag_ids,
+                                     Tag.all,
+                                     :id,
+                                     :name, {}, class: 'form-control'
+        %>
+      </fieldset>
+      <fieldset>
+        <legend>Comment</legend>
+        <%= f.fields_for :comments do |com_builder| %>
+            <fieldset>
+              <%= com_builder.label :user_id, 'User' %>
+              <%= com_builder.collection_select :user_id,
+                                                User.all, :id,
+                                                :name, { include_blank: true } %>
+            </fieldset>
+            <fieldset>
+              <%= com_builder.label :body, 'Your comment' %>
+              <%= com_builder.text_area :body %>
+            </fieldset>
+            <% if com_builder.object.persisted? %>
+                <%= com_builder.label :_destroy, 'Delete comment?' %>
+                <%= com_builder.check_box :_destroy %>
+            <% end %>
+        <% end %>
+      </fieldset>
+      <div class="button">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>
+
+<div class="post-form top-buffer bordered">
+  <%= form_for @post do |f| %>
+      <fieldset>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </fieldset>
+
+      <fieldset>
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+      </fieldset>
+      <fieldset>
+        <legend>Category by radio buttons using form_for</legend>
+        <%= f.collection_radio_buttons :category_id, Category.all, :id, :name %>
+      </fieldset>
+      <fieldset>
+        <legend>Add tags</legend>
+        <%= f.collection_check_boxes :tag_ids,
+                                     Tag.all,
+                                     :id,
+                                     :name
+        %>
+      </fieldset>
+      <div class="button">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>
+
+<div class="post-form top-buffer bordered">
+  <%= form_for @post do |f| %>
+      <fieldset>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </fieldset>
+
+      <fieldset>
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+      </fieldset>
+      <fieldset>
+        <legend>Category by radio buttons using form_for</legend>
+        <%= f.collection_radio_buttons :category_id, Category.all, :id, :name %>
+      </fieldset>
+      <fieldset>
+        <legend>Tags with combo-box</legend>
+        <%= f.collection_select :tag_ids,
+                                Tag.all,
+                                :id,
+                                :name,
+                                { include_blank: 'None' },
+                                { multiple: true }
+        %>
+      </fieldset>
+      <div class="button">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>
