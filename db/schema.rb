@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115164905) do
+ActiveRecord::Schema.define(version: 20171116233952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,14 +21,14 @@ ActiveRecord::Schema.define(version: 20171115164905) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "commments", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "user_id"
     t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_commments_on_post_id", using: :btree
-    t.index ["user_id"], name: "index_commments_on_user_id", using: :btree
+    t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "post_tags", force: :cascade do |t|
@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(version: 20171115164905) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "commments", "posts"
-  add_foreign_key "commments", "users"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
   add_foreign_key "posts", "categories"
