@@ -56,6 +56,7 @@ def generate_posts(users)
     post = Post.create!(
       title:  title,
       body:   body,
+      category_id: category_id
     )
 
     post.user_posts.create(
@@ -98,17 +99,6 @@ def generate_tags
 end
 
 
-# Populate PostTag table with posts and tags
-def associate_posts_and_tags
-  posts = Post.all
-  posts.each do |post|
-    pt = PostTag.new
-    pt[:post_id] = post.id
-    pt[:tag_id] = Tag.pluck(:id).sample
-    pt.save
-  end
-end
-
 # Seed DataBase
 
 # Create Categories
@@ -125,5 +115,5 @@ MULTIPLIER.times { generate_comments }
 puts "Created Comments"
 
 # Create tags
-generate_tags 
+generate_tags
 puts "Create Tags"
