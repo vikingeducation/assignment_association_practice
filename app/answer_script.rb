@@ -57,14 +57,12 @@
 
 16.List the posts under a given tag
   - Tag.find(id).posts
-#
-# 17.Add a new post to a given tag by only using its ID
-#   - Tag.find(id).post_ids
-#
-# 18.Add a new tag to a given post by only using its ID
-#   - post = Post.find(id)
-#   - post.tag_ids << id
-#   *** NOt working doesn't show newest added id when you post.tags after - tried reloading and saving not
+
+17.Add a new post to a given tag by only using its ID
+  - Tag.find(id).posts << Post.find(id)
+
+18.Add a new tag to a given post by only using its ID
+  - Post.find(id).tags << Tag.find(id)
 
 19.List the tags on a given post
   - Post.find(id).tags
