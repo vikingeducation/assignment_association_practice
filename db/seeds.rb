@@ -29,7 +29,7 @@ end
 puts "Creating Posts"
 User.all.each do |user|
   (rand(1..5)).times do
-    user.posts.create! do |p|
+    user.authored_posts.create! do |p|
       p.title = Faker::Lorem.sentence
       p.body = Faker::Lorem.paragraph
       p.category = Category.find(Category.pluck(:id).sample)
