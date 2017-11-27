@@ -58,6 +58,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'faker'
   gem 'database_cleaner'
+  gem 'hirb'
 end
 
 group :test do
