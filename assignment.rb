@@ -1,11 +1,29 @@
 # 1.	List all Users, Comments, Posts, Categories or Tags.
+User.all
+Comment.all
+Post.all
+Category.all
+Tag.all
 # 2.	List a given user's comments
+u = User.all.first
+u.comments
 # 3.	Set a comment to belong to a different user
+u = User.find(127)
+c = u.comments.first
+c.user_id = 123
 # 4.	Set a post to be in a different category
+post = Post.all.sample
+post.category_id = Category.all.sample.id
 # 5.	Set a collection of comments to replace a user's current comments (e.g. User.first.comments = [Comment.first, Comment.second])
+
 # 6.	Return a given comment's author
+c = Comment.all.sample
+c.user.name
 # 7.	List a given post's comments
+post = Post.find(67)
+post.comments.all
 # 8.	Return a given comment's parent post
+
 # 9.	Remove one post from a category's collection of posts
 # 10.	List the posts authored by a given user
 # 11.	List the IDs of all posts authored by a given user (hint: there's an association method for this)

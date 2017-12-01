@@ -10,8 +10,8 @@ Category.destroy_all
 Post.destroy_all
 Tag.destroy_all
 Comment.destroy_all
-PostTags.destroy_all
-UserPosts.destroy_all
+PostTag.destroy_all
+UserPost.destroy_all
 
 array = Array(0..10)
 array.each do |num|
@@ -23,7 +23,7 @@ array.each do |num|
 end
 
 array.each do |num|
-  Post.create(:title => "Post Name " + num.to_s, :body => "This is the text and stuff", :category_id => Category.all.sample.id)
+  Post.create(:title => "Post Name " + num.to_s, :body => Faker::Lorem.paragraph, :category_id => Category.all.sample.id)
 end
 
 array.each do |num|
@@ -31,10 +31,10 @@ array.each do |num|
 end
 
 array.each do |num|
-  Comment.create(:body => "I think we need #{num} seals", :user_id => User.all.sample.id, :post_id => Post.all.sample.id)
+  Comment.create(:body => Faker::Lorem.sentence, :user_id => User.all.sample.id, :post_id => Post.all.sample.id)
 end
 
 array.each do |num|
-  PostTags.create(:post_id => Post.all.sample.id, :tag_id => Tag.all.sample.id)
-  UserPosts.create(:post_id => Post.all.sample.id, :user_id => User.all.sample.id)
+  PostTag.create(:post_id => Post.all.sample.id, :tag_id => Tag.all.sample.id)
+  UserPost.create(:post_id => Post.all.sample.id, :user_id => User.all.sample.id)
 end
