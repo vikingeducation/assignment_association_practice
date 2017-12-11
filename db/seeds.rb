@@ -17,7 +17,7 @@ end
 (MULTIPLIER * 3).times do
   p = Post.create!({
     title: Faker::Lorem.unique.sentence,
-    body: Faker::Lorem.paragraph,
+    body: Faker::Lorem.paragraphs,
     category_id: Category.all.sample.id
     })
 
@@ -25,9 +25,19 @@ end
     p.post_authorings.create!(user_id: User.all.sample.id)
   end
 
-  (1..5).to_a.sample.times do
+  (0..5).to_a.sample.times do
     p.taggings.create!(tag_id: Tag.all.sample.id)
   end
 
+  (0..5).to_a.sample.times do
+    p.comments.create!(body: Faker::Lorem.paragraph, user_id: User.all.sample.id)
+  end
+
+end
+
+Post.all.each do |p|
+  (0..5).to_a.sample.times do
+    p.comments.create!(body: Faker::Lorem.paragraph, user_id: User.all.sample.id)
+  end
 end
 
