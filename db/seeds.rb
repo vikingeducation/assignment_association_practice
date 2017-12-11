@@ -6,6 +6,10 @@ MULTIPLIER = 1
   Category.create!(name: Faker::Commerce.unique.department)
 end
 
+(MULTIPLIER * 10).times do
+  Tag.create!(name: Faker::Lorem.unique.words(1))
+end
+
 (MULTIPLIER * 3).times do
   User.create!(name: Faker::Internet.unique.user_name)
 end
