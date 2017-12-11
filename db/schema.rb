@@ -31,14 +31,6 @@ ActiveRecord::Schema.define(version: 20171211205129) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "post_authorings", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id", "post_id"], name: "index_post_authorings_on_user_id_and_post_id", unique: true
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -60,6 +52,14 @@ ActiveRecord::Schema.define(version: 20171211205129) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_posts", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "post_id"], name: "index_user_posts_on_user_id_and_post_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
