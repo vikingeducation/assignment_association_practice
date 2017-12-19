@@ -4,6 +4,11 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def show
+    @post = Post.find(params[:id])
+    @tags = @post.tags
+  end
+
   def new
     @post = Post.new
   end
@@ -21,8 +26,6 @@ class PostsController < ApplicationController
   def update
   end
 
-  def show
-  end
 
   private
 

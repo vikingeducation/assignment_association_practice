@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
 
+  belongs_to :category
+
   has_many :user_posts, dependent: :destroy
   has_many :users, through: :user_posts
   has_many :authors, through: :user_posts, source: :user

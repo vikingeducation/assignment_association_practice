@@ -1,2 +1,12 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<h1><%= @post.title %></h1>
+<p>
+  Written in <%= @post.category.name %> on: <%= @post.created_at.to_date %><br>
+  Tags:
+  <% @tags.each do |t| %>
+    <%= t.name %>,
+  <% end %>
+</p>
+
+<p><%= @post.body %></p>
+
+<p><%= link_to 'edit', edit_post_path(@post) %></p>
