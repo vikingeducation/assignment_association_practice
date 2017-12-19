@@ -12,6 +12,7 @@
     <nav>
       <p><%= link_to 'index', root_path %> | <%= link_to 'new', new_post_path %></p>
       <hr>
+      <%= render 'shared/flashes' %>
     </nav>
     <%= yield %>
   </body>

@@ -17,7 +17,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
+      flash[:notice] = "Success"
+      redirect_to @post
     else
+      flash.now[:alert] = "Problem"
+      render :new
     end
   end
 
@@ -28,7 +32,11 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
+      flash[:notice] = "Success"
+      redirect_to @post
     else
+      flash.now[:alert] = "Problem"
+      render :edit
     end
   end
 

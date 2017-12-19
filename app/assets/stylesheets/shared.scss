@@ -1,0 +1,15 @@
+@mixin flashes($color) {
+  background-color: lighten($color, 40%);
+  color: $color;
+  width: 100%;
+  padding: 2%;
+  text-align: center;
+}
+
+.notice {
+  @include flashes(green);
+}
+
+.alert {
+  @include flashes(red);
+}

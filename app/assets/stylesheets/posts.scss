@@ -1,3 +1,26 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+label {
+  font-weight: bold;
+}
+
+input[type=text], textarea, select {
+  display: block;
+}
+
+input[type=submit] {
+  margin: 20px 0px;
+}
+
+.checkbox-and-label, .checkbox-and-label label {
+  display: block;
+  font-weight: normal;
+}
+
+article.form-partial {
+  background-color: #f1f1f1;
+  padding: 2%;
+  margin: 10px 0px;
+} /* article.form-partial */
