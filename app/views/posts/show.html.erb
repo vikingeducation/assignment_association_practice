@@ -9,4 +9,16 @@
 
 <p><%= @post.body %></p>
 
-<p><%= link_to 'edit', edit_post_path(@post) %></p>
+<p><%= link_to 'edit post', edit_post_path(@post) %></p>
+
+<% if @post.comments %>
+<hr>
+<h3>Comments:</h3>
+<% @post.comments.each do |comment| %>
+  <section class="comment">
+    <h4><%= comment.user.name %> said:</h4>
+    <p><%= comment.body %></p>
+  </section>
+<% end %>
+<% end %>
+
