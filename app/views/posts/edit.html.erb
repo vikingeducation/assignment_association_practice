@@ -1,19 +1,18 @@
 <h1>Edit Post</h1>
 
+<!-- Nested Form -->
+<%= render "nested_form", post: @post %>
+
+
+<!-- Regular form -->
 <%#= render 'form', post: @post %>
 
-<article class="form-partial">
-  <%= render "practice_form_1", post: @post %>
-</article>
 
-<article class="form-partial">
-  <%= render "practice_form_2", post: @post %>
-</article>
+<!-- Forms from  collection_select/checkboxes assignment -->
+<%#= render "practice_form_1", post: @post %>
 
-<article class="form-partial">
-  <%= render "practice_form_3", post: @post %>
-</article>
+<%#= render "practice_form_2", post: @post %>
 
-<article class="form-partial">
-  <%= render "practice_form_5", post: @post %>
-</article>
+<%#= render "practice_form_3", post: @post %>
+
+<%#= render "practice_form_5", post: @post %>
