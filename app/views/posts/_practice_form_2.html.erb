@@ -1,0 +1,28 @@
+<article class="form-partial">
+  <h3>practice_form_2</h3>
+  <p>Create each of the following form inputs to help select the Post's Category (a one-to-many relationship). They should submit the same set of nested parameters regardless of whether they are form_tag or form_for.</p>
+
+  <%= render 'shared/errors', object: post %>
+
+  <h4>form_for</h4>
+  <%= form_for post do |f| %>
+    <%= f.label :category_id, "Category Radio Buttons" %>
+    <%= f.collection_radio_buttons(:category_id, Category.all, :id, :name)do |b| %>
+      <%= b.label(class: 'checkbox-and-label'){ b.radio_button + " " + b.text } %>
+    <% end %><br>
+
+    <%= f.label :category_id, "Category Dropdown" %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, prompt: "-- select one --") %>
+
+    <%= f.submit %>
+  <% end %> <!-- form_for post -->
+
+
+  <h4>form_tag</h4>
+
+  <%= form_tag 'posts/new' do %>
+    <%= label_tag :category_id, "Category Dropdown" %>
+    <%= collection_select(:post, :category_id, Category.all, :id, :name, prompt: "-- select one --") %>
+    <%= submit_tag %>
+  <% end %>
+</article>

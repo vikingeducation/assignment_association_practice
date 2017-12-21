@@ -1,0 +1,37 @@
+<article class="form-partial">
+  <h3>Nested Form</h3>
+  <%= render 'shared/errors', object: post %>
+  <%= form_for post do |f_post| %>
+    <%= f_post.label :category_id %>
+    <%= f_post.collection_select(:category_id, Category.dropdown, :id, :name, prompt: "-- select one --") %><br>
+
+    <%= f_post.label :title %>
+    <%= f_post.text_field :title %><br>
+
+    <%= f_post.label :body %>
+    <%= f_post.text_area :body %><br>
+
+    <%= f_post.label :tag_ids %>
+    <%= f_post.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |b| %>
+      <%= b.label(class: 'checkbox-and-label'){ b.check_box + " " + b.text } %>
+    <% end %>
+
+    <h4>Add a Comment</h4>
+    <%= f_post.fields_for :comments do |f_comment| %>
+    <br>
+      <%= f_comment.label :user_id, "Comment Author" %>
+      <%= f_comment.collection_select :user_id, User.all, :id, :name, prompt: "-- select user--" %>
+      <br>
+      <%= f_comment.label :body, "Comment Body" %>
+      <%= f_comment.text_area :body %>
+
+      <% if f_comment.object.persisted? %>
+        <%= f_comment.label :_destroy, "Delete Comment?" %>
+        <%= f_comment.check_box :_destroy %>
+      <% end %>
+    <% end %> <!-- fields_for comments -->
+
+
+    <%= f_post.submit %>
+  <% end %> <!-- form_for post -->
+</article>

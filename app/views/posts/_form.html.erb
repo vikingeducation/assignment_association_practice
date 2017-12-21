@@ -1,0 +1,18 @@
+<%= render 'shared/errors', object: post %>
+<%= form_for post do |f| %>
+  <%= f.label :category_id %>
+  <%= f.collection_select(:category_id, Category.dropdown, :id, :name, prompt: "-- select one --") %><br>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %><br>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %><br>
+
+  <%= f.label :tag_ids %>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |b| %>
+    <%= b.label(class: 'checkbox-and-label'){ b.check_box + " " + b.text } %>
+  <% end %>
+
+  <%= f.submit %>
+<% end %> <!-- form_for post -->

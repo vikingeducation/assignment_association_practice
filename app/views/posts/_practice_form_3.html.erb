@@ -1,0 +1,16 @@
+<article class="form-partial">
+  <h3>practice_form_3</h3>
+  <p>Build a "combo-box" inside a form_for for selecting the Post's Tags</p>
+
+  <%= render 'shared/errors', object: post %>
+
+  <%= form_for post do |f| %>
+    <%= f.label :category_id %>
+    <%= f.collection_select(:category_id, Category.dropdown, :id, :name) %>
+
+    <%= f.label :tag_ids %>
+    <%= f.collection_select(:tag_ids, Tag.all, :id, :name, {}, multiple: true) %>
+
+    <%= f.submit %>
+  <% end %> <!-- form_for post -->
+</article>

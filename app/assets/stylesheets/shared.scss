@@ -1,0 +1,49 @@
+@mixin flashes($color) {
+  background-color: lighten($color, 40%);
+  color: $color;
+  width: 100%;
+  padding: 2%;
+  text-align: center;
+}
+
+.notice {
+  @include flashes(green);
+}
+
+.alert {
+  @include flashes(red);
+}
+
+
+/* FORMS */
+
+label {
+  font-weight: bold;
+  display: block;
+}
+
+input[type=text], textarea, select {
+  display: block;
+}
+
+input[type=submit] {
+  display: block;
+  margin: 20px 0px;
+}
+
+.checkbox-and-label, .checkbox-and-label label {
+  display: block;
+  font-weight: normal;
+  margin-top: 0px;
+}
+
+article.form-partial {
+  background-color: #f1f1f1;
+  padding: 2%;
+  margin: 10px 0px;
+}
+
+.combo-box {
+  height: 175px;
+  width: 125px;
+} /* .combo-box */

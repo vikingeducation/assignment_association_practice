@@ -1,0 +1,35 @@
+<!--
+Assignment: write a raw HTML form that will produce this output:
+https://www.vikingcodeschool.com/dashboard#/advanced-forms-and-active-record/practice-with-collection-forms
+
+Started PATCH "/posts/1" for 127.0.0.1 at 2015-07-28 15:05:02 -0700
+Processing by PostsController#update as HTML
+Parameters: {
+    "utf8"=>"✓",
+    "authenticity_token"=>"+8liMahjMiyA0WFF8ef8wzXu72+xXIKxlYzuI5UcTC4=",
+    "post"=>{
+        "title"=>"My Super Title",
+        "body"=>"Some Body of a post",
+        "tag_ids"=>["", "2", "3", "5"] },
+    "commit"=>"Update Post",
+    "id"=>"1"
+}
+ -->
+
+<form accept-charset="UTF-8" action="/posts" method="post">
+  <div style="margin:0;padding:0;display:block">
+    <input name="utf8" type="hidden" value="✓">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  </div>
+  <label for="post_title">Title:</label><br>
+  <input type="text" id="post_title" name="post[title]"><br>
+
+  <label for="post_body">Body:</label><br>
+  <textarea name="post[body]" value="" cols='30'></textarea><br>
+
+  <% @tags.each do |t| %>
+    <input type="checkbox" name="post[tag_ids][]" value="<%= t.id %>"> <%= t.name %><br>
+  <% end %>
+
+  <input type="submit" name="submit" value="Update Post">
+</form>

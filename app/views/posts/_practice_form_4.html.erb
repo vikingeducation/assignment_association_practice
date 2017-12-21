@@ -1,0 +1,10 @@
+<article class="form-partial">
+  <h3>practice_form_4</h3>
+  <p>Make sure all of your forms default to the proper values when used in an EDIT form as opposed to a NEW form.</p>
+
+  <% if post.new_record? %>
+    <p>See views/posts/edit.html.erb</p>
+  <% else %>
+    <p>See <%= link_to 'views/posts/edit', edit_post_path(post) %></p>
+  <% end %>
+</article>

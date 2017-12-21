@@ -1,0 +1,22 @@
+<article class="form-partial">
+  <h3>practice_form_5</h3>
+  <p>Choose a form_for from any of the scenarios above and add HTML classes to it, add HTML IDs to it, pass in an option like creating a "blank" checkbox/radio/option so the user can choose to not have a given association at all.</p>
+
+  <%= render 'shared/errors', object: post %>
+
+  <%= form_for post do |f| %>
+    <%= f.label :category_id %>
+    <%= f.collection_select(:category_id, Category.dropdown, :id, :name) %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title %><br>
+
+    <%= f.label :body %>
+    <%= f.text_area :body %><br>
+
+    <%= f.label :tag_ids, "Select Tags" %>
+    <%= f.collection_select(:tag_ids, Tag.all, :id, :name, {include_blank: "Select None"}, {multiple: true, class: 'combo-box'}) %>
+
+    <%= f.submit %>
+  <% end %> <!-- form_for post -->
+</article>
