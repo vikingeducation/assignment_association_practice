@@ -13,6 +13,9 @@ class Post < ApplicationRecord
   has_many :post_taggings, class_name: 'Tagging', dependent: :destroy
 
   has_many :comments, dependent: :destroy
+  accepts_nested_attributes_for :comments,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
 
   validates :title, :body, :category, presence: true
 
