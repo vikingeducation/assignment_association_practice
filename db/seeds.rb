@@ -59,11 +59,11 @@ def generate_posts(users)
       category_id: category_id
     )
 
-    post.user_posts.create(
+    post.post_authorings.create(
       user: users[0]
     )
 
-    post.user_posts.create(
+    post.post_authorings.create(
       user: users[rand(users.size)]
     )
 

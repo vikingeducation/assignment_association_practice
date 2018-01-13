@@ -14,6 +14,14 @@
       <h2>Category:</h2>
       <p><%= post.category.name %></p>
     <% end %>
-    <%= link_to "Show Post", post_path(post) %>
+    <% unless post.comments.first.nil? %>
+      <h2>Comments:</h2>
+      <% post.comments.each do |comment| %>
+        <p>Comment from User#: <%= User.find(comment.user_id).name %></p>
+        <p><%= comment.body %></p>
+      <% end %>
+      <% else %>
+    <% end %>
+      <%= link_to "Show Post", post_path(post) %>
   </article>
 <% end %>

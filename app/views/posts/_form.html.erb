@@ -1,42 +1,21 @@
-<%= form_for post do |pt| %>
-  <%= pt.label :title %><br>
-  <%= pt.text_field :title, disabled: disable %><br>
-  <%= pt.label :body %><br>
-  <%= pt.text_area :body, disabled: disable %><br><br>
-  <% if current_page?(new_post_path) %>
-    <h3>Tags:</h3>
-    <h4>Collection Select:</h4>
-    <%= pt.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {}, disabled: disable)  %><br><br>
-    <h4>Combo-Box:</h4>
-    <%= pt.select(:tag_ids, options_for_select(@tag_options), {}, disabled: disable, multiple: true)  %><br><br>
-    <h3>Category:</h3>
-    <h4>Radio Buttons</h4>
-    <%= pt.collection_radio_buttons(:category_id, Category.all, :id, :name, {}, disabled: disable) %><br>
-    <h4>Dropdown Menu</h4>
-    <%= pt.collection_select(:category_id, Category.all, :id, :name, {include_blank: true}, {disabled: disable, class: "good", id: "basic"}) %>
-    <h4>Form_tag Dropdown</h4>
-    <%= select_tag(:category, options_from_collection_for_select(Category.all, :id, :name), disabled: disable) %><br><br>
-    <%= pt.submit %>
-  <% else %>
-    <h3>Tags:</h3>
-    <h4>Collection Select:</h4>
-    <%= pt.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {}, disabled: disable)  %><br><br>
-    <h4>Combo-Box:</h4>
-    <%= pt.select(:tag_ids, options_for_select(@tag_options), {}, disabled: disable, multiple: true)  %><br><br>
-    <h3>Category:</h3>
-    <h4>Radio Buttons</h4>
-    <%= pt.collection_radio_buttons(:category_id, Category.all, :id, :name, {}, disabled: disable) %><br>
-    <h4>Dropdown Menu</h4>
-    <%= pt.collection_select(:category_id, Category.all, :id, :name, {include_blank: true}, {disabled: disable, class: "good", id: "basic"}) %>
-    <h4>Form_tag Dropdown</h4>
-    <%= select_tag(:category, options_from_collection_for_select(Category.all, :id, :name, post.category.id), disabled: disable) %>
-    <br><br>
-    <% if current_page?(post_path(post)) %>
-      <%= link_to "Back to All Posts", posts_path %>
-      <%= link_to "Edit Post", edit_post_path(post) %>
-      <%= link_to "Delete Post", "#" %>
-    <% else %>
-      <%= pt.submit %>
-    <% end %>
+<%= form_for post do |post_fields| %>
+  <%= post_fields.label :title %><br>
+  <%= post_fields.text_field :title %><br>
+  <%= post_fields.label :body %><br>
+  <%= post_fields.text_area :body %>
+  <br>
+  <br>
+  <h3>Tags:</h3>
+  <%= post_fields.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {})  %>
+  <br>
+  <br>
+  <h3>Category:</h3>
+  <%= post_fields.collection_radio_buttons(:category_id, Category.all, :id, :name, {}) %><br>
+  <br>
+  <br>
+  <% unless post.comments.first.nil? %>
+    <%= render partial: 'comment_fields', locals: { post: post, post_fields: post_fields } %>
   <% end %>
+  <%= post_fields.submit %>
+
 <% end %>
