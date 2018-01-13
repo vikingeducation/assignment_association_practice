@@ -1,0 +1,27 @@
+<h1>All Posts</h1>
+<%= link_to "Create New Post", new_post_path %>
+<% @posts.each do |post| %>
+  <article class="post-border">
+    <h2><%= post.title %></h2>
+    <p><%= post.body %></p>
+    <% unless post.tags.empty? %>
+      <h2>Tags:</h2>
+      <% post.tags.each do |tag| %>
+        <p><%= tag.name %></p>
+      <% end %>
+    <% end %>
+    <% unless post.category.nil? %>
+      <h2>Category:</h2>
+      <p><%= post.category.name %></p>
+    <% end %>
+    <% unless post.comments.first.nil? %>
+      <h2>Comments:</h2>
+      <% post.comments.each do |comment| %>
+        <p>Comment from User#: <%= User.find(comment.user_id).name %></p>
+        <p><%= comment.body %></p>
+      <% end %>
+      <% else %>
+    <% end %>
+      <%= link_to "Show Post", post_path(post) %>
+  </article>
+<% end %>

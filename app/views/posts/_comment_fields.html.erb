@@ -1,0 +1,19 @@
+<h3>Comments:</h3>
+<%= post_fields.fields_for :comments do |comment_fields| %>
+  <%= comment_fields.label :user_id %>
+  <br>
+  <%= comment_fields.text_field :user_id %>
+  <br>
+  <br>
+  <%= comment_fields.label :body %>
+  <br>
+  <%= comment_fields.text_area :body %>
+  <br>
+  <br>
+  <% if comment_fields.object.persisted? %>
+    <%= comment_fields.label :_destroy, "Delete this comment?" %>
+    <%= comment_fields.check_box :_destroy %>
+    <br>
+    <br>
+  <% end %>
+<% end %>

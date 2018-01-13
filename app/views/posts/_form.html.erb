@@ -1,0 +1,21 @@
+<%= form_for post do |post_fields| %>
+  <%= post_fields.label :title %><br>
+  <%= post_fields.text_field :title %><br>
+  <%= post_fields.label :body %><br>
+  <%= post_fields.text_area :body %>
+  <br>
+  <br>
+  <h3>Tags:</h3>
+  <%= post_fields.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {})  %>
+  <br>
+  <br>
+  <h3>Category:</h3>
+  <%= post_fields.collection_radio_buttons(:category_id, Category.all, :id, :name, {}) %><br>
+  <br>
+  <br>
+  <% unless post.comments.first.nil? %>
+    <%= render partial: 'comment_fields', locals: { post: post, post_fields: post_fields } %>
+  <% end %>
+  <%= post_fields.submit %>
+
+<% end %>
